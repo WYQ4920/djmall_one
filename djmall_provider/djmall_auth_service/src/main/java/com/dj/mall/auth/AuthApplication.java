@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.dj.mall.auth.mapper")
 @SpringBootApplication
 public class AuthApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AuthApplication.class, args);
     }

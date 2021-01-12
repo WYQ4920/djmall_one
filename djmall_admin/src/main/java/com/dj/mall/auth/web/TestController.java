@@ -18,7 +18,7 @@ public class TestController {
     @GetMapping("/toTest")
     public String toTest() {
 
-        return "/test";
+        return "test";
     }
 
     @GetMapping("/test")
