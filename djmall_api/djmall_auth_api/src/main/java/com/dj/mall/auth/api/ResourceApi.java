@@ -14,7 +14,7 @@ public interface ResourceApi {
 
     Boolean findByResourceName(String resourceName) throws Exception;
 
-    ResourceDTO findById(Integer id)throws Exception;
-
     void updeteRes(ResourceDTO resourceDTO)throws Exception;
+
+    ResourceDTO findResById(Integer id) throws Exception;
 }

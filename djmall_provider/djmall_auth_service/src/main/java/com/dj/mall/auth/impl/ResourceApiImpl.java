@@ -44,9 +44,9 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     }
 
     @Override
-    public ResourceDTO findById(Integer id) {
-        ResourceDTO one = this.findById(id);
-        return one;
+    public ResourceDTO findResById(Integer id) {
+        ResourceEntity one = getById(id);
+        return  DozerUtil.map(one, ResourceDTO.class);
     }
 
     @Override
