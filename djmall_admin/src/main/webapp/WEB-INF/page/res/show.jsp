@@ -20,8 +20,8 @@
     <form>
         <input type="hidden" id="id" value="0">
 
-        <input type="button" value="新增资源" onclick="toAdd">
-        <input type="button" value="编辑" onclick="toUpdate">
+        <input type="button" value="新增资源" onclick="toAdd()">
+        <input type="button" value="编辑" onclick="toUpdate()">
         <input type="button" value="删除">
     </form>
     <a id="treeDemo" class="ztree"></a>
@@ -71,7 +71,6 @@
     //获得节点id
     function zTreeBeforeClick(treeId, treeNodes) {
         $("#id").val(treeNodes.id);
-        alert(treeNodes.id)
         return true;
     }
 

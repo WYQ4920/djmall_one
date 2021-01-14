@@ -34,7 +34,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("resource_name",resourceName);
         ResourceEntity one = this.getOne(queryWrapper);
-        return one == null?false:true;
+        return one == null?true:false;
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
 
     @Override
     public ResourceDTO findById(Integer id) {
-        ResourceDTO resourceDTO = this.findById(id);
-        return resourceDTO;
+        ResourceDTO one = this.findById(id);
+        return one;
     }
 
     @Override
