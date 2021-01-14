@@ -13,9 +13,9 @@
 </style>
 <script type="text/javascript">
 
-    let pageNo = 1;
+    /*let pageNo = 1;*/
     $(function(){
-        show(pageNo);
+        show();
     })
 
     function show(){
@@ -24,7 +24,7 @@
             $("#fm").serialize(),
             function(result){
                 let html = "";
-                let pageHtml = "";
+                /*let pageHtml = "";*/
                 for (let i = 0; i < result.data.length; i++) {
                     let data = result.data[i];
                     html += "<tr>";
@@ -38,15 +38,15 @@
                     html += "</tr>";
                 }
                 $("#tb").html(html);
-                pageHtml += "<input type='button' onclick='page(true,null)' value='上一页'>";
+               /* pageHtml += "<input type='button' onclick='page(true,null)' value='上一页'>";
                 pageHtml += "<input type='button' onclick='page(false,"+result.data.pages+")' value='下一页'>";
-                $("#pageDiv").html(pageHtml);
+                $("#pageDiv").html(pageHtml);*/
             }
         )
     }
 
     /* 分页 */
-    function page(isShow, pages){
+    /*function page(isShow, pages){
         if(isShow){
             if(pageNo <= 1){
                 layer.msg("首页");
@@ -63,7 +63,7 @@
             layer.msg("第"+pageNo+"页");
         }
         show(pageNo);
-    }
+    }*/
 
     /* 修改 */
     function upd(id){
@@ -90,9 +90,9 @@
         )
     }
 
-    function check(){
+   /* function check(){
         show(pageNo);
-    }
+    }*/
 
 </script>
 <body>
@@ -109,6 +109,6 @@
     </tr>
     <tbody id="tb" align="center"></tbody>
 </table>
-<div id="pageDiv"></div>
+<%--<div id="pageDiv"></div>--%>
 </body>
 </html>

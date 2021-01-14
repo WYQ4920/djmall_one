@@ -29,8 +29,8 @@ public class RoleController {
      * 角色展示
      */
     @GetMapping("show")
-    public ResultModel show() throws Exception {
-        List<RoleDTO> roleDTOS = roleApi.findRoleAll();
+    public ResultModel show(RoleVOReq roleVOReq) throws Exception {
+        List<RoleDTO> roleDTOS = roleApi.findRoleAll(DozerUtil.map(roleVOReq, RoleDTO.class));
         return new ResultModel<>().success(DozerUtil.mapList(roleDTOS, RoleVOResp.class));
     }
 

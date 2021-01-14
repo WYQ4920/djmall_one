@@ -1,6 +1,7 @@
 package com.dj.mall.auth.api;
 
 import com.dj.mall.auth.dto.RoleDTO;
+import com.dj.mall.common.base.PageResult;
 import com.dj.mall.common.base.ResultModel;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface RoleApi {
     /**
      * 角色展示
      */
-    List<RoleDTO> findRoleAll() throws Exception;
+    List<RoleDTO> findRoleAll(RoleDTO roleDTO) throws Exception;
 
     /**
      * 新增角色查重

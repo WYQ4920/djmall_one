@@ -7,6 +7,7 @@ import com.dj.mall.auth.api.RoleApi;
 import com.dj.mall.auth.dto.RoleDTO;
 import com.dj.mall.auth.entity.RoleEntity;
 import com.dj.mall.auth.mapper.RoleMapper;
+import com.dj.mall.common.base.PageResult;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.base.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
@@ -26,8 +27,10 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
      * 角色展示
      */
     @Override
-    public List<RoleDTO> findRoleAll() throws Exception {
-        List<RoleEntity> roleEntityList = super.list();
+    public List<RoleDTO> findRoleAll(RoleDTO roleDTO) throws Exception {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("role_name", roleDTO.getRoleName());
+        List<RoleEntity> roleEntityList = super.list(queryWrapper);
         return DozerUtil.mapList(roleEntityList, RoleDTO.class);
     }
 
