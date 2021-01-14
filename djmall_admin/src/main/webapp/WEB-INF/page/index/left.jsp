@@ -16,9 +16,6 @@
 </head>
 <body>
 	<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户展示</a>
-
-
-
 	<div class="content_wrap" >
 		<ul id="baseData" class="ztree"></ul>
 	</div>

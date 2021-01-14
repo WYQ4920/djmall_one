@@ -18,8 +18,8 @@ import java.util.List;
 public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity> implements ResourceApi {
 
     @Override
-    public ResultModel<Object> findAll(ResourceDTO resourceDTO) {
+    public List<ResourceDTO> findAll(ResourceDTO resourceDTO) {
         List<ResourceEntity> list = this.list();
-        return new ResultModel<>().success(list);
+        return DozerUtil.mapList(list, ResourceDTO.class);
     }
 }

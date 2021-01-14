@@ -7,19 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/res/")
 public class ResourcePageController {
 
-<<<<<<< HEAD
-     @RequestMapping("toHome")
-    public String toHome(){
-=======
-    @RequestMapping("toShowResZtree")
-    public String toShowResZtree() throws Exception{
-        return "res/show";
+
+    @RequestMapping("toHome")
+    public String toHome() {
+        return "index/left";
     }
 
->>>>>>> origin/master
-
-         return "index/left";
-     }
-
+    @RequestMapping("toShowResZtree")
+    public String toShowResZtree() throws Exception {
+        return "index/left";
+    }
 
 }
+
+
+

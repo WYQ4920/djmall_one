@@ -2,8 +2,9 @@ package com.dj.mall.auth.api;
 
 
 import com.dj.mall.auth.dto.ResourceDTO;
-import com.dj.mall.common.base.ResultModel;
+
+import java.util.List;
 
 public interface ResourceApi {
-    ResultModel<Object> findAll(ResourceDTO resourceDTO);
+    List<ResourceDTO> findAll(ResourceDTO resourceDTO) throws Exception;
 }
