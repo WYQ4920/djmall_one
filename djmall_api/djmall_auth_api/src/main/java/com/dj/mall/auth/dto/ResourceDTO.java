@@ -3,9 +3,11 @@ package com.dj.mall.auth.dto;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 @Data
 @Accessors
-public class ResourceDTO {
+public class ResourceDTO implements Serializable {
     /**
      * 资源ID
      */
