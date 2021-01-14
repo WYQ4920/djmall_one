@@ -29,10 +29,11 @@
 </script>
 <body>
 <form id="fm">
+    <input type="hidden" name="id" value="${role.id}">
     <table align="center" cellspacing="0" cellpadding="5">
         <tr align="center">
             <td><label for="roleName">角色名:</label></td>
-            <td><input id="roleName" type="text" name="roleName"/></td>
+            <td><input id="roleName" type="text" name="roleName" value="${role.roleName}"/></td>
         </tr>
         <tr align="center">
             <td colspan="2">

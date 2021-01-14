@@ -52,6 +52,14 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
     }
 
     /**
+     * 修改角色查询
+     */
+    @Override
+    public RoleDTO findRoleById(Integer id) throws Exception {
+        return DozerUtil.map(super.getById(id), RoleDTO.class);
+    }
+
+    /**
      * 修改角色
      */
     @Override

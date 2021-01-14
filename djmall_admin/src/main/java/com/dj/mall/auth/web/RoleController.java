@@ -7,10 +7,7 @@ import com.dj.mall.auth.vo.RoleVOReq;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,6 +55,7 @@ public class RoleController {
     /**
      * 修改角色
      */
+    @PutMapping("update")
     public ResultModel update(RoleVOReq roleVOReq) throws Exception {
         Assert.hasText(roleVOReq.getRoleName(), "角色名不能为空");
         roleApi.updateRole(DozerUtil.map(roleVOReq, RoleDTO.class));

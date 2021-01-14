@@ -27,6 +27,11 @@ public interface RoleApi {
     void addRole(RoleDTO roleDTO) throws Exception;
 
     /**
+     * 修改角色查询
+     */
+    RoleDTO findRoleById(Integer id) throws Exception;
+
+    /**
      * 修改角色
      */
     void updateRole(RoleDTO roleDTO) throws Exception;
