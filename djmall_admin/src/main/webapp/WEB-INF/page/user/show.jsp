@@ -29,15 +29,15 @@
 				var pageHtml = "";
 				for (var i = 0; i < result.data.length; i++) {
 					html+="<tr>";
-					html+="<td>"+result.data.id+"</td>";
-					html+="<td>"+result.data.userName+"</td>";
+					html+="<td>"+result.data[i].id+"</td>";
+					html+="<td>"+result.data[i].userName+"</td>";
 					/*html+="<td>"+result.data.records[i].sex+"</td>";
 					html+="<td>"+result.data.records[i].age+"</td>";
 					html+="<td>"+result.data.records[i].nickName+"</td>";*/
 					html+="<td>";
-					html+="<input type='button' value='修改' onclick='upd("+result.data.id+")'>";
-					/*html+="<input type='button' value='删除' onclick='del("+result.data.id+")'>";*/
-					html+="<input type='button' value='授予角色' onclick='upd("+result.data.id+")'>";
+					html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
+					/*html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'>";*/
+					html+="<input type='button' value='授予角色' onclick='upd("+result.data[i].id+")'>";
 					html+="</td>";
 					html+="</tr>";
 				}
