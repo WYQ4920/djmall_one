@@ -70,8 +70,8 @@
 
     //获得节点id
     function zTreeBeforeClick(treeId, treeNodes) {
-        $("#id").val(treeId);
-        alert(treeId)
+        $("#id").val(treeNodes.id);
+        alert(treeNodes.id)
         return true;
     }
 
