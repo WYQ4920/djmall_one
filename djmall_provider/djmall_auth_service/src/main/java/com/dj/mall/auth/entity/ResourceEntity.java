@@ -9,10 +9,8 @@ import lombok.Data;
  * @Author zhengyk
  * @Date 2021/1/14 15:07
  */
-<<<<<<< HEAD
-=======
+
 @Data
->>>>>>> origin/master
 @TableName("djmall_auth_resource")
 public class ResourceEntity {
 
