@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.RoleApi;
 import com.dj.mall.auth.dto.RoleDTO;
 import com.dj.mall.auth.vo.RoleVOReq;
+import com.dj.mall.auth.vo.RoleVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
@@ -30,7 +31,7 @@ public class RoleController {
     @GetMapping("show")
     public ResultModel show() throws Exception {
         List<RoleDTO> roleDTOS = roleApi.findRoleAll();
-        return new ResultModel<>().success(roleDTOS);
+        return new ResultModel<>().success(DozerUtil.mapList(roleDTOS, RoleVOResp.class));
     }
 
     /**
@@ -58,8 +59,7 @@ public class RoleController {
     @PutMapping("update")
     public ResultModel update(RoleVOReq roleVOReq) throws Exception {
         Assert.hasText(roleVOReq.getRoleName(), "角色名不能为空");
-        roleApi.updateRole(DozerUtil.map(roleVOReq, RoleDTO.class));
-        return new ResultModel().success();
+        return roleApi.updateRole(DozerUtil.map(roleVOReq, RoleDTO.class));
     }
 
 }

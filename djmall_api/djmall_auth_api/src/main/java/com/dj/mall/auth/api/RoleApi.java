@@ -1,6 +1,7 @@
 package com.dj.mall.auth.api;
 
 import com.dj.mall.auth.dto.RoleDTO;
+import com.dj.mall.common.base.ResultModel;
 
 import java.util.List;
 
@@ -34,6 +35,6 @@ public interface RoleApi {
     /**
      * 修改角色
      */
-    void updateRole(RoleDTO roleDTO) throws Exception;
+    ResultModel updateRole(RoleDTO roleDTO) throws Exception;
 
 }

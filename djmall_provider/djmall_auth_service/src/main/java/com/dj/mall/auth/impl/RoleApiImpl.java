@@ -7,6 +7,8 @@ import com.dj.mall.auth.api.RoleApi;
 import com.dj.mall.auth.dto.RoleDTO;
 import com.dj.mall.auth.entity.RoleEntity;
 import com.dj.mall.auth.mapper.RoleMapper;
+import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.base.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
 
 import java.util.List;
@@ -37,10 +39,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         QueryWrapper<RoleEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("role_name", roleName);
         RoleEntity roleEntity = super.getOne(queryWrapper);
-        if (null != roleEntity) {
-            return false;
-        }
-        return true;
+        return null == roleEntity ? true : false;
     }
 
     /**
@@ -63,8 +62,13 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
      * 修改角色
      */
     @Override
-    public void updateRole(RoleDTO roleDTO) throws Exception {
+    public ResultModel updateRole(RoleDTO roleDTO) throws Exception {
+        RoleEntity roleEntity = super.getById(roleDTO.getId());
+        if (null != roleEntity && roleEntity.getId().equals(roleDTO.getId())) {
+            return new ResultModel().error(SystemConstant.ERROR_CODE, "该角色已存在");
+        }
         super.updateById(DozerUtil.map(roleDTO, RoleEntity.class));
+        return new ResultModel().success();
     }
 
 }
