@@ -38,4 +38,7 @@ public class ResourceController {
         List<ResourceVOResp> list1 = DozerUtil.mapList(list, ResourceVOResp.class);
         return new ResultModel<>().success(list1);
     }
+
+
+
 }
