@@ -1,14 +1,21 @@
 package com.dj.mall.auth.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 /**
  * @Author zhengyk
  * @Date 2021/1/14 15:07
  */
+@TableName("djmall_auth_resource")
 public class ResourceEntity {
 
     /**
      * 资源ID
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

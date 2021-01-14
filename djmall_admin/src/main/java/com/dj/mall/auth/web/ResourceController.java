@@ -1,5 +1,6 @@
 package com.dj.mall.auth.web;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2021/1/14 14:58
  */
 @RestController
+@RequestMapping("/res/")
 public class ResourceController {
 
 }
