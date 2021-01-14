@@ -15,10 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户展示</a>
-	<div class="content_wrap" >
-		<ul id="baseData" class="ztree"></ul>
-	</div>
+	<a id="treeDemo" class="ztree"></a>
 </body>
 <script type="text/javascript">
 	var setting = {
@@ -43,7 +40,7 @@
 		$.post("<%=request.getContextPath()%>/res/resourceShow",
 				{},
 				function (result) {
-					$.fn.zTree.init($("#baseData"), setting, result.data);
+					$.fn.zTree.init($("#treeDemo"), setting, result.data);
 				})
 	}
 </script>
