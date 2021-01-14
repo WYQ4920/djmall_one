@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/index/")
-public class IndexController {
+public class IndexPageController {
 
     @RequestMapping("/toIndex")
     public String toIndex() {
