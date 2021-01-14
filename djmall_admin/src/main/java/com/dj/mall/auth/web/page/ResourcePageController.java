@@ -9,6 +9,8 @@ public class ResourcePageController {
 
 
 
+    @Reference(check = false)
+    private ResourceApi resourceApi;
 
     @RequestMapping("toShowResZtree")
     public String toShowResZtree() throws Exception {

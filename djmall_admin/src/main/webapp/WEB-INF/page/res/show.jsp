@@ -17,11 +17,14 @@
 
 </head>
 <body>
-<input type="button" value="新增资源">
-<input type="button" value="编辑">
-<input type="button" value="删除">
+    <form>
+        <input type="hidden" id="id" value="0">
 
-<a id="treeDemo" class="ztree"></a>
+        <input type="button" value="新增资源" onclick="toAdd()">
+        <input type="button" value="编辑" onclick="toUpdate()">
+        <input type="button" value="删除">
+    </form>
+    <a id="treeDemo" class="ztree"></a>
 </body>
 <script type="text/javascript">
 
@@ -44,7 +47,8 @@
             }
         },
         callback:{
-            beforeDrag: zTreeBeforeDrag //防止拖拽
+            beforeDrag: zTreeBeforeDrag, //防止拖拽
+            beforeClick: zTreeBeforeClick //节点被选中
         }
     };
 
@@ -62,7 +66,31 @@
     //防止拖拽
     function zTreeBeforeDrag(treeId, treeNodes) {
         return false;
-    };
+    }
+
+    //获得节点id
+    function zTreeBeforeClick(treeId, treeNodes) {
+        $("#id").val(treeNodes.id);
+        return true;
+    }
+
+    function toAdd() {
+        var parentId = $("#id").val();
+        layer.open({
+            type: 2,
+            area: ['400px', '300px'], //宽高
+            content: '<%=request.getContextPath()%>/res/toAdd?parentId='+parentId,
+        });
+    }
+
+    function toUpdate() {
+        var id = $("#id").val();
+        layer.open({
+            type: 2,
+            area: ['400px', '300px'], //宽高
+            content: '<%=request.getContextPath()%>/res/toUpdate?id='+id,
+        });
+    }
 
 </script>
 </html>

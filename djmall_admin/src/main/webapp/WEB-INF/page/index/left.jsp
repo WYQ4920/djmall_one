@@ -16,6 +16,7 @@
 </head>
 <body>
 	<a id="treeDemo" class="ztree"></a>
+	<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户管理</a>
 </body>
 <script type="text/javascript">
 	var setting = {
