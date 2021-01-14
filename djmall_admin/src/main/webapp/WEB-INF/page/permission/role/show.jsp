@@ -8,6 +8,9 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
 </head>
+<style type="text/css">
+    a {text-decoration: none}
+</style>
 <script type="text/javascript">
 
     $(function(){
@@ -26,11 +29,9 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
-                    html += "<input type='button' onclick='resRole("+ data.id +")' value='关联资源'>";
-                    html += "|";
-                    html += "<input type='button' onclick='upd("+ data.id +")' value='编辑'>";
-                    html += "|";
-                    html += "<input type='button' onclick='remove("+ data.id +")' value='删除'>";
+                    html += "<a href='' onclick='resRole("+ data.id +")'>关联资源|</a>";
+                    html += "<a href='' onclick='upd("+ data.id +")'>编辑|</a>";
+                    html += "<a href='' onclick='remove("+ data.id +")'>删除</a>";
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -68,7 +69,7 @@
 <body>
 <table cellspacing="0" cellpadding="10" border="1px solid">
     <tr align="center">
-        <td>id</td>
+        <td>编号</td>
         <td>角色名</td>
         <td>操作</td>
     </tr>
