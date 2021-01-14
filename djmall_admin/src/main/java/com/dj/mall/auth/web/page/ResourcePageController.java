@@ -27,7 +27,7 @@ public class ResourcePageController {
 
     @RequestMapping("toUpdate")
     public String toUpdate(Model model,Integer id) throws Exception {
-        ResourceDTO one = resourceApi.findById(id);
+        ResourceDTO one = resourceApi.findResById(id);
         model.addAttribute("one",one);
         return "res/update";
     }

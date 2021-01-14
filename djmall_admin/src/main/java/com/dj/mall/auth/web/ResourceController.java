@@ -43,7 +43,7 @@ public class ResourceController {
 
     /**
      * 资源展示
-     * @param ResourceVOReq
+     * @param resourceVOReq
      * @return
      * @throws Exception
      */

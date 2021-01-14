@@ -27,6 +27,8 @@
 			<option value="1">菜单</option>
 			<option value="2">按钮</option>
 		</select>
+
+		<input type="submit" onclick="toAdd()">
 	</form>
 </body>
 <script type="text/javascript">
@@ -88,10 +90,6 @@
 		});
 	})
 
-	function back(){
-		parent.location.href="<%=request.getContextPath() %>/user/toLogin";
-
-	}
 
 </script>
 <style>
