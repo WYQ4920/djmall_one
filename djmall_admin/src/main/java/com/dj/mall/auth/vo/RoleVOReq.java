@@ -1,15 +1,15 @@
-package com.dj.mall.auth.dto;
+package com.dj.mall.auth.vo;
 
 import lombok.Data;
 
 /**
  * @Author WYQ
- * @Date 2021/1/14 15:27
- * 角色实体类 -> dto
+ * @Date 2021/1/14 16:54
+ * 角色实体类 -> voReq
  */
 
 @Data
-public class RoleDTO {
+public class RoleVOReq {
 
     /**
      * 角色id
@@ -20,5 +20,4 @@ public class RoleDTO {
      * 角色名称
      */
     private String roleName;
-
 }
