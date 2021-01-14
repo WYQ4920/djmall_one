@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ResourcePageController {
 
 
-    @RequestMapping("toHome")
-    public String toHome() {
-        return "index/left";
-    }
+
 
     @RequestMapping("toShowResZtree")
     public String toShowResZtree() throws Exception {

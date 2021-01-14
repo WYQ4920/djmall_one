@@ -21,8 +21,7 @@ public class IndexController {
 	}
 
 	@RequestMapping("toLeft")
-	public String toLeft(String token,ModelMap map) {
-		map.put("token", token);
+	public String toLeft() {
 		return "index/left";
 	}
 
