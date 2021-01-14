@@ -21,7 +21,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      * @return
      */
     @Override
-    public UserDTO findUserByNameAndPwd(String userName, String userPwd) {
+    public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws Exception {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName).eq("user_pwd", userPwd);
         UserEntity userEntity = this.getOne(queryWrapper);

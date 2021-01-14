@@ -28,7 +28,7 @@ public class UserController {
      * @return
      */
     @GetMapping("login")
-    public ResultModel<Object> login(String userName, String userPwd, HttpSession session) {
+    public ResultModel<Object> login(String userName, String userPwd, HttpSession session) throws Exception {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);

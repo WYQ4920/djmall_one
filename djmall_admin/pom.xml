@@ -59,6 +59,12 @@
             <artifactId>djmall_common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>3.2.0</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

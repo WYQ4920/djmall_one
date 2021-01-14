@@ -1,11 +1,9 @@
-package com.dj.mall.auth.dto;
+package com.dj.mall.auth.vo;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 @Data
-@Accessors
-public class ResourceDTO {
+public class ResourceVOReq {
     /**
      * 资源ID
      */
@@ -32,6 +30,4 @@ public class ResourceDTO {
      * 1:已删除
      */
     private Integer isDel;
-
-
 }
