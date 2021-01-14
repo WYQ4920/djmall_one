@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2021-01-14 12:02:35
+Date: 2021-01-14 15:04:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,6 +22,19 @@ DROP TABLE IF EXISTS `djmall_auth_resource`;
 CREATE TABLE `djmall_auth_resource` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '资源ID',
   `resource_name` varchar(255) NOT NULL COMMENT '资源名',
-  `url` varchar(255) NOT NULL COMMENT '资源路径',
+  `url` varchar(255) DEFAULT NULL COMMENT '资源路径',
+  `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限管理：资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='权限管理：资源表';
+
+-- ----------------------------
+-- Records of djmall_auth_resource
+-- ----------------------------
+INSERT INTO `djmall_auth_resource` VALUES ('1', '运用平台', null, '0');
+INSERT INTO `djmall_auth_resource` VALUES ('2', '用户管理', null, '1');
+INSERT INTO `djmall_auth_resource` VALUES ('3', '基础管理', null, '1');
+INSERT INTO `djmall_auth_resource` VALUES ('4', '订单管理', null, '1');
+INSERT INTO `djmall_auth_resource` VALUES ('5', '商品管理', null, '1');
+INSERT INTO `djmall_auth_resource` VALUES ('6', '权限管理', null, '1');
+INSERT INTO `djmall_auth_resource` VALUES ('7', '资源管理  ', null, '6');
+INSERT INTO `djmall_auth_resource` VALUES ('8', '角色资源', null, '6');
