@@ -7,10 +7,10 @@ import com.dj.mall.auth.api.RoleApi;
 import com.dj.mall.auth.dto.RoleDTO;
 import com.dj.mall.auth.entity.RoleEntity;
 import com.dj.mall.auth.mapper.RoleMapper;
-import com.dj.mall.common.base.PageResult;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.base.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -29,7 +29,9 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
     @Override
     public List<RoleDTO> findRoleAll(RoleDTO roleDTO) throws Exception {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("role_name", roleDTO.getRoleName());
+        if (!StringUtils.isEmpty(roleDTO.getRoleName())) {
+            queryWrapper.like("role_name", roleDTO.getRoleName());
+        }
         List<RoleEntity> roleEntityList = super.list(queryWrapper);
         return DozerUtil.mapList(roleEntityList, RoleDTO.class);
     }
@@ -67,7 +69,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
     @Override
     public ResultModel updateRole(RoleDTO roleDTO) throws Exception {
         RoleEntity roleEntity = super.getById(roleDTO.getId());
-        if (null != roleEntity && roleEntity.getId().equals(roleDTO.getId())) {
+        if (null != roleEntity && !roleEntity.getId().equals(roleDTO.getId())) {
             return new ResultModel().error(SystemConstant.ERROR_CODE, "该角色已存在");
         }
         super.updateById(DozerUtil.map(roleDTO, RoleEntity.class));

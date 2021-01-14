@@ -8,6 +8,7 @@ import com.dj.mall.common.util.DozerUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -26,7 +27,7 @@ public class RolePageController {
     /**
      * 去展示
      */
-    @RequestMapping("toShow")
+    @GetMapping("toShow")
     public String toShow(){
         return "permission/role/show";
     }
@@ -34,7 +35,7 @@ public class RolePageController {
     /**
      * 去新增
      */
-    @RequestMapping("toAdd")
+    @GetMapping("toAdd")
     public String toAdd(){
         return "permission/role/add";
     }
@@ -42,7 +43,7 @@ public class RolePageController {
     /**
      * 去修改
      */
-    @RequestMapping("toUpdate")
+    @GetMapping("toUpdate")
     public String toUpdate(Integer id, ModelMap map) throws Exception {
         RoleDTO role = roleApi.findRoleById(id);
         map.put("role", DozerUtil.map(role, RoleVOResp.class));

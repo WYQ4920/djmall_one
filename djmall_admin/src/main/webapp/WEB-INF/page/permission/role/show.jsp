@@ -31,9 +31,11 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
-                    html += "<a href='' onclick='resRole("+ data.id +")'>关联资源|</a>";
-                    html += "<a href='' onclick='upd("+ data.id +")'>编辑|</a>";
-                    html += "<a href='' onclick='remove("+ data.id +")'>删除</a>";
+                    html += "<input type='button' value='关联资源' onclick='resRole("+ data.id +")' style='color: cornflowerblue'>";
+                    html += "|";
+                    html += "<input type='button' value='编辑' onclick='upd("+ data.id +")' style='color: cornflowerblue'>";
+                    html += "|";
+                    html += "<input type='button' value='删除' onclick='remove("+ data.id +")' style='color: cornflowerblue'>";
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -65,6 +67,17 @@
         show(pageNo);
     }*/
 
+    /* 新增 */
+    function add(){
+        layer.open({
+            type: 2,
+            shade: 0.2,
+            area:["360px","360px"],
+            color:'cornflowerblue',
+            content: '<%=request.getContextPath() %>/role/toAdd',
+        });
+    }
+
     /* 修改 */
     function upd(id){
         layer.open({
@@ -90,12 +103,14 @@
         )
     }
 
-   /* function check(){
-        show(pageNo);
-    }*/
+   function check(){
+        show();
+   }
 
 </script>
 <body>
+<input type="button" value="新增" onclick="add()"/>
+<br>
 <form id="fm">
     角色名：<input type="text" name="roleName"/>
     <input type="button" value="查询" onclick="check()"/>

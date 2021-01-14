@@ -56,7 +56,7 @@ public class RoleController {
     /**
      * 修改角色
      */
-    @PutMapping("update")
+    @PostMapping("update")
     public ResultModel update(RoleVOReq roleVOReq) throws Exception {
         Assert.hasText(roleVOReq.getRoleName(), "角色名不能为空");
         return roleApi.updateRole(DozerUtil.map(roleVOReq, RoleDTO.class));

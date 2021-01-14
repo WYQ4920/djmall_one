@@ -2,13 +2,15 @@ package com.dj.mall.common.base;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * API接口统一返回
  *
  * @param <T> 数据泛型
  */
 @Data
-public class ResultModel<T> {
+public class ResultModel<T> implements Serializable {
     // 后期可优化为枚举
     /**
      * 默认处理失败状态码
