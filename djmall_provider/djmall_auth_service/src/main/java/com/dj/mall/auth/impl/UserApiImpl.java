@@ -9,6 +9,9 @@ import com.dj.mall.auth.entity.UserEntity;
 import com.dj.mall.auth.mapper.UserMapper;
 
 import com.dj.mall.common.util.DozerUtil;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Service
 public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements UserApi {
@@ -26,5 +29,21 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         queryWrapper.eq("user_name", userName).eq("user_pwd", userPwd);
         UserEntity userEntity = this.getOne(queryWrapper);
         return DozerUtil.map(userEntity, UserDTO.class);
+    }
+
+    /**
+     * 用户展示
+     * @param userDTO
+     * @return
+     */
+    @Override
+    public List<UserDTO> findAll(UserDTO userDTO) {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        if (!StringUtils.isEmpty(userDTO.getUserName())){
+            queryWrapper.like("user_name",userDTO.getUserName());
+        }
+        List<UserEntity> list = this.list(queryWrapper);
+        return DozerUtil.mapList(list,UserDTO.class);
     }
 }

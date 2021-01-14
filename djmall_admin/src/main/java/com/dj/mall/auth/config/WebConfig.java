@@ -18,6 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
         interceptorRegistration.addPathPatterns("/admin/**");
         interceptorRegistration.excludePathPatterns("/admin/user/toLogin");
         interceptorRegistration.excludePathPatterns("/admin/user/login");
-        interceptorRegistration.excludePathPatterns("/admin/res/**");
+        interceptorRegistration.excludePathPatterns("/admin/static/**");
     }
 }
