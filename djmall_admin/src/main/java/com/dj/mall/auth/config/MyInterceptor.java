@@ -16,6 +16,7 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println(request.getRequestURL());
         UserDTO user = (UserDTO) request.getSession().getAttribute("user");
         if (user == null) {
+            response.sendRedirect(request.getContextPath()+"/admin/user/toLogin");
             return false;
         }
         return true;

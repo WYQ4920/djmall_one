@@ -3,6 +3,10 @@ package com.dj.mall.auth.config;
 
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
+//import org.apache.shiro.authz.UnauthorizedException;
+
+import com.dj.mall.common.base.BusinessException;
+import com.dj.mall.common.base.ResultModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

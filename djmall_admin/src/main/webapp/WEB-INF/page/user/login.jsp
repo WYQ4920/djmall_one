@@ -40,7 +40,7 @@
 	   		submitHandler:function(fm){
 	   			let index = layer.load(2,{shade:0.4});
 	   			$.get(
-	   				"<%=request.getContextPath() %>/users/login",
+	   				"<%=request.getContextPath() %>/user/login",
 	   				$("#fm").serialize(),
 	   				function(result){
 	   					layer.msg(result.msg, {
