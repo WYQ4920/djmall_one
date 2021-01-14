@@ -8,28 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/index/")
 public class IndexController {
 
-	@RequestMapping("/toIndex")
-	public String toIndex(String token,ModelMap map) {
-		map.put("token", token);
-		return "index/index";
-	}
+    @RequestMapping("/toIndex")
+    public String toIndex() {
+        return "index/index";
+    }
 
-	@RequestMapping("toTop")
-	public String toTop() {
+    @RequestMapping("toTop")
+    public String toTop() {
+        return "index/top";
+    }
 
-		return "index/top";
-	}
+    @RequestMapping("toLeft")
+    public String toLeft() {
+        return "index/left";
+    }
 
-	@RequestMapping("toLeft")
-	public String toLeft() {
-		return "index/left";
-	}
-
-	@RequestMapping("toRight")
-	public String toRight() throws Exception {
-		return "index/right";
-	}
-
-
-
+    @RequestMapping("toRight")
+    public String toRight() throws Exception {
+        return "index/right";
+    }
 }
