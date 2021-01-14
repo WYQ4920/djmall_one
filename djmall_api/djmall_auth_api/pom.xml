@@ -11,6 +11,14 @@
 
     <artifactId>djmall_auth_api</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.dj.djmall</groupId>
+            <artifactId>djmall_common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

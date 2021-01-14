@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/res/")
 public class ResourcePageController {
 
+     @RequestMapping("toHome")
+    public String toHome(){
 
+         return "index/left";
+     }
 
 
 }

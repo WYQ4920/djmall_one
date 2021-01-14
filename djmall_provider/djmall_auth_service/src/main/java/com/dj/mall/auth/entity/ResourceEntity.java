@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * @Author zhengyk
+ * @Author
  * @Date 2021/1/14 15:07
  */
 
@@ -35,5 +35,10 @@ public class ResourceEntity {
      */
     private Integer parentId;
 
-
+    /**
+     * 状态
+     * 0:未删除
+     * 1:已删除
+     */
+    private Integer isDel;
 }
