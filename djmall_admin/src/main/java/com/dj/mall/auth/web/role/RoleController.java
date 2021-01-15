@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/role/")
 public class RoleController {
 
-    @Reference(check = false)
+    @Reference
     private RoleApi roleApi;
 
     /**
