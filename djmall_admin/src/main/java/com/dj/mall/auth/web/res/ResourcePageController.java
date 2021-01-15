@@ -5,6 +5,7 @@ import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,7 +22,8 @@ public class ResourcePageController {
 
     @RequestMapping("toAdd")
     public String toAdd(Integer parentId,Model model) throws Exception {
-        model.addAttribute("parentId",parentId);
+        ResourceDTO one = resourceApi.findResById(parentId);
+        model.addAttribute("one",one);
         return "res/add";
     }
 

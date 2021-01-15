@@ -14,13 +14,17 @@
 <body>
 	<form id="fm">
 		<input type="hidden" name="isDel" value="0">
-		<input type="hidden" name="parentId" value="${parentId}"><br>
+		<input type="hidden" name="parentId" value="${one.id}"><br>
+		上级名称：${one.resourceName}
 
 		<label for="resourceName">资源名：</label>
 		<input type="text" name="resourceName" id="resourceName"><br>
 
 		<label for="resourceCode">资源编码：</label>
 		<input type="text" name="resourceCode" id="resourceCode"><br>
+
+		<label for="url">路径：</label>
+		<input type="text" name="url" id="url"><br>
 
 		<label for="resourceType">资源类型：</label>
 		<select name="resourceType" id="resourceType">

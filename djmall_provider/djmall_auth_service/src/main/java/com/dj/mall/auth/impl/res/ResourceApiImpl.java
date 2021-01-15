@@ -48,7 +48,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
      * @throws Exception
      */
     @Override
-    public Boolean findByResourceName(String resourceName) throws Exception {
+    public Boolean findByResourceName(String resourceName) throws BusinessException {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("resource_name",resourceName);
         ResourceEntity one = this.getOne(queryWrapper);
@@ -61,7 +61,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
      * @throws BusinessException
      */
     @Override
-    public void addRes(ResourceDTO resourceDTO) throws Exception {
+    public void addRes(ResourceDTO resourceDTO) throws BusinessException {
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         Boolean byResourceName = this.findByResourceName(resourceEntity.getResourceName());
         if(byResourceName){
@@ -77,8 +77,11 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
      * @return
      */
     @Override
-    public ResourceDTO findResById(Integer id) {
+    public ResourceDTO findResById(Integer id) throws BusinessException{
         ResourceEntity one = getById(id);
+        if(one == null){
+            throw new BusinessException("请选择编辑资源");
+        }
         return  DozerUtil.map(one, ResourceDTO.class);
     }
 
@@ -88,7 +91,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
      * @throws BusinessException
      */
     @Override
-    public void updeteRes(ResourceDTO resourceDTO) throws BusinessException {
+    public void updateRes(ResourceDTO resourceDTO) throws BusinessException {
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("resource_name",resourceEntity.getResourceName());
