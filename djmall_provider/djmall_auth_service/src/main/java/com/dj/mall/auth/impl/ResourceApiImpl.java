@@ -14,12 +14,24 @@ import java.util.List;
 @Service
 public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity> implements ResourceApi {
 
+    /**
+     * left
+     * @param resourceDTO
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<ResourceDTO> findAll(ResourceDTO resourceDTO) throws Exception {
         List<ResourceEntity> list = this.list();
         return DozerUtil.mapList(list, ResourceDTO.class);
     }
 
+    /**
+     * res展示
+     * @param resourceDTO
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<ResourceDTO> findAll1(ResourceDTO resourceDTO) throws Exception {
         QueryWrapper queryWrapper = new QueryWrapper();
@@ -29,6 +41,12 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         return DozerUtil.mapList(list, ResourceDTO.class);
     }
 
+    /**
+     * 查重
+     * @param resourceName
+     * @return
+     * @throws Exception
+     */
     @Override
     public Boolean findByResourceName(String resourceName) throws Exception {
         QueryWrapper queryWrapper = new QueryWrapper();
@@ -37,29 +55,45 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         return one == null?true:false;
     }
 
+    /**
+     * 新增
+     * @param resourceDTO
+     * @throws Exception
+     */
     @Override
     public void addRes(ResourceDTO resourceDTO) throws Exception {
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         Boolean byResourceName = this.findByResourceName(resourceEntity.getResourceName());
         if(byResourceName){
             this.save(resourceEntity);
+            return;
         }
         throw new BusinessException("重名");
     }
 
+    /**
+     * 去修改回显
+     * @param id
+     * @return
+     */
     @Override
     public ResourceDTO findResById(Integer id) {
         ResourceEntity one = getById(id);
         return  DozerUtil.map(one, ResourceDTO.class);
     }
 
+    /**
+     * 修改
+     * @param resourceDTO
+     * @throws Exception
+     */
     @Override
     public void updeteRes(ResourceDTO resourceDTO) throws Exception {
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("resource_name",resourceEntity.getResourceName());
         ResourceEntity one = this.getOne(queryWrapper);
-        if( one == null && !resourceEntity.getId().equals(one.getId())){
+        if(one != null && !resourceEntity.getId().equals(one.getId())){
            throw new BusinessException("重名");
         }
         this.updateById(resourceEntity);
