@@ -8,11 +8,7 @@
 </head>
 <body>
 	<h1 align="center">欢迎${user.userName}登陆</h1>
-	<right>
-		<top>
-			<a href="<%=request.getContextPath() %>/user/exitUserLogin">退出</a>
-		</top>
-	</right>
+	<a href="<%=request.getContextPath() %>/user/exit">退出</a>
 	<div id="time" align="right"></div>
 </body>
 <script type="text/javascript">
