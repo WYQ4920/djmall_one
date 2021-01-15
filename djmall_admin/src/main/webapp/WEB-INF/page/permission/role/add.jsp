@@ -48,7 +48,7 @@
                                 if(result.code == 200){
                                     layer.close(index);
                                     layer.msg(result.msg);
-                                    parent.location.href="<%=request.getContextPath() %>/index/toIndex";
+                                    parent.location.href="<%=request.getContextPath() %>/role/toShow";
                                     return;
                                 }
                                 layer.close(index);
