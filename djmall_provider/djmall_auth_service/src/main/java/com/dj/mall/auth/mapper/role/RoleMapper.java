@@ -1,7 +1,7 @@
-package com.dj.mall.auth.mapper;
+package com.dj.mall.auth.mapper.role;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dj.mall.auth.entity.RoleEntity;
+import com.dj.mall.auth.entity.role.RoleEntity;
 
 /**
  * @Author WYQ

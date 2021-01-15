@@ -1,7 +1,6 @@
-package com.dj.mall.auth.api;
+package com.dj.mall.auth.api.role;
 
-import com.dj.mall.auth.dto.RoleDTO;
-import com.dj.mall.common.base.PageResult;
+import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.common.base.ResultModel;
 
 import java.util.List;

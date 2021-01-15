@@ -1,15 +1,15 @@
-package com.dj.mall.auth.vo;
+package com.dj.mall.auth.vo.role;
 
 import lombok.Data;
 
 /**
  * @Author WYQ
  * @Date 2021/1/14 16:54
- * 角色实体类 -> voResp
+ * 角色实体类 -> voReq
  */
 
 @Data
-public class RoleVOResp {
+public class RoleVOReq {
 
     /**
      * 角色id

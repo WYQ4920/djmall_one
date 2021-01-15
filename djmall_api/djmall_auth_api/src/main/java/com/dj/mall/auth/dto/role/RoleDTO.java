@@ -1,4 +1,4 @@
-package com.dj.mall.auth.dto;
+package com.dj.mall.auth.dto.role;
 
 import lombok.Data;
 

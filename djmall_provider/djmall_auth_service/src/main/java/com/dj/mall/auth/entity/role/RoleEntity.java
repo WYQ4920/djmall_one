@@ -1,4 +1,4 @@
-package com.dj.mall.auth.entity;
+package com.dj.mall.auth.entity.role;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

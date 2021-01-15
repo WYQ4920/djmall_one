@@ -1,11 +1,10 @@
-package com.dj.mall.auth.web.page;
+package com.dj.mall.auth.web.role.page;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.dj.mall.auth.api.RoleApi;
-import com.dj.mall.auth.dto.RoleDTO;
-import com.dj.mall.auth.vo.RoleVOResp;
+import com.dj.mall.auth.api.role.RoleApi;
+import com.dj.mall.auth.dto.role.RoleDTO;
+import com.dj.mall.auth.vo.role.RoleVOResp;
 import com.dj.mall.common.util.DozerUtil;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;

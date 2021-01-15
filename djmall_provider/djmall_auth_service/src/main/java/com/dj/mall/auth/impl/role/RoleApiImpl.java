@@ -1,12 +1,12 @@
-package com.dj.mall.auth.impl;
+package com.dj.mall.auth.impl.role;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dj.mall.auth.api.RoleApi;
-import com.dj.mall.auth.dto.RoleDTO;
-import com.dj.mall.auth.entity.RoleEntity;
-import com.dj.mall.auth.mapper.RoleMapper;
+import com.dj.mall.auth.api.role.RoleApi;
+import com.dj.mall.auth.dto.role.RoleDTO;
+import com.dj.mall.auth.entity.role.RoleEntity;
+import com.dj.mall.auth.mapper.role.RoleMapper;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.base.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
