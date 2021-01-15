@@ -20,6 +20,7 @@
 		<option value="2" <c:if test="${one.resourceType == 2}">selected</c:if>>按钮</option>
 	</select><br/>
 
+	<input type="submit" onclick="toUpdate()">
 </form>
 </body>
 <script type="text/javascript">

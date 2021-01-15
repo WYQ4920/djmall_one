@@ -38,9 +38,13 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     }
 
     @Override
-    public void addRes(ResourceDTO resourceDTO) {
+    public void addRes(ResourceDTO resourceDTO) throws Exception {
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
-        this.save(resourceEntity);
+        Boolean byResourceName = this.findByResourceName(resourceEntity.getResourceName());
+        if(byResourceName){
+            this.save(resourceEntity);
+        }
+        throw new BusinessException("重名");
     }
 
     @Override
