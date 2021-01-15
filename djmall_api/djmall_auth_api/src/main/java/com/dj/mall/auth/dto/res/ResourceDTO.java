@@ -1,4 +1,4 @@
-package com.dj.mall.auth.dto;
+package com.dj.mall.auth.dto.res;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
