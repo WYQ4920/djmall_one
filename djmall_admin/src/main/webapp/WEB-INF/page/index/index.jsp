@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
 </head>
-<frameset rows="30%,70%">
+<frameset rows="25%,75%">
 	<frame src="<%=request.getContextPath() %>/index/toTop?token=${token}"></frame>
 	<frameset cols="30%,70%">
 		<frame src="<%=request.getContextPath() %>/index/toLeft?token=${token}"></frame>
