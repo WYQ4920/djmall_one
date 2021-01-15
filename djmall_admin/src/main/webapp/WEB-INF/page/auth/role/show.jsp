@@ -31,11 +31,11 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
-                    html += "<input type='button' value='关联资源' onclick='resRole("+ data.id +")' style='color: cornflowerblue'>";
-                    html += "|";
-                    html += "<input type='button' value='编辑' onclick='upd("+ data.id +")' style='color: cornflowerblue'>";
-                    html += "|";
-                    html += "<input type='button' value='删除' onclick='remove("+ data.id +")' style='color: cornflowerblue'>";
+                    html += "<input type='button' value='关联资源' onclick='resRole("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html += "<span style='color: cornflowerblue'>|</span>";
+                    html += "<input type='button' value='编辑' onclick='upd("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html += "<span style='color: cornflowerblue'>|</span>";
+                    html += "<input type='button' value='删除' onclick='remove("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -108,11 +108,11 @@
 
 </script>
 <body>
-<input type="button" value="新增" onclick="add()"/>
 <br>
 <form id="fm">
     角色名：<input type="text" name="roleName"/>
-    <input type="button" value="查询" onclick="check()"/>
+    <input type="button" value="查询" onclick="check()"/>&nbsp;
+    <input type="button" value="新增" onclick="add()"/>
 </form>
 <br>
 <table cellspacing="0" cellpadding="10" border="1px solid">
