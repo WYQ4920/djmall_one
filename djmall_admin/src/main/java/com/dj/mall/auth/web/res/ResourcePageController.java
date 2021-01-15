@@ -22,7 +22,8 @@ public class ResourcePageController {
 
     @RequestMapping("toAdd")
     public String toAdd(Integer parentId,Model model) throws Exception {
-        model.addAttribute("parentId",parentId);
+        ResourceDTO one = resourceApi.findResById(parentId);
+        model.addAttribute("one",one);
         return "res/add";
     }
 

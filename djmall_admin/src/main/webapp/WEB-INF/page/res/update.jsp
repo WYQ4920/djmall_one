@@ -19,8 +19,7 @@
 	<label for="resourceName">资源名：</label>
 	<input type="text" id="resourceName" name="resourceName" value="${one.resourceName}"><br>
 
-	<label for="resourceCode">编码名：</label>
-	<input type="text" id="resourceCode" name="resourceCode" value="${one.resourceCode}"><br>
+	编码：${one.resourceCode} <br>
 	资源类型：
 	<select name="resourceType">
 		<option value="1" <c:if test="${one.resourceType == 1}">selected</c:if>>菜单</option>
