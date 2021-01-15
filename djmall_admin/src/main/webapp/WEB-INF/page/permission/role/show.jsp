@@ -73,7 +73,6 @@
             type: 2,
             shade: 0.2,
             area:["360px","360px"],
-            color:'cornflowerblue',
             content: '<%=request.getContextPath() %>/role/toAdd',
         });
     }

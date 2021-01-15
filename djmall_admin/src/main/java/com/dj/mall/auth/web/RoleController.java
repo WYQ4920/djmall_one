@@ -37,7 +37,7 @@ public class RoleController {
     /**
      * 新增角色查重
      */
-    @GetMapping("checkRoleName")
+    @PostMapping("checkRoleName")
     public Boolean checkRoleName(String roleName) throws Exception {
         Boolean result = roleApi.findRoleByRoleName(roleName);
         return result;
