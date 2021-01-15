@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @RequestMapping("/user/")
 @Controller
 public class UserPageController {
@@ -37,6 +39,12 @@ public class UserPageController {
     @RequestMapping("toAdd")
     public String toAdd() {
         return "user/add";
+    }
+
+    @RequestMapping("exit")
+    public void exit(HttpSession session){
+        session.removeAttribute("user");
+        session.invalidate();
     }
 
 
