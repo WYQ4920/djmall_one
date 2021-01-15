@@ -1,19 +1,14 @@
-package com.dj.mall.auth.web;
+package com.dj.mall.auth.web.res;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.dj.mall.auth.api.ResourceApi;
-import com.dj.mall.auth.dto.ResourceDTO;
+import com.dj.mall.auth.api.res.ResourceApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.vo.ResourceVOReq;
 import com.dj.mall.auth.vo.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-
-import com.dj.mall.auth.api.ResourceApi;
-import com.dj.mall.auth.dto.ResourceDTO;
-import com.dj.mall.common.base.ResultModel;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

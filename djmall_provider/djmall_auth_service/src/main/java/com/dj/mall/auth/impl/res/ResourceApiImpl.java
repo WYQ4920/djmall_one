@@ -1,11 +1,11 @@
-package com.dj.mall.auth.impl;
+package com.dj.mall.auth.impl.res;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dj.mall.auth.api.ResourceApi;
-import com.dj.mall.auth.dto.ResourceDTO;
-import com.dj.mall.auth.entity.ResourceEntity;
+import com.dj.mall.auth.api.res.ResourceApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.auth.entity.res.ResourceEntity;
 import com.dj.mall.auth.mapper.ResourcceMapper;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.util.DozerUtil;
@@ -58,7 +58,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     /**
      * 新增
      * @param resourceDTO
-     * @throws Exception
+     * @throws BusinessException
      */
     @Override
     public void addRes(ResourceDTO resourceDTO) throws Exception {
@@ -85,10 +85,10 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     /**
      * 修改
      * @param resourceDTO
-     * @throws Exception
+     * @throws BusinessException
      */
     @Override
-    public void updeteRes(ResourceDTO resourceDTO) throws Exception {
+    public void updeteRes(ResourceDTO resourceDTO) throws BusinessException {
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("resource_name",resourceEntity.getResourceName());

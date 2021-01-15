@@ -89,4 +89,10 @@
 		});
 	})
 </script>
+<style>
+	.error{
+		color:red;
+		font-size:10px;
+	}
+</style>
 </html>
