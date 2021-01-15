@@ -16,8 +16,11 @@
 </head>
 <body>
 	<a id="treeDemo" class="ztree"></a>
-	<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户管理</a><br>
-	<a href="<%=request.getContextPath() %>/res/toShowResZtree" target="right">资源管理</a><br>
+	<center>
+		<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户管理</a><br>
+		<a href="<%=request.getContextPath() %>/res/toShowResZtree" target="right">资源管理</a><br>
+		<a href="<%=request.getContextPath() %>/role/toShow" target="right">角色管理</a><br>
+	</center>
 </body>
 <script type="text/javascript">
 	var setting = {
