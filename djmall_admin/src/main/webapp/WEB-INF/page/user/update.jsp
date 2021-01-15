@@ -83,7 +83,7 @@ $(function(){
    						}, function(){
    						  //do something
    							if(result.code == "200"){
-   								parent.location.href="<%=request.getContextPath()%>/index/toIndex";
+   								parent.location.href="<%=request.getContextPath()%>/user/toShow";
    								layer.close(index); 
 								return;
 							}
