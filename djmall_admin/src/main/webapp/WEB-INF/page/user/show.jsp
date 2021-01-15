@@ -21,23 +21,23 @@
 			"<%=request.getContextPath() %>/user/list",
 			$("#fm").serialize(),
 			function(result){
-				if(result.code!=200){
+				if(result.code != 200){
 					layer.msg(result.msg);
 					return;
 				}
 				let html = "";
 				var pageHtml = "";
-				for (let i = 0; i < result.data.length; i++) {
+				for (var i = 0; i < result.data.length; i++) {
 					html+="<tr>";
-					html+="<td>"+result.data.id+"</td>";
-					html+="<td>"+result.data.userName+"</td>";
+					html+="<td>"+result.data[i].id+"</td>";
+					html+="<td>"+result.data[i].userName+"</td>";
 					/*html+="<td>"+result.data.records[i].sex+"</td>";
 					html+="<td>"+result.data.records[i].age+"</td>";
 					html+="<td>"+result.data.records[i].nickName+"</td>";*/
 					html+="<td>";
-					html+="<input type='button' value='修改' onclick='upd("+result.data.id+")'>";
-					/*html+="<input type='button' value='删除' onclick='del("+result.data.id+")'>";*/
-					html+="<input type='button' value='修改' onclick='upd("+result.data.id+")'>";
+					html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
+					/*html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'>";*/
+					html+="<input type='button' value='授予角色' onclick='upd("+result.data[i].id+")'>";
 					html+="</td>";
 					html+="</tr>";
 				}
@@ -127,7 +127,7 @@
 
 <body>
 	<form id="fm">
-		用户名：<input type="text" name="username"><br>
+		用户名：<input type="text" name="userName"><br>
 		<%--年龄：<input type="text" name="startAge">--
 		<input type="text" name="endAge">
 		性别：<input type="radio" name="sex" value="男">男

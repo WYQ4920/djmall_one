@@ -20,6 +20,16 @@ public class ResourceVOReq {
     private String url;
 
     /**
+     * 编码
+     */
+    private String ResourceCode;
+
+    /**
+     * 类型
+     */
+    private String ResourceType;
+
+    /**
      * 父级ID
      */
     private Integer parentId;

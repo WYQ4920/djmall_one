@@ -14,19 +14,19 @@
 <body>
 	<form id="fm">
 		<input type="hidden" name="isDel" value="0">
-		<input type="hidden" name="parentId" value="${parentId}">
+		<input type="hidden" name="parentId" value="${parentId}"><br>
 
 		<label for="resourceName">资源名：</label>
-		<input type="text" name="resourceName" id="resourceName">
+		<input type="text" name="resourceName" id="resourceName"><br>
 
 		<label for="resourceCode">资源编码：</label>
-		<input type="text" name="resourceCode" id="resourceCode">
+		<input type="text" name="resourceCode" id="resourceCode"><br>
 
 		<label for="resourceType">资源类型：</label>
 		<select name="resourceType" id="resourceType">
 			<option value="1">菜单</option>
 			<option value="2">按钮</option>
-		</select>
+		</select><br>
 
 		<input type="submit" onclick="toAdd()">
 	</form>

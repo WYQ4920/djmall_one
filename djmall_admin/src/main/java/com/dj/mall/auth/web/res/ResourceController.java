@@ -1,23 +1,14 @@
-package com.dj.mall.auth.web;
+package com.dj.mall.auth.web.res;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.dj.mall.auth.api.ResourceApi;
-import com.dj.mall.auth.dto.ResourceDTO;
+import com.dj.mall.auth.api.res.ResourceApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.vo.ResourceVOReq;
 import com.dj.mall.auth.vo.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import com.dj.mall.auth.api.ResourceApi;
-import com.dj.mall.auth.dto.ResourceDTO;
-import com.dj.mall.common.base.ResultModel;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -55,6 +46,12 @@ public class ResourceController {
         return new ResultModel<>().success(list1);
     }
 
+    /**
+     * 查重
+     * @param resourceVOReq
+     * @return
+     * @throws Exception
+     */
     @PostMapping ("checkResourceName")
     public Boolean checkResourceName(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
@@ -62,6 +59,12 @@ public class ResourceController {
         return  resourceApi.findByResourceName(resourceDTO.getResourceName());
     }
 
+    /**
+     * 新增
+     * @param resourceVOReq
+     * @return
+     * @throws Exception
+     */
     @PostMapping ("add")
     public ResultModel<Object> add(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
@@ -70,7 +73,13 @@ public class ResourceController {
         return new ResultModel<>().success();
     }
 
-    @PostMapping ("update")
+    /**
+     * 修改
+     * @param resourceVOReq
+     * @return
+     * @throws Exception
+     */
+    @PutMapping("update")
     public ResultModel<Object> update(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);

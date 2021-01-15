@@ -1,7 +1,8 @@
-package com.dj.mall.auth.api;
+package com.dj.mall.auth.api.res;
 
 
-import com.dj.mall.auth.dto.ResourceDTO;
+import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.common.base.BusinessException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface ResourceApi {
 
     Boolean findByResourceName(String resourceName) throws Exception;
 
-    void updeteRes(ResourceDTO resourceDTO)throws Exception;
+    void updeteRes(ResourceDTO resourceDTO)throws BusinessException;
 
     ResourceDTO findResById(Integer id) throws Exception;
 }

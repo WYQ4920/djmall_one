@@ -1,4 +1,4 @@
-package com.dj.mall.auth.entity;
+package com.dj.mall.auth.entity.res;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -29,6 +29,16 @@ public class ResourceEntity {
      * 资源路径
      */
     private String url;
+
+    /**
+     * 编码
+     */
+    private String ResourceCode;
+
+    /**
+     * 类型
+     */
+    private String ResourceType;
 
     /**
      * 父级ID

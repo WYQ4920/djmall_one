@@ -9,6 +9,9 @@ spring:
       prefix: /WEB-INF/page/
       suffix: .jsp
     static-path-pattern: /static/**
+    hiddenmethod:
+      filter:
+        enabled: true
 dubbo:
   application:
     name: admin # 应用名
