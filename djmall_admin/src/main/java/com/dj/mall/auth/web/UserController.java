@@ -8,10 +8,7 @@ import com.dj.mall.auth.vo.UserVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -28,6 +25,7 @@ public class UserController {
 
     /**
      * 登录
+     *
      * @param userName
      * @param userPwd
      * @return
@@ -37,27 +35,61 @@ public class UserController {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
-        if (userDTO == null) {
-            return new ResultModel<>().error("用户名或密码不正确");
-        }
-        session.setAttribute("user",userDTO);
+        session.setAttribute("user", userDTO);
         return new ResultModel<>().success();
     }
 
     /**
      * 用户展示
+     *
      * @param userVOReq
      * @return
      */
     @PostMapping("list")
-    public ResultModel<Object> list(UserVOReq userVOReq){
-        List<UserDTO> list = userApi.findAll(DozerUtil.map(userVOReq,UserDTO.class));
+    public ResultModel<Object> list(UserVOReq userVOReq) throws Exception {
+        List<UserDTO> list = userApi.findAll(DozerUtil.map(userVOReq, UserDTO.class));
         return new ResultModel<>().success(DozerUtil.mapList(list, UserVOResp.class));
     }
 
+    /**
+     * 新增用户
+     *
+     * @param userVOReq
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("add")
+    public ResultModel<Object> add(UserVOReq userVOReq) throws Exception {
+        Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
+        Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
+        userApi.addUser(DozerUtil.map(userVOReq, UserDTO.class));
+        return new ResultModel<>().success();
+    }
 
+    /**
+     * 修改用户
+     *
+     * @param userVOReq
+     * @return
+     */
+    @PutMapping("update")
+    public ResultModel<Object> update(UserVOReq userVOReq) throws Exception {
+        Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
+        userApi.updateUser(DozerUtil.map(userVOReq, UserDTO.class));
+        return new ResultModel<>().success();
+    }
 
-
+    /**
+     * 用户名查重
+     *
+     * @param userName
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("checkUserName")
+    public boolean checkUserName(String userName) throws Exception {
+        return userApi.checkUserName(userName);
+    }
 
 
 }
