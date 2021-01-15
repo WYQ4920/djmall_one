@@ -6,7 +6,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 @Data
-@Accessors
 public class ResourceDTO implements Serializable {
     /**
      * 资源ID
@@ -22,6 +21,17 @@ public class ResourceDTO implements Serializable {
      * 资源路径
      */
     private String url;
+
+    /**
+     * 编码
+     */
+    private String ResourceCode;
+
+    /**
+     * 类型
+     */
+    private String ResourceType;
+
 
     /**
      * 父级ID
