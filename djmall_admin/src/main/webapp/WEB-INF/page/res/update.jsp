@@ -6,15 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/static/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/layer-v3.1.1/layer/layer.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/static/dist/jquery.validate.js"></script>
 </head>
 
 <body>
 
 <form id="fm">
 	<input type="hidden" value="${one.id}" name="id"/>
-	<input type="text" name="resourceName" value="${one.resourceName}">
-	<input type="text" name="resourceCode" value="${one.resourceCode}">
+
+	<label for="resourceName">资源名：</label>
+	<input type="text" id="resourceName" name="resourceName" value="${one.resourceName}"><br>
+
+	<label for="resourceCode">编码名：</label>
+	<input type="text" id="resourceCode" name="resourceCode" value="${one.resourceCode}"><br>
+	资源类型：
 	<select name="resourceType">
 		<option value="1" <c:if test="${one.resourceType == 1}">selected</c:if>>菜单</option>
 		<option value="2" <c:if test="${one.resourceType == 2}">selected</c:if>>按钮</option>
@@ -62,7 +69,7 @@
 			submitHandler:function(fm){
 				var index = layer.load(2,{shade:0.4});
 				$.post(
-						"<%=request.getContextPath() %>/res/update",
+						"<%=request.getContextPath() %>/res/update?_method=put",
 						$("#fm").serialize(),
 						function(result){
 							layer.msg(result.msg, {
