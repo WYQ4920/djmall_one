@@ -20,7 +20,7 @@
                     rangelength:[2,5],
                     remote: {
                         type: "post",
-                        url: "<%=request.getContextPath()%>/role/checkRoleName",
+                        url: "<%=request.getContextPath()%>/auth/role/checkRoleName",
                         data:{
                             roleName: $("#roleName").val()
                         }
@@ -38,7 +38,7 @@
             submitHandler:function(fm){
                 var index = layer.load(4, {shade:0.2});
                 $.post(
-                    "<%=request.getContextPath()%>/role/add",
+                    "<%=request.getContextPath()%>/auth/role/add",
                     $("#fm").serialize(),
                     function(result){
                         layer.msg(
@@ -48,7 +48,7 @@
                                 if(result.code == 200){
                                     layer.close(index);
                                     layer.msg(result.msg);
-                                    parent.location.href="<%=request.getContextPath() %>/role/toShow";
+                                    parent.location.href="<%=request.getContextPath() %>/auth/role/toShow";
                                     return;
                                 }
                                 layer.close(index);

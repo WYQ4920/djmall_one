@@ -20,7 +20,7 @@
 
     function show(){
         $.get(
-            "<%=request.getContextPath() %>/role/show",
+            "<%=request.getContextPath() %>/auth/role/show",
             $("#fm").serialize(),
             function(result){
                 let html = "";
@@ -73,7 +73,7 @@
             type: 2,
             shade: 0.2,
             area:["360px","360px"],
-            content: '<%=request.getContextPath() %>/role/toAdd',
+            content: '<%=request.getContextPath() %>/auth/role/toAdd',
         });
     }
 
@@ -83,14 +83,14 @@
             type: 2,
             shade: 0.2,
             area:["360px","360px"],
-            content: '<%=request.getContextPath() %>/role/toUpdate?id=' + id,
+            content: '<%=request.getContextPath() %>/auth/role/toUpdate?id=' + id,
         });
     }
 
     /* 删除 */
     function remove(id){
         $.post(
-            "<%=request.getContextPath() %>/role/remove",
+            "<%=request.getContextPath() %>/auth/role/remove",
             {"id":id},
             function(result){
                 if (200 != result.code){

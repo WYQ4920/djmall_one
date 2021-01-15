@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/role/")
+@RequestMapping("/auth/role/")
 public class RoleController {
 
     @Reference
