@@ -15,6 +15,16 @@ public class ResourceVOResp {
     private String ResourceName;
 
     /**
+     * 编码
+     */
+    private String ResourceCode;
+
+    /**
+     * 类型
+     */
+    private String ResourceType;
+
+    /**
      * 资源路径
      */
     private String url;
