@@ -28,7 +28,6 @@ public class ResourcePageController {
 
     @RequestMapping("toUpdate")
     public String toUpdate(Model model,Integer id) throws Exception {
-        Assert.hasText(String.valueOf(id), "请选择编辑资源");
         ResourceDTO one = resourceApi.findResById(id);
         model.addAttribute("one",one);
         return "res/update";
