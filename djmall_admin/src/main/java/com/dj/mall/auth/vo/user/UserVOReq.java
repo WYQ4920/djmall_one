@@ -1,9 +1,9 @@
-package com.dj.mall.auth.vo;
+package com.dj.mall.auth.vo.user;
 
 import lombok.Data;
 
 @Data
-public class UserVOResp {
+public class UserVOReq {
 
     /**
      * 用户ID
@@ -14,5 +14,10 @@ public class UserVOResp {
      * 用户名
      */
     private String userName;
+
+    /**
+     * 用户密码
+     */
+    private String userPwd;
 
 }

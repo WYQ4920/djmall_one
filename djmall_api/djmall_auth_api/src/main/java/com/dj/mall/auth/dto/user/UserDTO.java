@@ -1,9 +1,11 @@
-package com.dj.mall.auth.vo;
+package com.dj.mall.auth.dto.user;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UserVOReq {
+public class UserDTO implements Serializable {
 
     /**
      * 用户ID
@@ -19,5 +21,4 @@ public class UserVOReq {
      * 用户密码
      */
     private String userPwd;
-
 }

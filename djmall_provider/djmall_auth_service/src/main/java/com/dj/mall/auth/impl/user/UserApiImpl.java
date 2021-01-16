@@ -1,12 +1,12 @@
-package com.dj.mall.auth.impl;
+package com.dj.mall.auth.impl.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dj.mall.auth.api.UserApi;
-import com.dj.mall.auth.dto.UserDTO;
-import com.dj.mall.auth.entity.UserEntity;
-import com.dj.mall.auth.mapper.UserMapper;
+import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.entity.user.UserEntity;
+import com.dj.mall.auth.mapper.user.UserMapper;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.StringUtils;

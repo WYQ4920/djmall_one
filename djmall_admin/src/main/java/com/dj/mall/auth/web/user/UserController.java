@@ -1,10 +1,10 @@
-package com.dj.mall.auth.web;
+package com.dj.mall.auth.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.dj.mall.auth.api.UserApi;
-import com.dj.mall.auth.dto.UserDTO;
-import com.dj.mall.auth.vo.UserVOReq;
-import com.dj.mall.auth.vo.UserVOResp;
+import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.vo.user.UserVOReq;
+import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;

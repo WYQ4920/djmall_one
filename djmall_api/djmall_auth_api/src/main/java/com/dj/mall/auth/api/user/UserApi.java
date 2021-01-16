@@ -1,6 +1,6 @@
-package com.dj.mall.auth.api;
+package com.dj.mall.auth.api.user;
 
-import com.dj.mall.auth.dto.UserDTO;
+import com.dj.mall.auth.dto.user.UserDTO;
 
 import java.util.List;
 
