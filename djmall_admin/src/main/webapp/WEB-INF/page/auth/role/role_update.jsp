@@ -12,12 +12,12 @@
 <script type="text/javascript">
     function update(){
         $.post(
-            "<%=request.getContextPath()%>/role/update",
+            "<%=request.getContextPath()%>/auth/role/update",
             $("#fm").serialize(),
             function(result){
                 if(result.code == 200){
                     layer.msg(result.msg);
-                    parent.location.href="<%=request.getContextPath() %>/role/toShow";
+                    parent.location.href="<%=request.getContextPath() %>/auth/role/toShow";
                     return;
                 }
                 layer.msg(result.msg);

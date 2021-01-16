@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/role/")
+@RequestMapping("/auth/role/")
 public class RolePageController {
 
     @Reference
@@ -28,7 +28,7 @@ public class RolePageController {
      */
     @GetMapping("toShow")
     public String toShow(){
-        return "auth/role/show";
+        return "auth/role/role_show";
     }
 
     /**
@@ -36,7 +36,7 @@ public class RolePageController {
      */
     @GetMapping("toAdd")
     public String toAdd(){
-        return "auth/role/add";
+        return "auth/role/role_add";
     }
 
     /**
@@ -46,7 +46,7 @@ public class RolePageController {
     public String toUpdate(Integer id, ModelMap map) throws Exception {
         RoleDTO role = roleApi.findRoleById(id);
         map.put("role", DozerUtil.map(role, RoleVOResp.class));
-        return "auth/role/update";
+        return "auth/role/role_update";
     }
 
 }
