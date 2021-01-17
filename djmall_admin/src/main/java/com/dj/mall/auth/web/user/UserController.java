@@ -59,7 +59,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("add")
-    public ResultModel<Object> add(UserVOReq userVOReq) throws Exception {
+    public ResultModel<Object> add(UserVOReq userVOReq,HttpSession session) throws Exception {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
         userApi.addUser(DozerUtil.map(userVOReq, UserDTO.class));

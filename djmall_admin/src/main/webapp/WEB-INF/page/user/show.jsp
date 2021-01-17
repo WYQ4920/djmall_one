@@ -96,7 +96,7 @@
 		show();
 	}
 
-	function add(){
+	/*function add(){
 		layer.open({
 			type : 2,
 			title : '注册页面',
@@ -104,19 +104,6 @@
 			area : [ '380px', '360px' ],
 			content : '<%=request.getContextPath() %>/user/toAdd' //iframe的url
 		});
-	}
-
-	/*function check(){
-		$.post(
-				"<%=request.getContextPath() %>/user/check",
-				{"id":1},
-				function (result){
-					if(result.code == 200){
-						layer.msg("success!")
-						alert(result.data);
-					}
-				}
-		)
 	}*/
 	
 
@@ -128,21 +115,13 @@
 <body>
 	<form id="fm">
 		用户名：<input type="text" name="userName"><br>
-		<%--年龄：<input type="text" name="startAge">--
-		<input type="text" name="endAge">
-		性别：<input type="radio" name="sex" value="男">男
-		<input type="radio" name="sex" value="女">女
-		<br>--%>
 		<input type="button" value="查询" onclick="query()">
-		<input type="button" value="新增" onclick="add()">
+		<%--<input type="button" value="新增" onclick="add()">--%>
 		<br>
 		<table>
 			<tr>
 				<td>用户ID</td>
 				<td>用户名</td>
-				<%--<td>性别</td>
-				<td>年龄</td>
-                <td>昵称</td>--%>
 				<td>操作</td>
 			</tr>
 			<tbody id="tb"></tbody>

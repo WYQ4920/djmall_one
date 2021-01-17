@@ -57,11 +57,14 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      *
      * @param userDTO
      * @throws Exception
+     * @return
      */
     @Override
     public void addUser(UserDTO userDTO) throws Exception {
         UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
         this.save(userEntity);
+       /* UserDTO userDTO1=DozerUtil.map(this.getById(userEntity.getId()),UserDTO.class);
+        return userDTO1;*/
     }
 
     /**
