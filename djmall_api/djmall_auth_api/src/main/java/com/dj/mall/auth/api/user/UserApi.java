@@ -1,5 +1,6 @@
 package com.dj.mall.auth.api.user;
 
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.common.base.BusinessException;
 
@@ -18,4 +19,12 @@ public interface UserApi {
     void updateUser(UserDTO userDTO) throws BusinessException;
 
     boolean checkUserName(String userName) throws Exception;
+
+    /**
+     * 获取用户资源信息
+     * @param userId 用户ID
+     * @return
+     * @throws Exception
+     */
+    List<ResourceDTO> getUserResource(Integer userId)throws Exception;
 }
