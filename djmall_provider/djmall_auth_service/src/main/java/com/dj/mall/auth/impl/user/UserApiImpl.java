@@ -1,12 +1,12 @@
-package com.dj.mall.auth.impl;
+package com.dj.mall.auth.impl.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dj.mall.auth.api.UserApi;
-import com.dj.mall.auth.dto.UserDTO;
-import com.dj.mall.auth.entity.UserEntity;
-import com.dj.mall.auth.mapper.UserMapper;
+import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.entity.user.UserEntity;
+import com.dj.mall.auth.mapper.user.UserMapper;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.StringUtils;
@@ -17,14 +17,15 @@ import java.util.List;
 public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements UserApi {
 
     /**
-     * 登录
+     * 用户登录
      *
      * @param userName
      * @param userPwd
      * @return
+     * @throws BusinessException
      */
     @Override
-    public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws Exception {
+    public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName).eq("user_pwd", userPwd);
         UserEntity userEntity = this.getOne(queryWrapper);
@@ -56,6 +57,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      * 新增用户
      *
      * @param userDTO
+     * @return
      * @throws Exception
      */
     @Override
@@ -81,10 +83,10 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      * 修改用户
      *
      * @param userDTO
-     * @throws Exception
+     * @throws BusinessException
      */
     @Override
-    public void updateUser(UserDTO userDTO) throws Exception {
+    public void updateUser(UserDTO userDTO) throws BusinessException {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userDTO.getUserName());
         UserEntity userEntity = this.getOne(queryWrapper);

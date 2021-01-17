@@ -35,11 +35,11 @@ $(function(){
            	 required: true,
            	 rangelength:[3,9]
            },
-           userPwd_confirm:{
+           /*userPwd_confirm:{
           	 required: true,
           	 rangelength:[3,9],
           	 equalTo: "#userPwd"
-          },
+          },*/
            /*userSex:{
            	 required: true,          	 
            },
@@ -58,11 +58,11 @@ $(function(){
 		        required: "密码不能为空",
 		        rangelength: "密码长度应在3~9",
        		},
-       		userPwd_confirm: {
+       		/*userPwd_confirm: {
 		        required: "确认密码不能为空",
 		        rangelength: "确认密码的长度应在3~9",
 		        equalTo:"两次输入不一致"
-       		},
+       		},*/
        		/*userSex: {
 		        required: "性别不能为空",
        		}, 
@@ -83,7 +83,7 @@ $(function(){
    						}, function(){
    						  //do something
    							if(result.code == "200"){
-   								parent.location.href="<%=request.getContextPath()%>/index/toIndex";
+   								parent.location.href="<%=request.getContextPath()%>/user/toLogin";
    								layer.close(index); 
 								return;
 							}
@@ -107,8 +107,8 @@ $(function(){
 		 <input type="text" name="userName" id="userName"><br>
 	 	<label for="userPwd">密 码：</label>
 		 <input type="text" name="userPwd" id="userPwd"><br>
-		 <label for="userPwd_confirm">确认密码：</label>
-		 <input type="text" name="userPwd_confirm" id="userPwd_confirm"><br>
+		 <%--<label for="userPwd_confirm">确认密码：</label>
+		 <input type="text" name="userPwd_confirm" id="userPwd_confirm"><br>--%>
 		<%--<label for="userSex">性 别：</label>
 			<c:forEach items="${sexList}" var="s">
 				<input type="radio" name="userSex" id="userSex" value="${s.id}" >${s.baseName}

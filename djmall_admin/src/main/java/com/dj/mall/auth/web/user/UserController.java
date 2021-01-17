@@ -1,10 +1,11 @@
-package com.dj.mall.auth.web;
+package com.dj.mall.auth.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.dj.mall.auth.api.UserApi;
-import com.dj.mall.auth.dto.UserDTO;
-import com.dj.mall.auth.vo.UserVOReq;
-import com.dj.mall.auth.vo.UserVOResp;
+import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.vo.user.UserVOReq;
+import com.dj.mall.auth.vo.user.UserVOResp;
+import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
@@ -31,7 +32,7 @@ public class UserController {
      * @return
      */
     @GetMapping("login")
-    public ResultModel<Object> login(String userName, String userPwd, HttpSession session) throws Exception {
+    public ResultModel<Object> login(String userName, String userPwd, HttpSession session) throws BusinessException {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
@@ -59,7 +60,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("add")
-    public ResultModel<Object> add(UserVOReq userVOReq) throws Exception {
+    public ResultModel<Object> add(UserVOReq userVOReq,HttpSession session) throws Exception {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
         userApi.addUser(DozerUtil.map(userVOReq, UserDTO.class));
@@ -73,7 +74,7 @@ public class UserController {
      * @return
      */
     @PutMapping("update")
-    public ResultModel<Object> update(UserVOReq userVOReq) throws Exception {
+    public ResultModel<Object> update(UserVOReq userVOReq) throws BusinessException {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         userApi.updateUser(DozerUtil.map(userVOReq, UserDTO.class));
         return new ResultModel<>().success();

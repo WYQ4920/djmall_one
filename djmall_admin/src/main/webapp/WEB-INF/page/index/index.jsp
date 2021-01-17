@@ -6,11 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
 </head>
+<frameset rows="25%,75%">
+	<frame src="<%=request.getContextPath() %>/index/toTop?token=${token}"></frame>
 <frameset rows="20%,80%">
 	<frame src="<%=request.getContextPath() %>/index/toTop" name="top"/>
 	<frameset cols="30%,70%">
-		<frame src="<%=request.getContextPath() %>/index/toLeft" name="left"/>
-		<frame src="<%=request.getContextPath() %>/index/toRight" name="right"/>
+		<frame src="<%=request.getContextPath() %>/index/toLeft?token=${token}"></frame>
+		<frame src="<%=request.getContextPath() %>/index/toRight?token=${token}" name="right"></frame>
 	</frameset>
 </frameset>
 </html>

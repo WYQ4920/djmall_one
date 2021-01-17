@@ -69,6 +69,7 @@ public class ResourceController {
     public ResultModel<Object> add(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
+        resourceDTO.setResourceCode(resourceVOReq.getResourceCode().toUpperCase());
         resourceApi.addRes(resourceDTO);
         return new ResultModel<>().success();
     }
@@ -83,7 +84,7 @@ public class ResourceController {
     public ResultModel<Object> update(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
-        resourceApi.updeteRes(resourceDTO);
+        resourceApi.updateRes(resourceDTO);
         return new ResultModel<>().success();
     }
 

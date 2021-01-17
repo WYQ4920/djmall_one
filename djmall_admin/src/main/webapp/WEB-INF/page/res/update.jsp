@@ -19,8 +19,7 @@
 	<label for="resourceName">资源名：</label>
 	<input type="text" id="resourceName" name="resourceName" value="${one.resourceName}"><br>
 
-	<label for="resourceCode">编码名：</label>
-	<input type="text" id="resourceCode" name="resourceCode" value="${one.resourceCode}"><br>
+	编码：${one.resourceCode} <br>
 	资源类型：
 	<select name="resourceType">
 		<option value="1" <c:if test="${one.resourceType == 1}">selected</c:if>>菜单</option>
@@ -36,15 +35,6 @@
 			rules:{
 				resourceName:{
 					required: true,
-					remote: {
-						type: "post",
-						url: "<%=request.getContextPath()%>/res/checkResourceName",
-						data:{
-							resourceName: function() {
-								return $("#resourceName").val();
-							}
-						}
-					}
 				},
 				url:{
 					required: true,
@@ -56,7 +46,6 @@
 			messages:{
 				resourceName: {
 					required: "请输入资源名",
-					remote:"资源名重复"
 				},
 				url:{
 					required: "请输入路径",

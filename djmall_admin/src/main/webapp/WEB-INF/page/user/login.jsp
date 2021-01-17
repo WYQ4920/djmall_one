@@ -60,15 +60,15 @@
 	   			}   			  			
 	   		})
 	 	 });
-	  					
-	function register(){	
+
+	function add(){
 		layer.open({
-				type : 2,
-				title : '注册页面',
-				shade : 0.5,
-				area : [ '380px', '360px' ],
-				content : '<%=request.getContextPath() %>/user/toRegister' //iframe的url
-			});
+			type : 2,
+			title : '注册页面',
+			shade : 0.5,
+			area : [ '380px', '360px' ],
+			content : '<%=request.getContextPath() %>/user/toAdd' //iframe的url
+		});
 	}
 	
 
@@ -90,7 +90,7 @@
 		<label for="userPwd">密   码：</label>
 		   <input type="text" name="userPwd" id="userPwd" ><br>
 		<input type="submit" value="登录" >
-		<input type="button" value="注册" onclick="register()">
+		<input type="button" value="注册" onclick="add()">
 	</form>	
 
 </body>

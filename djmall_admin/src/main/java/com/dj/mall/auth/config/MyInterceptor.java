@@ -1,7 +1,7 @@
 package com.dj.mall.auth.config;
 
 
-import com.dj.mall.auth.dto.UserDTO;
+import com.dj.mall.auth.dto.user.UserDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
