@@ -2,6 +2,8 @@ package com.dj.mall.auth.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ResourceVOReq {
     /**
@@ -40,4 +42,9 @@ public class ResourceVOReq {
      * 1:已删除
      */
     private Integer isDel;
+
+    /**
+     * 资源ID集合
+     */
+    private List<Integer> resourceIds;
 }

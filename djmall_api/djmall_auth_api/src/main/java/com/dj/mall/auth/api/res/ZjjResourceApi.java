@@ -33,4 +33,11 @@ public interface ZjjResourceApi {
      * @throws Exception
      */
     void updateResource(ResourceDTO resourceDTO) throws Exception;
+
+    /**
+     * 删除资源
+     * @param resourceDTO
+     * @throws Exception
+     */
+    void delResource(ResourceDTO resourceDTO) throws Exception;
 }

@@ -54,6 +54,17 @@ public class ZjjResourceController {
         return new ResultModel().success();
     }
 
+    /**
+     * 删除资源
+     * @param resourceVOReq
+     * @return
+     */
+    @DeleteMapping("del")
+    public ResultModel delResource(ResourceVOReq resourceVOReq) throws Exception {
+        zjjResourceApi.delResource(DozerUtil.map(resourceVOReq,ResourceDTO.class));
+        return new ResultModel().success();
+    }
+
 
 
 

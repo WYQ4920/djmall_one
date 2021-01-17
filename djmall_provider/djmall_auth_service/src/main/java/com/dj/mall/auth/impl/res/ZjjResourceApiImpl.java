@@ -60,4 +60,15 @@ public class ZjjResourceApiImpl extends ServiceImpl<ZjjResourceMapper, ResourceE
     public void updateResource(ResourceDTO resourceDTO) throws Exception {
         super.updateById(DozerUtil.map(resourceDTO,ResourceEntity.class));
     }
+
+    /**
+     * 删除资源
+     *
+     * @param resourceDTO
+     * @throws Exception
+     */
+    @Override
+    public void delResource(ResourceDTO resourceDTO) throws Exception {
+        super.removeByIds(resourceDTO.getResourceIds());
+    }
 }
