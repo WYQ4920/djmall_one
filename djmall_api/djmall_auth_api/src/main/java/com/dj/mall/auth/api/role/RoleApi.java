@@ -39,6 +39,13 @@ public interface RoleApi {
     ResultModel updateRole(RoleDTO roleDTO) throws Exception;
 
     /**
+     * 删除角色
+     * @param id
+     * @throws Exception
+     */
+    void deleteRole(Integer id) throws Exception;
+
+    /**
      * 展示关联资源
      * @param roleDTO 角色资源
      * @return
@@ -52,4 +59,5 @@ public interface RoleApi {
      * @throws Exception
      */
     void saveRoleResource(RoleDTO roleDTO) throws Exception;
+
 }

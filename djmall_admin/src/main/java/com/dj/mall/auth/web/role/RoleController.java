@@ -65,6 +65,15 @@ public class RoleController {
     }
 
     /**
+     * 删除角色
+     */
+    @PostMapping("del")
+    public ResultModel del(Integer id) throws Exception {
+        roleApi.deleteRole(id);
+        return new ResultModel().success();
+    }
+
+    /**
      * 展示关联资源
      */
     @GetMapping("showResRel")

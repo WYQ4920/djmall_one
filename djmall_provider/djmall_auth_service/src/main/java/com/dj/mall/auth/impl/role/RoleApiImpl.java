@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.api.role.RoleApi;
+import com.dj.mall.auth.service.user.UserRoleService;
 import com.dj.mall.auth.entity.role.RoleResourceEntity;
+import com.dj.mall.auth.entity.user.UserRoleEntity;
 import com.dj.mall.auth.service.role.RoleResourceService;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
@@ -36,6 +38,9 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
 
     @Autowired
     private RoleResourceService roleResourceService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     /**
      * 角色展示
@@ -88,6 +93,22 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         }
         super.updateById(DozerUtil.map(roleDTO, RoleEntity.class));
         return new ResultModel().success();
+    }
+
+    /**
+     * 删除角色
+     * @param id 角色id
+     * @throws Exception
+     */
+    @Override
+    public void deleteRole(Integer id) throws Exception {
+        super.removeById(id);
+        QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id", id);
+        roleResourceService.remove(queryWrapper);
+        QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("role_id", id);
+        userRoleService.remove(queryWrapper1);
     }
 
     /**
