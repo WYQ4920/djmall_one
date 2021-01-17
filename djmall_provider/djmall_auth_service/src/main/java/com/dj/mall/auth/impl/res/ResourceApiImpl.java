@@ -21,7 +21,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
      * @throws Exception
      */
     @Override
-    public List<ResourceDTO> findAll(ResourceDTO resourceDTO) throws Exception {
+    public List<ResourceDTO> findAll() throws Exception {
         List<ResourceEntity> list = this.list();
         return DozerUtil.mapList(list, ResourceDTO.class);
     }

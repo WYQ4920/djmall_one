@@ -31,7 +31,7 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
-                    html += "<input type='button' value='关联资源' onclick='resRole("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html += "<input type='button' value='关联资源' onclick='toResRelZtree("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html += "<span style='color: cornflowerblue'>|</span>";
                     html += "<input type='button' value='编辑' onclick='upd("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html += "<span style='color: cornflowerblue'>|</span>";
@@ -66,6 +66,16 @@
         }
         show(pageNo);
     }*/
+
+    /* 关联资源 */
+    function toResRelZtree(id){
+        layer.open({
+            type: 2,
+            shade: 0.2,
+            area:["360px","360px"],
+            content: '<%=request.getContextPath() %>/auth/role/toResRelZtree?id=' + id,
+        });
+    }
 
     /* 新增 */
     function add(){

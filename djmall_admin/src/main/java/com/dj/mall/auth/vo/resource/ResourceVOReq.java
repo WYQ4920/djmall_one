@@ -1,6 +1,8 @@
-package com.dj.mall.auth.vo;
+package com.dj.mall.auth.vo.resource;
 
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class ResourceVOReq {
@@ -40,4 +42,5 @@ public class ResourceVOReq {
      * 1:已删除
      */
     private Integer isDel;
+
 }

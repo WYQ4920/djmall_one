@@ -7,7 +7,7 @@ import com.dj.mall.common.base.BusinessException;
 import java.util.List;
 
 public interface ResourceApi {
-    List<ResourceDTO> findAll(ResourceDTO resourceDTO) throws Exception;
+    List<ResourceDTO> findAll() throws Exception;
 
     List<ResourceDTO> findAll1(ResourceDTO resourceDTO) throws Exception;
 
