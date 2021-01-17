@@ -10,13 +10,14 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.all.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<a id="treeDemo" class="ztree"></a>
 	<center>
+		<div id="resourceShow" class="ztree"></div><br>
 		<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户管理</a><br>
 		<a href="<%=request.getContextPath() %>/res/toShowResZtree" target="right">资源管理</a><br>
 		<a href="<%=request.getContextPath() %>/role/toShow" target="right">角色管理</a><br>
@@ -24,6 +25,7 @@
 	</center>
 </body>
 <script type="text/javascript">
+
 	var setting = {
 		edit : {
 			enable : true
@@ -37,18 +39,26 @@
 			key : {
 				name : "resourceName"
 			}
+		},
+		callback:{    //第一步
+			onClick:function (event, treeId, treeNode) {
+				if (!treeNode.isParent) {
+					parent.right.location.href = "<%=request.getContextPath() %>" + treeNode.url;
+				}
+			}
 		}
 	};
-	$(function () {
-		show();
-	})
-	function show() {
-		$.post("<%=request.getContextPath()%>/res/resourceShow",
-				{},
-				function (result) {
-					$.fn.zTree.init($("#treeDemo"), setting, result.data);
-				})
-	}
-</script>
 
+	$(function () {
+		$.get("<%=request.getContextPath()%>/res/resourceShow",
+			{},
+			function (result) {
+				if (200 == result.code){
+					$.fn.zTree.init($("#resourceShow"), setting, result.data);
+				}
+			}
+		)
+	})
+
+</script>
 </html>
