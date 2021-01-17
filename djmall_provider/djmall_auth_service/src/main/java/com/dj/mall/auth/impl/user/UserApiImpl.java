@@ -4,7 +4,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.entity.res.ResourceEntity;
 import com.dj.mall.auth.entity.user.UserEntity;
 import com.dj.mall.auth.mapper.user.UserMapper;
 import com.dj.mall.common.base.BusinessException;
@@ -112,6 +114,18 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
             return false;
         }
         return true;
+    }
+
+    /**
+     * 获取用户资源信息
+     * @param userId 用户ID
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<ResourceDTO> getUserResource(Integer userId) throws Exception {
+        List<ResourceEntity> resourceEntities = getBaseMapper().getUserResourceByUserId(userId);
+        return DozerUtil.mapList(resourceEntities, ResourceDTO.class);
     }
 
 

@@ -60,9 +60,8 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
      * @throws Exception
      */
     @Override
-    public boolean updateResource(ResourceDTO resourceDTO) throws Exception {
+    public void updateResource(ResourceDTO resourceDTO) throws Exception {
         super.updateById(DozerUtil.map(resourceDTO, ResourceEntity.class));
-        return true;
     }
 
     /**
@@ -71,9 +70,8 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
      * @throws Exception
      */
     @Override
-    public boolean delResource(ResourceDTO resourceDTO) throws Exception {
+    public void delResource(ResourceDTO resourceDTO) throws Exception {
         super.removeByIds(resourceDTO.getResourceIds());
-        return true;
     }
 
 }
