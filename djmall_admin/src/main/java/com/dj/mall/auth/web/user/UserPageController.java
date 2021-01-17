@@ -42,9 +42,10 @@ public class UserPageController {
     }
 
     @RequestMapping("exit")
-    public void exit(HttpSession session){
+    public String exit(HttpSession session){
         session.removeAttribute("user");
         session.invalidate();
+        return "user/login";
     }
 
 
