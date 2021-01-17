@@ -40,13 +40,13 @@ public interface WyqResourceApi {
      * @return
      * @throws Exception
      */
-    boolean updateResource(ResourceDTO resourceDTO) throws Exception;
+    void updateResource(ResourceDTO resourceDTO) throws Exception;
 
     /**
      * 删除资源
      * @param resourceDTO 资源信息
      * @throws Exception
      */
-    boolean delResource(ResourceDTO resourceDTO) throws Exception;
+    void delResource(ResourceDTO resourceDTO) throws Exception;
 
 }
