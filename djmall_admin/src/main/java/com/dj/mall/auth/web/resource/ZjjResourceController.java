@@ -8,10 +8,7 @@ import com.dj.mall.auth.vo.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +33,12 @@ public class ZjjResourceController {
         return new ResultModel().success(DozerUtil.mapList(resourceList, ResourceVOResp.class));
     }
 
+    /**
+     * 新增资源
+     * @param resourceVOReq
+     * @return
+     * @throws Exception
+     */
     @PostMapping("add")
     public ResultModel add(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(),"资源名不能为空");
@@ -44,6 +47,14 @@ public class ZjjResourceController {
         zjjResourceApi.addResource(DozerUtil.map(resourceVOReq,ResourceDTO.class));
         return new ResultModel().success();
     }
+
+    @PutMapping("update")
+    public ResultModel update(ResourceVOReq resourceVOReq) throws Exception {
+        zjjResourceApi.updateResource(DozerUtil.map(resourceVOReq,ResourceDTO.class));
+        return new ResultModel().success();
+    }
+
+
 
 
 

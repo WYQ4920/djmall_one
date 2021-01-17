@@ -49,4 +49,15 @@ public class ZjjResourceApiImpl extends ServiceImpl<ZjjResourceMapper, ResourceE
     public void addResource(ResourceDTO resourceDTO) throws Exception {
         this.save(DozerUtil.map(resourceDTO,ResourceEntity.class));
     }
+
+    /**
+     * 修改资源
+     *
+     * @param resourceDTO
+     * @throws Exception
+     */
+    @Override
+    public void updateResource(ResourceDTO resourceDTO) throws Exception {
+        super.updateById(DozerUtil.map(resourceDTO,ResourceEntity.class));
+    }
 }

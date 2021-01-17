@@ -26,4 +26,11 @@ public interface ZjjResourceApi {
      * @throws Exception
      */
     void addResource(ResourceDTO resourceDTO) throws Exception;
+
+    /**
+     * 修改资源
+     * @param resourceDTO
+     * @throws Exception
+     */
+    void updateResource(ResourceDTO resourceDTO) throws Exception;
 }
