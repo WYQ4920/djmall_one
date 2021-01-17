@@ -25,9 +25,9 @@ public class ResourceController {
     private ResourceApi resourceApi;
 
 
-    @PostMapping("resourceShow")
-    public ResultModel<Object> resourceShow(ResourceDTO resourceDTO) throws Exception {
-        List<ResourceDTO> list = resourceApi.findAll(resourceDTO);
+    @GetMapping("resourceShow")
+    public ResultModel<Object> resourceShow() throws Exception {
+        List<ResourceDTO> list = resourceApi.findAll();
         List<ResourceVOResp> list1 = DozerUtil.mapList(list, ResourceVOResp.class);
         return new ResultModel<>().success(list1);
     }
