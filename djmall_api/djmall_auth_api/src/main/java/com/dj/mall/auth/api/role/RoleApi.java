@@ -1,6 +1,7 @@
 package com.dj.mall.auth.api.role;
 
 import com.dj.mall.auth.dto.role.RoleDTO;
+import com.dj.mall.auth.dto.role.TreeDataDTO;
 import com.dj.mall.common.base.ResultModel;
 
 import java.util.List;
@@ -37,4 +38,18 @@ public interface RoleApi {
      */
     ResultModel updateRole(RoleDTO roleDTO) throws Exception;
 
+    /**
+     * 展示关联资源
+     * @param roleDTO 角色资源
+     * @return
+     * @throws Exception
+     */
+    List<TreeDataDTO> findAll(RoleDTO roleDTO) throws Exception;
+
+    /**
+     * 保存角色资源
+     * @param roleDTO 角色资源
+     * @throws Exception
+     */
+    void saveRoleResource(RoleDTO roleDTO) throws Exception;
 }

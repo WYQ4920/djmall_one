@@ -3,15 +3,23 @@ package com.dj.mall.auth.impl.role;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.api.role.RoleApi;
+import com.dj.mall.auth.entity.role.RoleResourceEntity;
+import com.dj.mall.auth.service.role.RoleResourceService;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
+import com.dj.mall.auth.dto.role.RoleResourceDTO;
+import com.dj.mall.auth.dto.role.TreeDataDTO;
 import com.dj.mall.auth.entity.role.RoleEntity;
 import com.dj.mall.auth.mapper.role.RoleMapper;
 import com.dj.mall.common.base.ResultModel;
-import com.dj.mall.common.base.SystemConstant;
+import com.dj.mall.common.constant.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +30,12 @@ import java.util.List;
 
 @Service
 public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements RoleApi {
+
+    @Autowired
+    private ResourceApi resourceApi;
+
+    @Autowired
+    private RoleResourceService roleResourceService;
 
     /**
      * 角色展示
@@ -74,6 +88,54 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         }
         super.updateById(DozerUtil.map(roleDTO, RoleEntity.class));
         return new ResultModel().success();
+    }
+
+    /**
+     * 展示关联资源
+     * @param roleDTO 角色资源
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<TreeDataDTO> findAll(RoleDTO roleDTO) throws Exception {
+        List<ResourceDTO> resourceDTOList = resourceApi.findAll();
+        List<RoleResourceDTO> roleResourceDTOS = roleResourceService.findRoleResourceByRoleId(roleDTO.getId());
+        List<TreeDataDTO> treeDataList = new ArrayList<>();
+        for (ResourceDTO res:resourceDTOList) {
+            TreeDataDTO treeDataDTO = TreeDataDTO.builder()
+                    .id(res.getId())
+                    .parentId(res.getParentId())
+                    .resourceName(res.getResourceName())
+                    .build();
+            for (RoleResourceDTO rrs:roleResourceDTOS) {
+                if (rrs.getResourceId().equals(res.getId())) {
+                    treeDataDTO.setChecked(true);
+                    break;
+                }
+            }
+            treeDataList.add(treeDataDTO);
+        }
+        return treeDataList;
+    }
+
+    /**
+     * 保存角色资源
+     * @param roleDTO 角色资源
+     * @throws Exception
+     */
+    @Override
+    public void saveRoleResource(RoleDTO roleDTO) throws Exception {
+        QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id", roleDTO.getId());
+        roleResourceService.remove(queryWrapper);
+        List<RoleResourceEntity> resourceEntities = new ArrayList<>();
+        for (Integer resourceIds:roleDTO.getResourceIds()) {
+            resourceEntities.add(RoleResourceEntity.builder()
+                    .roleId(roleDTO.getId())
+                    .resourceId(resourceIds)
+                    .build());
+        }
+        roleResourceService.saveBatch(resourceEntities);
     }
 
 }

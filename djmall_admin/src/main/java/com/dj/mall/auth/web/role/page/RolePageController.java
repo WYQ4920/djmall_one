@@ -6,8 +6,10 @@ import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.vo.role.RoleVOResp;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -47,6 +49,15 @@ public class RolePageController {
         RoleDTO role = roleApi.findRoleById(id);
         map.put("role", DozerUtil.map(role, RoleVOResp.class));
         return "auth/role/role_update";
+    }
+
+    /**
+     * 去展示关联资源
+     */
+    @GetMapping("toResRelZtree")
+    public String toResRelZtree(Integer id, ModelMap map){
+        map.put("id",id);
+        return "auth/role/role_resource";
     }
 
 }
