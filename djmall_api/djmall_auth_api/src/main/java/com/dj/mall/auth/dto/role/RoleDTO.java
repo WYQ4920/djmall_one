@@ -3,6 +3,7 @@ package com.dj.mall.auth.dto.role;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author WYQ
@@ -23,4 +24,8 @@ public class RoleDTO implements Serializable {
      */
     private String roleName;
 
+    /**
+     * 资源id集合
+     */
+    private List<Integer> resourceIds;
 }
