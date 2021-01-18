@@ -3,8 +3,10 @@ package com.dj.mall.auth.web.role;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.role.RoleApi;
 import com.dj.mall.auth.dto.role.RoleDTO;
+import com.dj.mall.auth.dto.role.TreeDataDTO;
 import com.dj.mall.auth.vo.role.RoleVOReq;
 import com.dj.mall.auth.vo.role.RoleVOResp;
+import com.dj.mall.auth.vo.role.TreeDataVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
@@ -62,4 +64,33 @@ public class RoleController {
         return roleApi.updateRole(DozerUtil.map(roleVOReq, RoleDTO.class));
     }
 
+    /**
+     * 删除角色
+     */
+    @PostMapping("del")
+    public ResultModel del(Integer id) throws Exception {
+        roleApi.deleteRole(id);
+        return new ResultModel().success();
+    }
+
+    /**
+     * 展示关联资源
+     */
+    @GetMapping("showResRel")
+    public ResultModel showResRel(RoleVOReq roleVOReq) throws Exception {
+        List<TreeDataDTO> treeDataDTOS = roleApi.findAll(DozerUtil.map(roleVOReq, RoleDTO.class));
+        for (TreeDataDTO t:treeDataDTOS) {
+            System.out.println(t.getChecked());
+        }
+        return new ResultModel().success(DozerUtil.mapList(treeDataDTOS, TreeDataVOResp.class));
+    }
+
+    /**
+     * 保存角色资源
+     */
+    @PostMapping("saveRoleResource")
+    public ResultModel saveRoleResource(RoleVOReq roleVOReq) throws Exception {
+        roleApi.saveRoleResource(DozerUtil.map(roleVOReq, RoleDTO.class));
+        return new ResultModel().success();
+    }
 }

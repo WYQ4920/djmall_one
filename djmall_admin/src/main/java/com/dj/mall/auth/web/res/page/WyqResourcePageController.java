@@ -3,6 +3,7 @@ package com.dj.mall.auth.web.res.page;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.WyqResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.common.constant.SystemConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class WyqResourcePageController {
      */
     @GetMapping("toAdd")
     public String toAdd(Integer parentId, ModelMap map) throws Exception {
-        if (parentId != 1) {
+        if (!parentId.equals(SystemConstant.NUMBER)) {
             ResourceDTO resourceDTO = wyqResourceApi.getResource(parentId);
             // parentId -> 上级id
             map.put("resourceName", resourceDTO.getResourceName());

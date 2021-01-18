@@ -1,4 +1,4 @@
-package com.dj.mall.auth.vo;
+package com.dj.mall.auth.vo.resource;
 
 import lombok.Data;
 

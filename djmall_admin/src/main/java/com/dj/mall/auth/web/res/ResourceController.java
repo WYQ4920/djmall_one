@@ -3,8 +3,8 @@ package com.dj.mall.auth.web.res;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
-import com.dj.mall.auth.vo.ResourceVOReq;
-import com.dj.mall.auth.vo.ResourceVOResp;
+import com.dj.mall.auth.vo.resource.ResourceVOReq;
+import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
@@ -25,9 +25,9 @@ public class ResourceController {
     private ResourceApi resourceApi;
 
 
-    @PostMapping("resourceShow")
-    public ResultModel<Object> resourceShow(ResourceDTO resourceDTO) throws Exception {
-        List<ResourceDTO> list = resourceApi.findAll(resourceDTO);
+    @GetMapping("resourceShow")
+    public ResultModel<Object> resourceShow() throws Exception {
+        List<ResourceDTO> list = resourceApi.findAll();
         List<ResourceVOResp> list1 = DozerUtil.mapList(list, ResourceVOResp.class);
         return new ResultModel<>().success(list1);
     }

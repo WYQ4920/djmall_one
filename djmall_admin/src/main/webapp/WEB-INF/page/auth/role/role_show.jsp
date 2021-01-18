@@ -31,11 +31,11 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
-                    html += "<input type='button' value='关联资源' onclick='resRole("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html += "<input type='button' value='关联资源' onclick='toResRelZtree("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html += "<span style='color: cornflowerblue'>|</span>";
                     html += "<input type='button' value='编辑' onclick='upd("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html += "<span style='color: cornflowerblue'>|</span>";
-                    html += "<input type='button' value='删除' onclick='remove("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html += "<input type='button' value='删除' onclick='del("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -67,6 +67,16 @@
         show(pageNo);
     }*/
 
+    /* 关联资源 */
+    function toResRelZtree(id){
+        layer.open({
+            type: 2,
+            shade: 0.2,
+            area:["360px","360px"],
+            content: '<%=request.getContextPath() %>/auth/role/toResRelZtree?id=' + id,
+        });
+    }
+
     /* 新增 */
     function add(){
         layer.open({
@@ -88,16 +98,16 @@
     }
 
     /* 删除 */
-    function remove(id){
+    function del(id){
         $.post(
-            "<%=request.getContextPath() %>/auth/role/remove",
+            "<%=request.getContextPath() %>/auth/role/del",
             {"id":id},
             function(result){
                 if (200 != result.code){
                     layer.msg(result.msg);
                     return;
                 }
-                show(pageNo);
+                show();
             }
         )
     }

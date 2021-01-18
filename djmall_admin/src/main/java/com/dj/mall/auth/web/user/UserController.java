@@ -2,11 +2,14 @@ package com.dj.mall.auth.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.auth.vo.user.UserVOReq;
 import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -92,5 +95,16 @@ public class UserController {
         return userApi.checkUserName(userName);
     }
 
+    /**
+     *
+     * @param session
+     * @return
+     */
+    @GetMapping("getMenu")
+    public ResultModel getMenu(HttpSession session) throws Exception {
+        UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
+        List<ResourceDTO> resourceDTOList = userApi.getUserResource(user.getId());
+        return new ResultModel().success(DozerUtil.mapList(resourceDTOList, ResourceVOResp.class));
+    }
 
 }
