@@ -55,6 +55,7 @@
                 if (200 == result.code) {
                     layer.msg("保存成功");
                     window.location.reload();
+                    parent.location.href="<%=request.getContextPath() %>/auth/role/toShow";
                     return;
                 } else {
                     layer.msg(result.msg);
@@ -65,25 +66,6 @@
         )
     }
 
-   /* //获取被选中的节点
-    function save(){
-        var treeObj = $.fn.zTree.getZTreeObj("resourceList");
-        var nodes = treeObj.getCheckedNodes(true);
-        var ids = '';
-        for (var i = 0; i < nodes.length; i++) {
-            ids += nodes[i].id + ",";
-        }
-        ids = ids.substring(0,ids.length-1);
-        $.post(
-            "<%=request.getContextPath() %>/auth/role/saveRoleResource",
-            {"resourceIds":ids, "id": ${id}},
-            function (res){
-                if(res.code == 200){
-                    parent.location.href = "<%=request.getContextPath() %>/auth/role/toShow"
-                }
-            }
-        )
-    }*/
 </script>
 <body>
     <button type="button" onclick="save()">保存</button>
