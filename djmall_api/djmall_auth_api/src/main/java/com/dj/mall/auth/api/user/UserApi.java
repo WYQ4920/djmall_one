@@ -27,4 +27,20 @@ public interface UserApi {
      * @throws Exception
      */
     List<ResourceDTO> getUserResource(Integer userId)throws Exception;
+
+    /**
+     * 用户邮箱查重
+     * @param userEmail
+     * @return
+     * @throws Exception
+     */
+    boolean checkUserEmail(String userEmail) throws Exception;
+
+    /**
+     *  用户手机号查重
+     * @param userPhone
+     * @return
+     * @throws Exception
+     */
+    boolean checkUserPhone(String userPhone) throws Exception;
 }

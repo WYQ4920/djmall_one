@@ -60,4 +60,10 @@ public interface RoleApi {
      */
     void saveRoleResource(RoleDTO roleDTO) throws Exception;
 
+    /**
+     * 获取角色集合
+     * @return
+     * @throws Exception
+     */
+    List<RoleDTO> getRoleList() throws Exception;
 }
