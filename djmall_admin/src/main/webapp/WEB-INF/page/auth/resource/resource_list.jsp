@@ -92,13 +92,14 @@
         )
     })
 
-    /* 新增 */
+    /* 去新增 */
     function toAdd(){
         var parentId = 0;
+        debugger;
         // 获取树对象
         var treeObj = $.fn.zTree.getZTreeObj("resourceList");
         var selectedNodes = treeObj.getSelectedNodes();
-        if (selectedNodes != undefined && selectedNodes.length > 0){
+        if (undefined != selectedNodes && selectedNodes.length > 0){
             // 选择节点作为父id
             var selectedNode = selectedNodes[0];
             parentId = selectedNode.id;
@@ -136,19 +137,20 @@
 
     /* 修改 */
     function update() {
-        alert($("#resourceCode").val());
         $.post(
             "<%=request.getContextPath() %>/auth/resource/wyq/update?_method=put",
             $("#fm").serialize(),
             function(result){
                 if (200 == result.code){
                     $("#myModal").modal("hide"); // 关闭弹框
+                    window.location.reload();
                 }
             }
         )
     }
 
     /* 删除 */
+    var ids = "";
     function del(){
         // 获取树对象
         var treeObj = $.fn.zTree.getZTreeObj("resourceList");
@@ -160,8 +162,6 @@
         }
         // 选择删除的资源节点
         var selectedNode = selectedNodes[0];
-        var ids ="";
-        debugger;
         if (selectedNode.isParent) {
             // 获取所选节点的子节点
             ids = getChildNode(selectedNode);
@@ -175,7 +175,6 @@
                 if (200 == result.code){
                     layer.msg(result.msg);
                     window.location.reload();
-                    show();
                     return;
                 }
             }
@@ -184,7 +183,6 @@
 
     /* 获取删除的所有节点 */
     function getChildNode(parentNode){
-        var ids = "";
         var childList = parentNode.children;
         for (var i = 0; i < childList.length; i++) {
             var child = childList[i];
@@ -193,7 +191,6 @@
                 getChildNode(child);
             }
         }
-        alert(ids);
         return ids;
     }
 
