@@ -82,7 +82,7 @@
                             //do something
                             if(result.code == "200"){
                                 layer.close(index);
-                                parent.location.href="<%=request.getContextPath() %>/zjj/resource/list";
+                                parent.location.href="<%=request.getContextPath() %>/zjj/resource/toShow";
                                 return;
                             }
                             layer.close(index);
