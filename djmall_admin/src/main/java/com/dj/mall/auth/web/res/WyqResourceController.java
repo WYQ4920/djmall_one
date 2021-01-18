@@ -5,6 +5,7 @@ import com.dj.mall.auth.api.res.WyqResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.vo.resource.ResourceVOReq;
 import com.dj.mall.auth.vo.resource.ResourceVOResp;
+import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
@@ -40,7 +41,7 @@ public class WyqResourceController {
      * 新增资源
      */
     @PostMapping("add")
-    public ResultModel add(ResourceVOReq resourceVOReq) throws Exception {
+    public ResultModel add(ResourceVOReq resourceVOReq) throws BusinessException {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         Assert.hasText(resourceVOReq.getUrl(), "资源PATH不能为空");
         Assert.hasText(resourceVOReq.getResourceCode(), "资源编码不能为空");
@@ -53,7 +54,7 @@ public class WyqResourceController {
      * 修改资源
      */
     @PutMapping("update")
-    public ResultModel update(ResourceVOReq resourceVOReq) throws Exception {
+    public ResultModel update(ResourceVOReq resourceVOReq) throws BusinessException {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         Assert.hasText(resourceVOReq.getUrl(), "资源PATH不能为空");
         Assert.hasText(resourceVOReq.getResourceCode(), "资源编码不能为空");

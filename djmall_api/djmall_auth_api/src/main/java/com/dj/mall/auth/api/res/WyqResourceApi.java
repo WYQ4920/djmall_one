@@ -1,6 +1,7 @@
 package com.dj.mall.auth.api.res;
 
 import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.common.base.BusinessException;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public interface WyqResourceApi {
      * @return
      * @throws Exception
      */
-    boolean addResource(ResourceDTO resourceDTO) throws Exception;
+     void addResource(ResourceDTO resourceDTO) throws BusinessException;
 
     /**
      * 修改资源
@@ -40,7 +41,7 @@ public interface WyqResourceApi {
      * @return
      * @throws Exception
      */
-    void updateResource(ResourceDTO resourceDTO) throws Exception;
+    void updateResource(ResourceDTO resourceDTO) throws BusinessException;
 
     /**
      * 删除资源
