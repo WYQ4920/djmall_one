@@ -40,10 +40,14 @@ public class WyqResourcePageController {
      */
     @GetMapping("toAdd")
     public String toAdd(Integer parentId, ModelMap map) throws Exception {
-        if (!parentId.equals(SystemConstant.NUMBER)) {
+        if (parentId != SystemConstant.NUMBER) {
             ResourceDTO resourceDTO = wyqResourceApi.getResource(parentId);
-            // parentId -> 上级id
-            map.put("resourceName", resourceDTO.getResourceName());
+            if (resourceDTO != null) {
+                // parentId -> 上级id
+                map.put("resourceName", resourceDTO.getResourceName());
+            } else {
+                map.put("resourceName", "顶级");
+            }
         } else {
             map.put("resourceName", "顶级");
         }
