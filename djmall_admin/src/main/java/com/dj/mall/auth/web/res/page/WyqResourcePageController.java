@@ -40,7 +40,7 @@ public class WyqResourcePageController {
      */
     @GetMapping("toAdd")
     public String toAdd(Integer parentId, ModelMap map) throws Exception {
-        if (parentId != SystemConstant.NUMBER) {
+        if (parentId != SystemConstant.PARENT_ID) {
             ResourceDTO resourceDTO = wyqResourceApi.getResource(parentId);
             if (resourceDTO != null) {
                 // parentId -> 上级id
