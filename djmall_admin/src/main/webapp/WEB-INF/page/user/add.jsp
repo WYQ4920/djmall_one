@@ -134,7 +134,7 @@ $(function(){
 		//自定义手机号验证
 		jQuery.validator.addMethod("isphoneNum", function(value, element) {
 			var length = value.length;
-			var mobile = /^1[3|5|8]{1}[0-9]{9}$/;
+			var mobile = /^1[3|5|7|8]{1}[0-9]{9}$/;
 			return this.optional(element) || (length == 11 && mobile.test(value));
 		}, "请正确填写您的手机号码");
 
