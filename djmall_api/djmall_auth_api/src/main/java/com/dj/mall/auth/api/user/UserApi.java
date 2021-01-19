@@ -1,6 +1,7 @@
 package com.dj.mall.auth.api.user;
 
 import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.common.base.BusinessException;
 
@@ -79,4 +80,11 @@ public interface UserApi {
      * @throws Exception
      */
     Integer findRoleByUserId(Integer userId) throws Exception;
+
+    /**
+     * 所有角色集合
+     * @return
+     * @throws Exception
+     */
+    List<RoleDTO> findAllRole() throws Exception;
 }
