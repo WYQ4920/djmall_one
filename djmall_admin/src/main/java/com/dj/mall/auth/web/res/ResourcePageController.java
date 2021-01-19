@@ -22,7 +22,7 @@ public class ResourcePageController {
         return "res/show";
     }
 
-    @RequestMapping("/toAdd/{id}/")
+    @RequestMapping("/toAdd/{id}")
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
         if (id == 0) {
             model.addAttribute("resourceName", "顶级");

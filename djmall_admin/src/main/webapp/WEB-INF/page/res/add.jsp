@@ -14,8 +14,8 @@
 <body>
 	<form id="fm">
 		<input type="hidden" name="isDel" value="0">
-		<input type="hidden" name="parentId" value="${one.id}"><br>
-		上级名称：${one.resourceName}
+		<input type="hidden" name="parentId" value="${parentId}"><br>
+		上级名称：${resourceName}<br>
 
 		<label for="resourceName">资源名：</label>
 		<input type="text" name="resourceName" id="resourceName"><br>
