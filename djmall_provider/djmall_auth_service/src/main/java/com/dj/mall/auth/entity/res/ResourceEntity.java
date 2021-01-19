@@ -23,7 +23,7 @@ public class ResourceEntity {
     /**
      * 资源名
      */
-    private String ResourceName;
+    private String resourceName;
 
     /**
      * 资源路径
@@ -33,12 +33,12 @@ public class ResourceEntity {
     /**
      * 编码
      */
-    private String ResourceCode;
+    private String resourceCode;
 
     /**
      * 类型
      */
-    private String ResourceType;
+    private String resourceType;
 
     /**
      * 父级ID
