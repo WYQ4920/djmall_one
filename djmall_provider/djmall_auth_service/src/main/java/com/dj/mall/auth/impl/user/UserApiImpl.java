@@ -242,8 +242,21 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
             userRoleEntity1.setRoleId(roleId);
             userRoleService.update(userRoleEntity1, queryWrapper);
         }
+    }
 
-
+    /**
+     * 通过用户id查找角色
+     *
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Integer findRoleByUserId(Integer userId) throws Exception {
+        QueryWrapper<UserRoleEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        UserRoleEntity userRole = userRoleService.getOne(queryWrapper);
+        return userRole.getRoleId();
     }
 
 

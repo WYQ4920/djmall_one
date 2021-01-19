@@ -53,8 +53,10 @@ public class UserPageController {
     }
 
     @RequestMapping("toGiveRole")
-    public String totoGiveRole(Integer userId, Model model){
+    public String totoGiveRole(Integer userId, Model model) throws Exception {
         model.addAttribute("userId",userId);
+        Integer roleId = userApi.findRoleByUserId(userId);
+        model.addAttribute("roleId",roleId);
         return "user/give_role";
     }
 

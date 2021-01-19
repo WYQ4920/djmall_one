@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
     $(function(){
         show();
     })
-
+    alert(${roleId});
     function show(){
         $.get(
             "<%=request.getContextPath() %>/auth/role/show",
@@ -27,7 +28,8 @@
                     let data = result.data[i];
                     html += "<tr>";
                     html += "<td>";
-                    html += "<input type='radio' name='roleId' value='"+data.id+"'>"+ data.id +"</td>";
+                    html += "<input type='radio' name='roleId' value='"+data.id+"' <c:if test='${roleId=="+data.id+"}'>checked</c:if> >"+ data.id;
+                    html += "</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "</tr>";
                 }
