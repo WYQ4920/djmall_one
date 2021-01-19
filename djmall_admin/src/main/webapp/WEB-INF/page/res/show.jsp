@@ -18,24 +18,48 @@
 </head>
 <body>
     <form>
-        <input type="hidden" id="id" value="0">
-
-        <input type="button" value="新增资源" onclick="toAdd()">
-        <input type="button" value="编辑" onclick="toUpdate()">
+        <input type="button" value="新增资源" onclick="toAdd()"><br>
+        <input type="button" value="编辑" onclick="toUpdate()"><br>
         <input type="button" value="删除">
     </form>
     <a id="treeDemo" class="ztree"></a>
+
+    <!-- Modal框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="fm">
+                        资源名称:<input type="text" name="resourceName" id="resourceName"><br>
+                        <input type="hidden" name="id" id="id">
+                        url:<input type="text" name="url" id="url"><br>
+                        资源码:<input type="text" name="resourceCode" id="resourceCode" disabled><br>
+                        资源类型:<select name="resourceType" id="resourceType">
+                        <option value="1">菜单</option>
+                        <option value="2">按钮</option>
+                    </select><br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="upd()">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
 
+    $(function (){
+        show()
+    });
+
     //zTree 的配置数据
     var setting = {
-        edit: {
-            enable: true,
-            editNameSelectAll: true,//编辑名字时候是否为全选
-            removeTitle:'删除',//鼠标移到×的提示
-            renameTitle:'重命名'//鼠标移到编辑的提示
-        },
         data: {//数据
             simpleData: {
                 enable: true, //true 、 false 分别表示 使用 、 不使用 简单数据模式
@@ -43,53 +67,107 @@
                 pIdKey: "parentId"//节点数据中保存其父节点唯一标识的属性名称
             },
             key: {
-                name: "resourceName"  //zTree 节点数据保存节点名称的属性名称  默认值："name"
+                name: "resourceName",  //zTree 节点数据保存节点名称的属性名称  默认值："name"
+                url: "url"
             }
-        },
-        callback:{
-            beforeDrag: zTreeBeforeDrag, //防止拖拽
-            beforeClick: zTreeBeforeClick //节点被选中
         }
     };
 
     //展示基础数据
-    $(function(){
+    function show(){
         $.post(
-            "${ctx}/res/showResZtree",
-            {"isDel":0},
+            "<%=request.getContextPath() %>/res/resourceShow",
+            {},
             function (res){
-                $.fn.zTree.init($("#treeDemo"), setting, res.data);//生成ztree
+                $.fn.zTree.init($("#treeDemo"), setting, res.data).expandAll(true);;//生成ztree
             }
         )
-    });
+    };
 
-    //防止拖拽
-    function zTreeBeforeDrag(treeId, treeNodes) {
-        return false;
+    //新增
+    function add(){
+        // 获取当前被选中的节点数据集合
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = treeObj.getSelectedNodes();
+        if(undefined == nodes || nodes.length == 0){
+            location.href = "<%=request.getContextPath() %>/res/toAdd/"+0;
+            return ;
+            var selectNodes =  treeObj.getSelectedNodes;
+            alert(selectNodes)
+        }
     }
 
-    //获得节点id
-    function zTreeBeforeClick(treeId, treeNodes) {
-        $("#id").val(treeNodes.id);
-        return true;
+    //删除
+    function del(){
+        // 获取当前被选中的节点数据集合
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = treeObj.getSelectedNodes();
+        if(undefined == nodes || nodes.length == 0){
+            layer.msg("请选择后再删除");
+            return ;
+        }
+        var ids = '';
+        if(nodes[0].children){
+            ids = getChildNode(nodes[0]);
+        }
+        ids += nodes[0].id;
+        $.post(
+            "del",
+            {"ids":ids},
+            function (res){
+                if(res.code == 200){
+                    location.href = "<%=request.getContextPath() %>/res/toShowResZtree";
+                }
+            }
+        )
     }
 
-    function toAdd() {
-        var parentId = $("#id").val();
-        layer.open({
-            type: 2,
-            area: ['400px', '300px'], //宽高
-            content: '<%=request.getContextPath()%>/res/toAdd?parentId='+parentId,
-        });
+    //递归
+    function getChildNode(parentNode){
+        var ids = "";
+        var childList = parentNode.children;
+        for (var i = 0; i < childList.length; i++) {
+            var child = childList[i];
+            ids += child.id + ",";
+            if (child.isParent){
+                ids += getChildNode(child);
+            }
+        }
+        return ids;
     }
 
-    function toUpdate() {
-        var id = $("#id").val();
-        layer.open({
-            type: 2,
-            area: ['400px', '300px'], //宽高
-            content: '<%=request.getContextPath()%>/res/toUpdate?id='+id,
-        });
+    //去增加页面
+    function toUpd(){
+        // 获取当前被选中的节点数据集合
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = treeObj.getSelectedNodes();
+        if(undefined == nodes || nodes.length == 0){
+            layer.msg("请选择后再修改");
+            return ;
+        }
+        $("#resourceName").val(nodes[0].resourceName);
+        $("#url").val(nodes[0].url);
+        $("#id").val(nodes[0].id);
+        $("#resourceCode").val(nodes[0].resourceCode);
+        $("#resourceType").val(nodes[0].resourceType);
+        //jQ模态框
+        $("#myModal").modal();
+    }
+
+    //修改
+    function upd(){
+        $.post(
+            "<%=request.getContextPath() %>/res/toUpdate",
+            $("#fm").serialize(),
+            function (res){
+                if(res.code == 200){
+                    $("#myModal").modal("hide");
+                    show();
+                    return ;
+                }
+                layer.msg(res.msg);
+            }
+        )
     }
 
 </script>

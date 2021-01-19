@@ -17,5 +17,5 @@ public interface ResourceApi {
 
     void updateRes(ResourceDTO resourceDTO)throws BusinessException;
 
-    ResourceDTO findResById(Integer id) throws Exception;
+    ResourceDTO findResById(Integer id) throws BusinessException;
 }
