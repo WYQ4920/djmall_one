@@ -32,7 +32,7 @@
             {"id": ${id}},
             function(result){
                 if (200 == result.code){
-                    $.fn.zTree.init($("#resourceList"), setting, result.data);
+                    $.fn.zTree.init($("#resourceList"), setting, result.data).expandAll(true);
                 }
             }
         )
