@@ -9,16 +9,57 @@ import java.util.List;
 
 public interface UserApi {
 
+    /**
+     * 用户登录
+     *
+     * @param userName
+     * @param userPwd
+     * @return
+     * @throws BusinessException
+     */
     UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException;
 
+    /**
+     * 用户展示
+     *
+     * @param userDTO
+     * @return
+     */
     List<UserDTO> findUserAll(UserDTO userDTO) throws Exception;
 
-    void addUser(UserDTO userDTO) throws Exception;
+    /**
+     * 新增用户
+     *
+     * @param userDTO
+     * @return
+     * @throws Exception
+     */
+    void addUser(UserDTO userDTO) throws BusinessException;
 
+    /**
+     * 通过Id 查用户
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     UserDTO findUserById(Integer id) throws Exception;
 
+    /**
+     * 修改用户
+     *
+     * @param userDTO
+     * @throws BusinessException
+     */
     void updateUser(UserDTO userDTO) throws BusinessException;
 
+    /**
+     * 用户名查重
+     *
+     * @param userName
+     * @return
+     * @throws Exception
+     */
     boolean checkUserName(String userName) throws Exception;
 
     /**
@@ -67,14 +108,16 @@ public interface UserApi {
 
     /**
      * 用户授予角色
+     *
      * @param userId
      * @param roleId
      * @throws Exception
      */
-    void giveRole(Integer userId,Integer roleId) throws Exception;
+    void giveRole(Integer userId, Integer roleId) throws Exception;
 
     /**
-     *  通过用户id查找角色
+     * 通过用户id查找角色
+     *
      * @param userId
      * @return
      * @throws Exception
@@ -83,6 +126,7 @@ public interface UserApi {
 
     /**
      * 所有角色集合
+     *
      * @return
      * @throws Exception
      */

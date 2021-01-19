@@ -74,7 +74,10 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addUser(UserDTO userDTO) throws Exception {
+    public void addUser(UserDTO userDTO) throws BusinessException {
+        if (userDTO.getUserName().equals(userDTO.getNickName())){
+           throw new BusinessException("用户名和昵称一致");
+        }
         // 用户表新增
         UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
         super.save(userEntity);
