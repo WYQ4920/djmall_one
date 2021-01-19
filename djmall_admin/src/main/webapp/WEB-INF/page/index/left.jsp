@@ -33,9 +33,6 @@
 <script type="text/javascript">
 
 	var setting = {
-		edit : {
-			enable : true
-		},
 		data : {
 			simpleData : {
 				enable : true,
