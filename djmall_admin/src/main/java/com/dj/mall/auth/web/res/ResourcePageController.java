@@ -22,7 +22,7 @@ public class ResourcePageController {
         return "res/show";
     }
 
-    @RequestMapping("/toAdd/{id}/")
+    @RequestMapping("/toAdd/{id}")
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
         if (id == 0) {
             model.addAttribute("resourceName", "顶级");
@@ -33,13 +33,6 @@ public class ResourcePageController {
         return "res/add";
     }
 
-    @RequestMapping("/toUpd/{id}")
-    public String toUpdate(Model model,@PathVariable Integer id) throws Exception {
-
-        ResourceDTO one = resourceApi.findResById(id);
-        model.addAttribute("one",one);
-        return "res/update";
-    }
 
 
 

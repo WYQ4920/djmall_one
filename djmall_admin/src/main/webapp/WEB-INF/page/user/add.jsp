@@ -45,7 +45,6 @@ $(function(){
 			nickName:{
 				required: true,
 				rangelength:[2,8],
-				equalTo: "#userName",
 			},
            userSex:{
            	 required: true,          	 

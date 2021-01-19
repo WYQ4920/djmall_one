@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" onclick="upd()">修改</button>
+                    <button type="button" class="btn btn-primary" onclick="update()">修改</button>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
             },
             key: {
                 name: "resourceName",  //zTree 节点数据保存节点名称的属性名称  默认值："name"
-                url: "url"
+                url: ""
             }
         }
     };
@@ -88,15 +88,22 @@
 
     //新增
     function toAdd(){
-        // 获取当前被选中的节点数据集合
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-        var nodes = treeObj.getSelectedNodes();
-        if(undefined == nodes || nodes.length == 0){
+        var selectedNodes = treeObj.getSelectedNodes();
+        if(undefined == selectedNodes || selectedNodes.length == 0){
             location.href = "<%=request.getContextPath() %>/res/toAdd/"+0;
             return ;
-            var selectNodes =  $.fn.zTree.getZTreeObj("treeDemo").getSelectedNodes;
-            alert(selectNodes)
         }
+        var selectedNode = selectedNodes[0];
+        layer.open({
+            type: 2,
+            shade: 0.2,
+            area:["360px","360px"],
+            content: '<%=request.getContextPath() %>/res/toAdd/' +selectedNode.id,
+            end: function () {
+                location.reload();
+            }
+        });
     }
 
     //删除
@@ -114,10 +121,11 @@
         }
         ids += nodes[0].id;
         $.post(
-            "del",
-            {"ids":ids},
+            "<%=request.getContextPath() %>/res/del",
+            {"resourceIds":ids},
             function (res){
                 if(res.code == 200){
+                    layer.msg("删除成功")
                     location.href = "<%=request.getContextPath() %>/res/toShowResZtree";
                 }
             }
@@ -138,7 +146,7 @@
         return ids;
     }
 
-    //去增加页面
+    //去修改页面
     function toUpdate(){
         // 获取当前被选中的节点数据集合
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
@@ -159,7 +167,7 @@
     //修改
     function update(){
         $.post(
-            "<%=request.getContextPath() %>/res/toUpdate",
+            "<%=request.getContextPath() %>/res/update?_method=put",
             $("#fm").serialize(),
             function (res){
                 if(res.code == 200){

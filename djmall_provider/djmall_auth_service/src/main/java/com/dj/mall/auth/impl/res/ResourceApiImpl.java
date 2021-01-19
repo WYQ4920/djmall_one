@@ -72,20 +72,6 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     }
 
     /**
-     * 去修改回显
-     * @param id
-     * @return
-     */
-    @Override
-    public ResourceDTO findResById(Integer id) throws BusinessException{
-        ResourceEntity one = getById(id);
-        if(one == null){
-            throw new BusinessException("请选择编辑资源");
-        }
-        return  DozerUtil.map(one, ResourceDTO.class);
-    }
-
-    /**
      * 修改
      * @param resourceDTO
      * @throws BusinessException
