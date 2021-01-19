@@ -25,7 +25,7 @@ public class ZjjResourceApiImpl extends ServiceImpl<ZjjResourceMapper, ResourceE
      */
     @Override
     public List<ResourceDTO> findResource() throws Exception {
-        return DozerUtil.mapList(super.list(),ResourceDTO.class);
+        return DozerUtil.mapList(super.list(), ResourceDTO.class);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ZjjResourceApiImpl extends ServiceImpl<ZjjResourceMapper, ResourceE
      */
     @Override
     public ResourceDTO getResourceById(Integer parentId) throws Exception {
-        return DozerUtil.map(this.getById(parentId),ResourceDTO.class);
+        return DozerUtil.map(this.getById(parentId), ResourceDTO.class);
     }
 
     /**
@@ -47,7 +47,7 @@ public class ZjjResourceApiImpl extends ServiceImpl<ZjjResourceMapper, ResourceE
      */
     @Override
     public void addResource(ResourceDTO resourceDTO) throws Exception {
-        this.save(DozerUtil.map(resourceDTO,ResourceEntity.class));
+        this.save(DozerUtil.map(resourceDTO, ResourceEntity.class));
     }
 
     /**
@@ -58,7 +58,7 @@ public class ZjjResourceApiImpl extends ServiceImpl<ZjjResourceMapper, ResourceE
      */
     @Override
     public void updateResource(ResourceDTO resourceDTO) throws Exception {
-        super.updateById(DozerUtil.map(resourceDTO,ResourceEntity.class));
+        super.updateById(DozerUtil.map(resourceDTO, ResourceEntity.class));
     }
 
     /**

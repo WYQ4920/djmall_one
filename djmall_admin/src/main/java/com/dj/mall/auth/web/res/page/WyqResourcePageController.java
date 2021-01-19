@@ -31,7 +31,7 @@ public class WyqResourcePageController {
      * 去展示资源
      */
     @GetMapping("toList")
-    public String toShow(){
+    public String toShow() {
         return PAGE_PREFIX + "/resource_list";
     }
 

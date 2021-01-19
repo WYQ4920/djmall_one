@@ -1,9 +1,11 @@
 package com.dj.mall.auth.web.res;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.common.base.BusinessException;
+import com.dj.mall.common.constant.SystemConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -24,16 +26,14 @@ public class ResourcePageController {
 
     @RequestMapping("/toAdd/{id}")
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
-        if (id == 0) {
+        if (id == SystemConstant.ERROR_ONEE) {
             model.addAttribute("resourceName", "顶级");
-        } else {
+        } /*else {
             model.addAttribute("resourceName", resourceApi.findResById(id).getResourceName());
-        }
-        model.addAttribute("parentId",id);
+        }*/
+        model.addAttribute("parentId", id);
         return "res/add";
     }
-
-
 
 
 }

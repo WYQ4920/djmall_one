@@ -8,6 +8,7 @@ public interface ZjjResourceApi {
 
     /**
      * 资源展示
+     *
      * @return
      * @throws Exception
      */
@@ -15,6 +16,7 @@ public interface ZjjResourceApi {
 
     /**
      * 通过id查资源
+     *
      * @param parentId
      * @return
      */
@@ -22,6 +24,7 @@ public interface ZjjResourceApi {
 
     /**
      * 新增资源
+     *
      * @param resourceDTO
      * @throws Exception
      */
@@ -29,6 +32,7 @@ public interface ZjjResourceApi {
 
     /**
      * 修改资源
+     *
      * @param resourceDTO
      * @throws Exception
      */
@@ -36,6 +40,7 @@ public interface ZjjResourceApi {
 
     /**
      * 删除资源
+     *
      * @param resourceDTO
      * @throws Exception
      */

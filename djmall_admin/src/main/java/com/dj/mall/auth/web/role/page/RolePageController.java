@@ -29,7 +29,7 @@ public class RolePageController {
      * 去展示
      */
     @GetMapping("toShow")
-    public String toShow(){
+    public String toShow() {
         return "auth/role/role_show";
     }
 
@@ -37,7 +37,7 @@ public class RolePageController {
      * 去新增
      */
     @GetMapping("toAdd")
-    public String toAdd(){
+    public String toAdd() {
         return "auth/role/role_add";
     }
 
@@ -55,8 +55,8 @@ public class RolePageController {
      * 去展示关联资源
      */
     @GetMapping("toResRelZtree")
-    public String toResRelZtree(Integer id, ModelMap map){
-        map.put("id",id);
+    public String toResRelZtree(Integer id, ModelMap map) {
+        map.put("id", id);
         return "auth/role/role_resource";
     }
 

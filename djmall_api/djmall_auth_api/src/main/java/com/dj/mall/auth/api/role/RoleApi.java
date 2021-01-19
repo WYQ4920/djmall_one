@@ -40,14 +40,16 @@ public interface RoleApi {
 
     /**
      * 删除角色
+     *
      * @param id
-     * @throws Exception
      * @return
+     * @throws Exception
      */
     boolean deleteRole(Integer id) throws Exception;
 
     /**
      * 展示关联资源
+     *
      * @param roleDTO 角色资源
      * @return
      * @throws Exception
@@ -56,6 +58,7 @@ public interface RoleApi {
 
     /**
      * 保存角色资源
+     *
      * @param roleDTO 角色资源
      * @throws Exception
      */
@@ -63,6 +66,7 @@ public interface RoleApi {
 
     /**
      * 获取角色集合
+     *
      * @return
      * @throws Exception
      */

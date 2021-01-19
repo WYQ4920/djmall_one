@@ -28,6 +28,7 @@ public class WyqResourceController {
 
     /**
      * 展示资源
+     *
      * @return
      * @throws Exception
      */
@@ -63,7 +64,7 @@ public class WyqResourceController {
         return new ResultModel().success();
     }
 
-   /* *//**
+    /**
      * 删除资源
      */
     @PostMapping("del")
