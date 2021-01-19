@@ -23,6 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
         interceptorRegistration.excludePathPatterns("/user/checkUserName");
         interceptorRegistration.excludePathPatterns("/user/checkUserEmail");
         interceptorRegistration.excludePathPatterns("/user/checkUserPhone");
+        interceptorRegistration.excludePathPatterns("/user/getSalt");
         interceptorRegistration.excludePathPatterns("/static/**");
         interceptorRegistration.excludePathPatterns("/error");
     }

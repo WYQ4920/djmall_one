@@ -34,7 +34,7 @@ public class UserController {
      * @param userPwd
      * @return
      */
-    @GetMapping("login")
+    @PostMapping("login")
     public ResultModel<Object> login(String userName, String userPwd, HttpSession session) throws BusinessException {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
@@ -82,6 +82,13 @@ public class UserController {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         userApi.updateUser(DozerUtil.map(userVOReq, UserDTO.class));
         return new ResultModel<>().success();
+    }
+
+    @PostMapping("getSalt")
+    public ResultModel getSalt(String userName) throws Exception {
+        Assert.hasText(userName,"用户名不能为空");
+        UserDTO userDTO = userApi.getSalt(userName);
+        return new ResultModel().success(DozerUtil.map(userDTO,UserVOResp.class).getSalt());
     }
 
     /**

@@ -9,7 +9,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/dist/jquery.validate.js"></script>
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/static/MD5/md5-min.js"></script>
 </head>
 <script type="text/javascript">
 	
@@ -20,9 +20,9 @@
 	            	 required: true,
 	            	 rangelength:[2,8],
 	            },
-				password:{
+				userPwd:{
 	            	 required: true,
-	            	 rangelength:[2,8]           	 
+	            	 rangelength:[3,9]
 	            }
 	            
 	        },
@@ -31,15 +31,17 @@
 			        required: "请输入用户名",
 			        rangelength: "用户名长度在2~8"
 	       		 },
-				password: {
+				userPwd: {
 			        required: "密码不能为空",
-			        rangelength: "密码长度应在2~8",
+			        rangelength: "密码长度应在3~9",
 	       		},
 	       		
 	   		 },
 	   		submitHandler:function(fm){
 	   			let index = layer.load(2,{shade:0.4});
-	   			$.get(
+				// 最终密码：md5(md5(明文)+盐)
+				$("#userPwd").val(md5(md5($("#userPwd").val())+$("#salt").val()));
+	   			$.post(
 	   				"<%=request.getContextPath() %>/user/login",
 	   				$("#fm").serialize(),
 	   				function(result){
@@ -70,6 +72,21 @@
 			content : '<%=request.getContextPath() %>/user/toAdd' //iframe的url
 		});
 	}
+
+	function getSalt(userName){
+		//alert(userName);
+		$.post(
+				"<%=request.getContextPath() %>/user/getSalt",
+				{userName:userName},
+				function (result){
+					if (result.code == 200){
+						$("#salt").val(result.data);
+						return;
+					}
+					layer.msg(result.msg);
+				}
+		)
+	}
 	
 
 	//Frameset中使得页面加载同步
@@ -85,11 +102,12 @@
 </style>
 <body>
 	<form id="fm">
+		<input type="hidden" name="salt" id="salt">
 		<label for="userName">用户名：</label>
-		  <input type="text" name="userName" id="userName"/><br>
-		<label for="userPwd">密   码：</label>
-		   <input type="text" name="userPwd" id="userPwd" ><br>
-		<input type="submit" value="登录" >
+		<input type="text" name="userName" id="userName" onblur="getSalt(this.value)"/><br>
+		<label for="userPwd">密 码：</label>
+		<input type="text" name="userPwd" id="userPwd"><br>
+		<input type="submit" value="登录">
 		<input type="button" value="注册" onclick="add()">
 	</form>	
 

@@ -36,11 +36,14 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
     @Override
     public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name", userName).eq("user_pwd", userPwd);
+        queryWrapper.eq("user_name", userName);
         UserEntity userEntity = this.getOne(queryWrapper);
         UserDTO userDTO = DozerUtil.map(userEntity, UserDTO.class);
         if (userDTO == null) {
-            throw new BusinessException("用户名或密码不正确");
+            throw new BusinessException("用户名不存在");
+        }
+        if (!userDTO.getUserPwd().equals(userPwd)) {
+            throw new BusinessException("密码不正确");
         }
         return userDTO;
     }
@@ -75,6 +78,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         // 用户表新增
         UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
         super.save(userEntity);
+        // 用户角色表新增
         UserRoleEntity userRoleEntity = new UserRoleEntity()
                 .setUserId(userEntity.getId()).setRoleId(userDTO.getRoleId());
         userRoleService.save(userRoleEntity);
@@ -130,6 +134,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
 
     /**
      * 获取用户资源信息
+     *
      * @param userId 用户ID
      * @return
      * @throws Exception
@@ -176,5 +181,19 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         return true;
     }
 
+    /**
+     * 获取用户密码盐
+     *
+     * @param userName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public UserDTO getSalt(String userName) throws Exception {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name", userName);
+        UserEntity userEntity = this.getOne(queryWrapper);
 
+        return DozerUtil.map(userEntity, UserDTO.class);
+    }
 }

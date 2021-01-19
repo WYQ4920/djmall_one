@@ -43,4 +43,12 @@ public interface UserApi {
      * @throws Exception
      */
     boolean checkUserPhone(String userPhone) throws Exception;
+
+    /**
+     *  获取用户密码盐
+     * @param userName
+     * @return
+     * @throws Exception
+     */
+    UserDTO getSalt(String userName) throws Exception;
 }

@@ -7,12 +7,10 @@
 <title>主页</title>
 </head>
 <frameset rows="25%,75%">
-	<frame src="<%=request.getContextPath() %>/index/toTop?token=${token}"></frame>
-<frameset rows="20%,80%">
-	<frame src="<%=request.getContextPath() %>/index/toTop" name="top"/>
+	<frame src="<%=request.getContextPath() %>/index/toTop"></frame>
 	<frameset cols="30%,70%">
-		<frame src="<%=request.getContextPath() %>/index/toLeft?token=${token}"></frame>
-		<frame src="<%=request.getContextPath() %>/index/toRight?token=${token}" name="right"></frame>
+		<frame src="<%=request.getContextPath() %>/index/toLeft"></frame>
+		<frame src="<%=request.getContextPath() %>/index/toRight" name="right"></frame>
 	</frameset>
 </frameset>
 </html>
