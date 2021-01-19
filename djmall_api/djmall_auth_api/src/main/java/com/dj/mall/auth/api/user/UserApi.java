@@ -22,14 +22,16 @@ public interface UserApi {
 
     /**
      * 获取用户资源信息
+     *
      * @param userId 用户ID
      * @return
      * @throws Exception
      */
-    List<ResourceDTO> getUserResource(Integer userId)throws Exception;
+    List<ResourceDTO> getUserResource(Integer userId) throws Exception;
 
     /**
      * 用户邮箱查重
+     *
      * @param userEmail
      * @return
      * @throws Exception
@@ -37,7 +39,8 @@ public interface UserApi {
     boolean checkUserEmail(String userEmail) throws Exception;
 
     /**
-     *  用户手机号查重
+     * 用户手机号查重
+     *
      * @param userPhone
      * @return
      * @throws Exception
@@ -45,10 +48,19 @@ public interface UserApi {
     boolean checkUserPhone(String userPhone) throws Exception;
 
     /**
-     *  获取用户密码盐
+     * 获取用户密码盐
+     *
      * @param userName
      * @return
      * @throws Exception
      */
     UserDTO getSalt(String userName) throws Exception;
+
+    /**
+     * 用户删除
+     *
+     * @param userDTO
+     * @throws Exception
+     */
+    void del(UserDTO userDTO) throws Exception;
 }

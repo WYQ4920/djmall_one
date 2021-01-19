@@ -33,17 +33,17 @@ public class UserDTO implements Serializable {
     private String userPhone;
 
     /**
-     *  用户邮箱
+     * 用户邮箱
      */
     private String userEmail;
 
     /**
-     *  用户性别 ：1为男，2为女
+     * 用户性别 ：1为男，2为女
      */
     private Integer userSex;
 
     /**
-     *  角色ID
+     * 角色ID
      */
     private Integer roleId;
 

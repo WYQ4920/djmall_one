@@ -63,7 +63,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("add")
-    public ResultModel<Object> add(UserVOReq userVOReq,HttpSession session) throws Exception {
+    public ResultModel<Object> add(UserVOReq userVOReq, HttpSession session) throws Exception {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
         Assert.hasText(userVOReq.getUserPhone(), "用户手机号不能为空");
@@ -86,9 +86,9 @@ public class UserController {
 
     @PostMapping("getSalt")
     public ResultModel getSalt(String userName) throws Exception {
-        Assert.hasText(userName,"用户名不能为空");
+        Assert.hasText(userName, "用户名不能为空");
         UserDTO userDTO = userApi.getSalt(userName);
-        return new ResultModel().success(DozerUtil.map(userDTO,UserVOResp.class).getSalt());
+        return new ResultModel().success(DozerUtil.map(userDTO, UserVOResp.class).getSalt());
     }
 
     /**
@@ -104,7 +104,8 @@ public class UserController {
     }
 
     /**
-     *  用户邮箱查重
+     * 用户邮箱查重
+     *
      * @param userEmail
      * @return
      * @throws Exception
@@ -115,7 +116,8 @@ public class UserController {
     }
 
     /**
-     *  用户手机号查重
+     * 用户手机号查重
+     *
      * @param userPhone
      * @return
      * @throws Exception
@@ -126,7 +128,6 @@ public class UserController {
     }
 
     /**
-     *
      * @param session
      * @return
      */
@@ -137,4 +138,9 @@ public class UserController {
         return new ResultModel().success(DozerUtil.mapList(resourceDTOList, ResourceVOResp.class));
     }
 
+    @PostMapping("del")
+    public ResultModel del(UserVOReq userVOReq) throws Exception {
+        userApi.del(DozerUtil.map(userVOReq, UserDTO.class));
+        return new ResultModel().success();
+    }
 }
