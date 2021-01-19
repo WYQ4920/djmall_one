@@ -63,7 +63,7 @@ public class WyqResourceController {
         return new ResultModel().success();
     }
 
-    /**
+   /* *//**
      * 删除资源
      */
     @PostMapping("del")

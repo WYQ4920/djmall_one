@@ -72,7 +72,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
         super.updateById(DozerUtil.map(resourceDTO, ResourceEntity.class));
     }
 
-    /**
+/*    *//**
      * 删除资源
      * @param resourceDTO 资源信息
      * @throws Exception

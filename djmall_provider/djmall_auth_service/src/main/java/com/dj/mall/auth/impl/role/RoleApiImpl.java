@@ -178,4 +178,15 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         roleResourceService.saveBatch(resourceEntities);
     }
 
+    /**
+     * 获取角色集合
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<RoleDTO> getRoleList() throws Exception {
+        return DozerUtil.mapList(super.list(),RoleDTO.class);
+    }
+
 }
