@@ -106,7 +106,7 @@
 		<label for="userName">用户名：</label>
 		<input type="text" name="userName" id="userName" onblur="getSalt(this.value)"/><br>
 		<label for="userPwd">密 码：</label>
-		<input type="text" name="userPwd" id="userPwd"><br>
+		<input type="password" name="userPwd" id="userPwd"><br>
 		<input type="submit" value="登录">
 		<input type="button" value="注册" onclick="add()">
 	</form>	

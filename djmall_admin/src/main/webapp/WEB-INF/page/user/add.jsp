@@ -154,9 +154,9 @@ $(function(){
 		<label for="nickName">昵称:</label>
 		<input type="text" name="nickName" id="nickName"><br>
 		<label for="userPwd">密 码：</label>
-		<input type="text" name="userPwd" id="userPwd"><br>
+		<input type="password" name="userPwd" id="userPwd"><br>
 		<label for="userPwd_confirm">确认密码：</label>
-		<input type="text" name="userPwd_confirm" id="userPwd_confirm"><br>
+		<input type="password" name="userPwd_confirm" id="userPwd_confirm"><br>
 		<label for="userPhone">手机：</label>
 		<input type="text" name="userPhone" id="userPhone"><br>
 		<label for="userEmail">邮箱：</label>
