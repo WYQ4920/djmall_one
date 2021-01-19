@@ -2,11 +2,14 @@ package com.dj.mall.auth.web.res;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.ResourceApi;
+import com.dj.mall.auth.api.user.UserApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.auth.vo.resource.ResourceVOReq;
 import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
+import org.apache.catalina.User;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +28,14 @@ public class ResourceController {
     @Reference(check = false)
     private ResourceApi resourceApi;
 
+    @Reference(check = false)
+    private UserApi userApi;
+
 
     @GetMapping("resourceShow")
     public ResultModel<Object> resourceShow(HttpSession session) throws Exception {
-        Object resList = session.getAttribute("resList");
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        List<ResourceDTO> resList = userApi.getUserResource(user.getId());
         return new ResultModel<>().success(resList);
     }
 
