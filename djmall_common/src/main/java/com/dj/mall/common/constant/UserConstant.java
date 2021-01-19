@@ -8,4 +8,8 @@ public interface UserConstant {
 
     String USER_SESSION = "user";
 
+    int SEX_NAM = 1;
+
+    int SEX_WONAM = 2;
+
 }

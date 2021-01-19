@@ -132,16 +132,11 @@ public class UserController {
     }
 
     /**
-     * @param session
+     * 删除用户
+     * @param userVOReq
      * @return
+     * @throws Exception
      */
-    @GetMapping("getMenu")
-    public ResultModel getMenu(HttpSession session) throws Exception {
-        UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
-        List<ResourceDTO> resourceDTOList = userApi.getUserResource(user.getId());
-        return new ResultModel().success(DozerUtil.mapList(resourceDTOList, ResourceVOResp.class));
-    }
-
     @PostMapping("del")
     public ResultModel del(UserVOReq userVOReq) throws Exception {
         userApi.del(DozerUtil.map(userVOReq, UserDTO.class));
