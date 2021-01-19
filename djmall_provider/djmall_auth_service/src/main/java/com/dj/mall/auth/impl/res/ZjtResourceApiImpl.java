@@ -10,6 +10,7 @@ import com.dj.mall.common.constant.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
 
 import java.util.List;
+
 @Service
 public class ZjtResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity> implements ZjtResourceApi {
 
@@ -21,17 +22,19 @@ public class ZjtResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
 
     /**
      * 获取资源id
+     *
      * @param parentId
      * @return
      * @throws Exception
      */
     @Override
     public ResourceDTO findResouceBySuperId(Integer parentId) throws Exception {
-        return DozerUtil.map(super.getById(parentId),ResourceDTO.class);
+        return DozerUtil.map(super.getById(parentId), ResourceDTO.class);
     }
 
     /**
      * 资源新增
+     *
      * @param resourceDTO
      * @return
      */
@@ -46,16 +49,18 @@ public class ZjtResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
 
     /**
      * 修改资源
+     *
      * @param resourceDTO
      */
     @Override
     public void update(ResourceDTO resourceDTO) {
-       this.updateById(DozerUtil.map(resourceDTO,ResourceEntity.class));
+        this.updateById(DozerUtil.map(resourceDTO, ResourceEntity.class));
 
     }
 
     /**
      * 删除资源
+     *
      * @param resourceDTO
      * @throws Exception
      */

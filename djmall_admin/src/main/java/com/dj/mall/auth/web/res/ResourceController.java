@@ -34,6 +34,7 @@ public class ResourceController {
 
     /**
      * 资源展示
+     *
      * @param resourceVOReq
      * @return
      * @throws Exception
@@ -48,24 +49,26 @@ public class ResourceController {
 
     /**
      * 查重
+     *
      * @param resourceVOReq
      * @return
      * @throws Exception
      */
-    @PostMapping ("checkResourceName")
+    @PostMapping("checkResourceName")
     public Boolean checkResourceName(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
-        return  resourceApi.findByResourceName(resourceDTO.getResourceName());
+        return resourceApi.findByResourceName(resourceDTO.getResourceName());
     }
 
     /**
      * 新增
+     *
      * @param resourceVOReq
      * @return
      * @throws Exception
      */
-    @PostMapping ("add")
+    @PostMapping("add")
     public ResultModel<Object> add(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
@@ -76,6 +79,7 @@ public class ResourceController {
 
     /**
      * 修改
+     *
      * @param resourceVOReq
      * @return
      * @throws Exception
@@ -90,6 +94,7 @@ public class ResourceController {
 
     /**
      * del
+     *
      * @param resourceVOReq
      * @return
      * @throws Exception
@@ -100,9 +105,6 @@ public class ResourceController {
         resourceApi.delRes(resourceDTO.getResourceIds());
         return new ResultModel().success();
     }
-
-
-
 
 
 }

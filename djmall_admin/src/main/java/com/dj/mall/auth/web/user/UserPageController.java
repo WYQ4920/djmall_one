@@ -48,12 +48,12 @@ public class UserPageController {
     public String toAdd(Model model) throws Exception {
         model.addAttribute("salt", PasswordSecurityUtil.generateSalt());
         List<RoleDTO> roleList = roleApi.getRoleList();
-        model.addAttribute("roleList",DozerUtil.mapList(roleList, RoleVOResp.class));
+        model.addAttribute("roleList", DozerUtil.mapList(roleList, RoleVOResp.class));
         return "user/add";
     }
 
     @RequestMapping("exit")
-    public String exit(HttpSession session){
+    public String exit(HttpSession session) {
         session.removeAttribute("user");
         session.invalidate();
         return "user/login";

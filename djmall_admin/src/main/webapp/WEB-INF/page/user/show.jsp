@@ -38,6 +38,9 @@
 					html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
 					/*html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'>";*/
 					html+="<input type='button' value='授予角色' onclick='upd("+result.data[i].id+")'>";
+					html+="<td>";
+					html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'/>";
+					html+="</td>";
 					html+="</td>";
 					html+="</tr>";
 				}
@@ -78,18 +81,18 @@
 		
 	}	
 	
-	/*function del(id){
+	function del(id){
 		$.post(
-			"<%=request.getContextPath() %>/users/del",
+			"<%=request.getContextPath() %>/user/del",
 			{"id":id,"isDel":0},
 			function(result){
 				if(result.code!=200){
 					layer.msg(result.msg);
 					return;
 				}
-				show(pageNum);
+				show();
 			})
-	}*/
+	}
 
 	function query(){
 		/*show(pageNum);*/

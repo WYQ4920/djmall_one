@@ -96,9 +96,10 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
 
     /**
      * 删除角色
+     *
      * @param id 角色id
-     * @throws Exception
      * @return
+     * @throws Exception
      */
     @Override
     public boolean deleteRole(Integer id) throws Exception {
@@ -121,6 +122,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
 
     /**
      * 展示关联资源
+     *
      * @param roleDTO 角色资源
      * @return
      * @throws Exception
@@ -137,13 +139,13 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         // 定义ztree集合
         List<TreeDataDTO> treeDataList = new ArrayList<>();
         // 组装数据
-        for (ResourceDTO res:resourceDTOList) {
+        for (ResourceDTO res : resourceDTOList) {
             TreeDataDTO treeDataDTO = TreeDataDTO.builder()
                     .id(res.getId())
                     .parentId(res.getParentId())
                     .resourceName(res.getResourceName())
                     .build();
-            for (RoleResourceEntity rrs:resourceEntities) {
+            for (RoleResourceEntity rrs : resourceEntities) {
                 if (rrs.getResourceId().equals(res.getId())) {
                     treeDataDTO.setChecked(true);
                     break;
@@ -157,6 +159,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
 
     /**
      * 保存角色资源
+     *
      * @param roleDTO 角色资源
      * @throws Exception
      */
@@ -169,7 +172,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         // 定义角色资源表集合
         List<RoleResourceEntity> resourceEntities = new ArrayList<>();
         // 添加数据
-        for (Integer resourceIds:roleDTO.getResourceIds()) {
+        for (Integer resourceIds : roleDTO.getResourceIds()) {
             resourceEntities.add(RoleResourceEntity.builder()
                     .roleId(roleDTO.getId())
                     .resourceId(resourceIds)
@@ -186,7 +189,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
      */
     @Override
     public List<RoleDTO> getRoleList() throws Exception {
-        return DozerUtil.mapList(super.list(),RoleDTO.class);
+        return DozerUtil.mapList(super.list(), RoleDTO.class);
     }
 
 }

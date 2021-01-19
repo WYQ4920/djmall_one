@@ -14,6 +14,7 @@ public interface WyqResourceApi {
 
     /**
      * 展示资源
+     *
      * @return
      * @throws Exception
      */
@@ -21,6 +22,7 @@ public interface WyqResourceApi {
 
     /**
      * 获取对应角色资源
+     *
      * @param id 资源id
      * @return
      * @throws Exception
@@ -29,14 +31,16 @@ public interface WyqResourceApi {
 
     /**
      * 新增资源
+     *
      * @param resourceDTO 资源信息
      * @return
      * @throws Exception
      */
-     void addResource(ResourceDTO resourceDTO) throws BusinessException;
+    void addResource(ResourceDTO resourceDTO) throws BusinessException;
 
     /**
      * 修改资源
+     *
      * @param resourceDTO 资源信息
      * @return
      * @throws Exception
@@ -45,6 +49,7 @@ public interface WyqResourceApi {
 
     /**
      * 删除资源
+     *
      * @param resourceDTO 资源信息
      * @throws Exception
      */

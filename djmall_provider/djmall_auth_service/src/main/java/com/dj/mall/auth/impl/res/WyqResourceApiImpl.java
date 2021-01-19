@@ -30,6 +30,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
 
     /**
      * 展示资源
+     *
      * @return
      * @throws Exception
      */
@@ -40,6 +41,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
 
     /**
      * 获取对应角色资源
+     *
      * @param id 资源id
      * @return
      * @throws Exception
@@ -51,6 +53,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
 
     /**
      * 新增资源
+     *
      * @param resourceDTO 资源信息
      * @return
      * @throws Exception
@@ -63,6 +66,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
 
     /**
      * 修改资源
+     *
      * @param resourceDTO 资源信息
      * @return
      * @throws Exception
@@ -72,8 +76,11 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
         super.updateById(DozerUtil.map(resourceDTO, ResourceEntity.class));
     }
 
-/*    *//**
+    /*    */
+
+    /**
      * 删除资源
+     *
      * @param resourceDTO 资源信息
      * @throws Exception
      */
