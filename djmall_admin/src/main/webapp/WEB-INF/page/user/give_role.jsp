@@ -43,7 +43,7 @@
             function (result){
                 if(result.code == 200){
                     layer.msg("授予角色成功");
-                    show();
+                    location.href="<%=request.getContextPath()%>/user/toShow";
                     return;
                 }
                 layer.msg(result.msg);

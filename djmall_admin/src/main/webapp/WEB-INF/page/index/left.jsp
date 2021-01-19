@@ -33,9 +33,6 @@
 <script type="text/javascript">
 
 	var setting = {
-		edit : {
-			enable : true
-		},
 		data : {
 			simpleData : {
 				enable : true,
@@ -43,7 +40,8 @@
 				pIdKey : "parentId"
 			},
 			key : {
-				name : "resourceName"
+				name : "resourceName",
+				url : "xUrl"
 			}
 		},
 		callback:{    //第一步
