@@ -52,6 +52,12 @@ public class UserPageController {
         return "user/add";
     }
 
+    @RequestMapping("toGiveRole")
+    public String totoGiveRole(Integer userId, Model model){
+        model.addAttribute("userId",userId);
+        return "user/give_role";
+    }
+
     @RequestMapping("exit")
     public String exit(HttpSession session) {
         session.removeAttribute("user");

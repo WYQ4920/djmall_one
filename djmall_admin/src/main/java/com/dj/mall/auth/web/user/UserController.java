@@ -2,18 +2,14 @@ package com.dj.mall.auth.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.user.UserApi;
-import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
-import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.auth.vo.user.UserVOReq;
 import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
-import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -140,6 +136,19 @@ public class UserController {
     @PostMapping("del")
     public ResultModel del(UserVOReq userVOReq) throws Exception {
         userApi.del(DozerUtil.map(userVOReq, UserDTO.class));
+        return new ResultModel().success();
+    }
+
+    /**
+     * 用户授予角色
+     * @param userId
+     * @param roleId
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("giveRole")
+    public ResultModel giveRole(Integer userId,Integer roleId) throws Exception{
+        userApi.giveRole(userId,roleId);
         return new ResultModel().success();
     }
 }

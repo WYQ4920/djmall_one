@@ -63,4 +63,12 @@ public interface UserApi {
      * @throws Exception
      */
     void del(UserDTO userDTO) throws Exception;
+
+    /**
+     * 用户授予角色
+     * @param userId
+     * @param roleId
+     * @throws Exception
+     */
+    void giveRole(Integer userId,Integer roleId) throws Exception;
 }

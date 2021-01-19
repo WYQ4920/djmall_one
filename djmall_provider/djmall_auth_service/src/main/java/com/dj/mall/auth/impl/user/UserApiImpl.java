@@ -206,5 +206,29 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         this.userRoleService.remove(queryWrapper);
     }
 
+    /**
+     * 用户授予角色
+     * @param userId
+     * @param roleId
+     * @throws Exception
+     */
+    @Override
+    public void giveRole(Integer userId,Integer roleId) throws Exception {
+        QueryWrapper<UserRoleEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        UserRoleEntity userRoleEntity1 = userRoleService.getOne(queryWrapper);
+        if (userRoleEntity1==null){
+            UserRoleEntity userRoleEntity=new UserRoleEntity()
+                    .setUserId(userId).setRoleId(roleId);
+            userRoleService.save(userRoleEntity);
+        }else {
+            userRoleEntity1.setRoleId(roleId);
+            userRoleService.update(userRoleEntity1,queryWrapper);
+        }
+
+
+
+    }
+
 
 }

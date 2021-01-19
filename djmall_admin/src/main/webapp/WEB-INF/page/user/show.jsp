@@ -37,7 +37,6 @@
 					html+="<td>"+result.data[i].userEmail+"</td>";
 					html+="<td>";
 					html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
-					/*html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'>";*/
 					html+="<input type='button' value='授予角色' onclick='giveRole("+result.data[i].id+")'>";
 					html+="<td>";
 					html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'/>";
@@ -98,6 +97,10 @@
 	function query(){
 		/*show(pageNum);*/
 		show();
+	}
+
+	function giveRole(userId){
+		location.href="<%=request.getContextPath() %>/user/toGiveRole?userId="+userId;
 	}
 	
 
