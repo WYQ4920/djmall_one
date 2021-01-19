@@ -26,7 +26,7 @@ public class ResourcePageController {
 
     @RequestMapping("/toAdd/{id}")
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
-        if (id.equals(SystemConstant.ERROR_ONEE)) {
+        if (id == 0) {
             model.addAttribute("resourceName", "顶级");
         } else {
             ResourceDTO resourceDTO = resourceApi.findResById(id);
@@ -35,6 +35,8 @@ public class ResourcePageController {
         model.addAttribute("parentId", id);
         return "res/add";
     }
+
+
 
 
 }

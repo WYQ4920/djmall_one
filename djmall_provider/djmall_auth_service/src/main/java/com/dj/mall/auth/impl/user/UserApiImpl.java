@@ -3,9 +3,11 @@ package com.dj.mall.auth.impl.user;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dj.mall.auth.api.role.RoleApi;
 import com.dj.mall.auth.api.user.UserApi;
 import com.dj.mall.auth.bo.user.UserBO;
 import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.auth.entity.res.ResourceEntity;
 import com.dj.mall.auth.entity.user.UserEntity;
@@ -24,6 +26,9 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
 
     @Autowired
     private UserRoleService userRoleService;
+
+    @Autowired
+    private RoleApi roleApi;
 
     /**
      * 用户登录
@@ -257,6 +262,18 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         queryWrapper.eq("user_id",userId);
         UserRoleEntity userRole = userRoleService.getOne(queryWrapper);
         return userRole.getRoleId();
+    }
+
+    /**
+     * 所有角色集合
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<RoleDTO> findAllRole() throws Exception {
+        List<RoleDTO> roleList = roleApi.getRoleList();
+        return roleList;
     }
 
 

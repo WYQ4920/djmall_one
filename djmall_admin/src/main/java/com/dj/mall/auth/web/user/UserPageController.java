@@ -57,6 +57,8 @@ public class UserPageController {
         model.addAttribute("userId",userId);
         Integer roleId = userApi.findRoleByUserId(userId);
         model.addAttribute("roleId",roleId);
+        List<RoleDTO> roleList= userApi.findAllRole();
+        model.addAttribute("roleList",roleList);
         return "user/give_role";
     }
 

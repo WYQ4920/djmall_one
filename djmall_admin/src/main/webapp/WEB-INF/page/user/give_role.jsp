@@ -14,30 +14,6 @@
 </style>
 <script type="text/javascript">
 
-    $(function(){
-        show();
-    })
-    alert(${roleId});
-    function show(){
-        $.get(
-            "<%=request.getContextPath() %>/auth/role/show",
-            $("#fm").serialize(),
-            function(result){
-                let html = "";
-                for (let i = 0; i < result.data.length; i++) {
-                    let data = result.data[i];
-                    html += "<tr>";
-                    html += "<td>";
-                    html += "<input type='radio' name='roleId' value='"+data.id+"' <c:if test='${roleId=="+data.id+"}'>checked</c:if> >"+ data.id;
-                    html += "</td>";
-                    html += "<td>"+ data.roleName +"</td>";
-                    html += "</tr>";
-                }
-                $("#tb").html(html);
-            }
-        )
-    }
-
     function giveRole(){
         $.post(
             "<%=request.getContextPath() %>/user/giveRole",
@@ -65,7 +41,12 @@
             <td>编号</td>
             <td>角色名</td>
         </tr>
-        <tbody id="tb" align="center"></tbody>
+        <c:forEach items="${roleList}" var="role" >
+            <tr>
+                <td><input type="radio" name="roleId" value="${role.id}" <c:if test="${roleId==role.id}">checked</c:if> >${role.id}</td>
+                <td>${role.roleName}</td>
+            </tr>
+        </c:forEach>
     </table>
 </form>
 </body>
