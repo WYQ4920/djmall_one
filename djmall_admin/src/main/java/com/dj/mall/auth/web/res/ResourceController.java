@@ -10,6 +10,7 @@ import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,10 +27,9 @@ public class ResourceController {
 
 
     @GetMapping("resourceShow")
-    public ResultModel<Object> resourceShow() throws Exception {
-        List<ResourceDTO> list = resourceApi.findAll();
-        List<ResourceVOResp> list1 = DozerUtil.mapList(list, ResourceVOResp.class);
-        return new ResultModel<>().success(list1);
+    public ResultModel<Object> resourceShow(HttpSession session) throws Exception {
+        Object resList = session.getAttribute("resList");
+        return new ResultModel<>().success(resList);
     }
 
     /**

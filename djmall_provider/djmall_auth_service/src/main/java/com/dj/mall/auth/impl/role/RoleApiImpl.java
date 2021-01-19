@@ -130,7 +130,9 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
     @Override
     public List<TreeDataDTO> findAll(RoleDTO roleDTO) throws Exception {
         // 获取资源表全部信息
-        List<ResourceDTO> resourceDTOList = resourceApi.findAll();
+        ResourceDTO resourceDTO = new ResourceDTO();
+        resourceDTO.setIsDel(0);
+        List<ResourceDTO> resourceDTOList = resourceApi.findAll1(resourceDTO);
         // 根据角色id获取角色对应的所有资源
         QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("role_id", roleDTO.getId());

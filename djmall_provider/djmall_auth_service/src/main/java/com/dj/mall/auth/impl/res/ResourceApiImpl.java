@@ -16,19 +16,6 @@ import java.util.List;
 public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity> implements ResourceApi {
 
     /**
-     * left
-     *
-     * @param resourceDTO
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public List<ResourceDTO> findAll() throws Exception {
-        List<ResourceEntity> list = this.list();
-        return DozerUtil.mapList(list, ResourceDTO.class);
-    }
-
-    /**
      * res展示
      *
      * @param resourceDTO
@@ -104,6 +91,12 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         super.removeByIds(resourceIds);
     }
 
+    /**
+     * id查
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResourceDTO findResById(Integer id) throws Exception {
         return DozerUtil.map(super.getById(id), ResourceDTO.class);

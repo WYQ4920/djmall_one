@@ -8,7 +8,6 @@ import com.google.common.reflect.ClassPath;
 import java.util.List;
 
 public interface ResourceApi {
-    List<ResourceDTO> findAll() throws Exception;
 
     List<ResourceDTO> findAll1(ResourceDTO resourceDTO) throws Exception;
 
@@ -18,8 +17,8 @@ public interface ResourceApi {
 
     void updateRes(ResourceDTO resourceDTO) throws BusinessException;
 
-    void delRes(List<Integer> resourceIds)throws Exception;;
+    void delRes(List<Integer> resourceIds)throws Exception;
 
+    ResourceDTO findResById(Integer id)throws Exception;
 
-    ResourceDTO findResById(Integer id)throws Exception;;
 }
