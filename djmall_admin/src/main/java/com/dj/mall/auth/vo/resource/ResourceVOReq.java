@@ -42,6 +42,10 @@ public class ResourceVOReq {
      * 1:已删除
      */
     private Integer isDel;
+    /**
+     * 资源id集合
+     */
+    private List<Integer> resourceIds;
 
     /**
      * 资源ID集合

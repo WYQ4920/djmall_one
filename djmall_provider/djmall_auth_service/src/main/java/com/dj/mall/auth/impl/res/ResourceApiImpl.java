@@ -37,7 +37,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         QueryWrapper queryWrapper = new QueryWrapper();
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         queryWrapper.eq("is_del",resourceEntity.getIsDel());
-        List<ResourceEntity> list = this.list(queryWrapper);
+        List<ResourceEntity> list = super.list(queryWrapper);
         return DozerUtil.mapList(list, ResourceDTO.class);
     }
 
@@ -51,7 +51,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     public Boolean findByResourceName(String resourceName) throws BusinessException {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("resource_name",resourceName);
-        ResourceEntity one = this.getOne(queryWrapper);
+        ResourceEntity one = super.getOne(queryWrapper);
         return one == null?true:false;
     }
 
@@ -65,7 +65,7 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         ResourceEntity resourceEntity = DozerUtil.map(resourceDTO, ResourceEntity.class);
         Boolean byResourceName = this.findByResourceName(resourceEntity.getResourceName());
         if(byResourceName){
-            this.save(resourceEntity);
+            super.save(resourceEntity);
             return;
         }
         throw new BusinessException("重名");
@@ -99,7 +99,16 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         if(one != null && !resourceEntity.getId().equals(one.getId())){
            throw new BusinessException("重名");
         }
-        this.updateById(resourceEntity);
+        super.updateById(resourceEntity);
+    }
+
+    /**
+     * del
+     * @param resourceIds
+     */
+    @Override
+    public void delRes(List<Integer> resourceIds) {
+        super.removeByIds(resourceIds);
     }
 
 

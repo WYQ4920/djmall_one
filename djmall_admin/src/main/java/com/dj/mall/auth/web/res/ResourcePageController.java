@@ -1,5 +1,4 @@
 package com.dj.mall.auth.web.res;
-
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;

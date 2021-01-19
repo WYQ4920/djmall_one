@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -50,5 +51,6 @@ public class ResourceDTO implements Serializable {
      * 资源id集合
      */
     private List<Integer> resourceIds;
+
 
 }

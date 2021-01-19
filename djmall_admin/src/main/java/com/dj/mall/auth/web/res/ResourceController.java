@@ -88,6 +88,19 @@ public class ResourceController {
         return new ResultModel<>().success();
     }
 
+    /**
+     * del
+     * @param resourceVOReq
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/del")
+    public ResultModel<Object> del(ResourceVOReq resourceVOReq) throws Exception {
+        ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
+        resourceApi.delRes(resourceDTO.getResourceIds());
+        return new ResultModel().success();
+    }
+
 
 
 
