@@ -193,7 +193,11 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         return DozerUtil.map(userEntity, UserDTO.class);
     }
 
-
+    /**
+     * 删除用户
+     * @param userDTO
+     * @throws Exception
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void del(UserDTO userDTO) throws Exception {
