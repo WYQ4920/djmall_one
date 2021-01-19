@@ -56,7 +56,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     public List<UserDTO> findUserAll(UserDTO userDTO) {
-        List<UserBO> list = getBaseMapper().findUserAll(DozerUtil.map(userDTO,UserEntity.class));
+        List<UserBO> list = getBaseMapper().findUserAll(DozerUtil.map(userDTO, UserEntity.class));
         return DozerUtil.mapList(list, UserDTO.class);
     }
 
@@ -99,11 +99,26 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     public void updateUser(UserDTO userDTO) throws BusinessException {
+        //用户名查重
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userDTO.getUserName());
         UserEntity userEntity = this.getOne(queryWrapper);
         if (userEntity != null && !userEntity.getId().equals(userDTO.getId())) {
             throw new BusinessException("用户名重复");
+        }
+        //手机号查重
+        QueryWrapper<UserEntity> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("user_phone", userDTO.getUserPhone());
+        UserEntity userEntity1 = this.getOne(queryWrapper1);
+        if (userEntity1 != null && !userEntity1.getUserPhone().equals(userDTO.getUserPhone())) {
+            throw new BusinessException("手机号已经注册");
+        }
+        //邮箱查重
+        QueryWrapper<UserEntity> queryWrapper2 = new QueryWrapper<>();
+        queryWrapper2.eq("user_email", userDTO.getUserEmail());
+        UserEntity userEntity2 = this.getOne(queryWrapper2);
+        if (userEntity2 != null && !userEntity2.getUserEmail().equals(userDTO.getUserEmail())) {
+            throw new BusinessException("邮箱已经注册");
         }
         this.updateById(DozerUtil.map(userDTO, UserEntity.class));
     }
@@ -193,6 +208,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
 
     /**
      * 删除用户
+     *
      * @param userDTO
      * @throws Exception
      */
@@ -208,24 +224,24 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
 
     /**
      * 用户授予角色
+     *
      * @param userId
      * @param roleId
      * @throws Exception
      */
     @Override
-    public void giveRole(Integer userId,Integer roleId) throws Exception {
+    public void giveRole(Integer userId, Integer roleId) throws Exception {
         QueryWrapper<UserRoleEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id",userId);
+        queryWrapper.eq("user_id", userId);
         UserRoleEntity userRoleEntity1 = userRoleService.getOne(queryWrapper);
-        if (userRoleEntity1==null){
-            UserRoleEntity userRoleEntity=new UserRoleEntity()
+        if (userRoleEntity1 == null) {
+            UserRoleEntity userRoleEntity = new UserRoleEntity()
                     .setUserId(userId).setRoleId(roleId);
             userRoleService.save(userRoleEntity);
-        }else {
+        } else {
             userRoleEntity1.setRoleId(roleId);
-            userRoleService.update(userRoleEntity1,queryWrapper);
+            userRoleService.update(userRoleEntity1, queryWrapper);
         }
-
 
 
     }
