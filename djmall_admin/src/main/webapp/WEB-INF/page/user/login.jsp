@@ -47,12 +47,12 @@
 	   				function(result){
 	   					layer.msg(result.msg, {
 	   						  /* icon: 1, */
-	   						  time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+	   						  time: 2000 //1.5秒关闭（如果不配置，默认是3秒）
 	   						}, function(){
 	   						  //do something
 	   							if(result.code == "200"){
-	   								layer.close(index); 
 	   								location.href="<%=request.getContextPath() %>/index/toIndex";
+									layer.close(index);
 	   								return;
 	   							}
 	   							layer.close(index); 

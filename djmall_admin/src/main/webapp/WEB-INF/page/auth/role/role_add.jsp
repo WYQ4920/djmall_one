@@ -22,7 +22,9 @@
                         type: "post",
                         url: "<%=request.getContextPath()%>/auth/role/checkRoleName",
                         data:{
-                            roleName: $("#roleName").val()
+                            roleName: function() {
+                                return $("#roleName").val();
+                            }
                         }
                     }
                 },
@@ -41,14 +43,12 @@
                     "<%=request.getContextPath()%>/auth/role/add",
                     $("#fm").serialize(),
                     function(result){
-                        layer.msg(
-                            "奋力加载中", {
-                                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                            layer.msg(result.msg, {
+                                /* icon: 1, */
+                                time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
                             }, function(){
                                 if(result.code == 200){
                                     layer.close(index);
-                                    layer.msg(result.msg);
-                                    window.location.reload();
                                     parent.location.href="<%=request.getContextPath() %>/auth/role/toShow";
                                     return;
                                 }

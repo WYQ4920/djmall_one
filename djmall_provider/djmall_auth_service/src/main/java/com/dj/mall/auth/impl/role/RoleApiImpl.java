@@ -62,7 +62,7 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         QueryWrapper<RoleEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("role_name", roleName);
         RoleEntity roleEntity = super.getOne(queryWrapper);
-        return null == roleEntity ? true : false;
+        return roleEntity == null ? true : false;
     }
 
     /**

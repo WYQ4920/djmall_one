@@ -91,7 +91,15 @@
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
         var selectedNodes = treeObj.getSelectedNodes();
         if(undefined == selectedNodes || selectedNodes.length == 0){
-            location.href = "<%=request.getContextPath() %>/res/toAdd/"+0;
+            layer.open({
+                type: 2,
+                shade: 0.2,
+                area:["360px","360px"],
+                content: "<%=request.getContextPath() %>/res/toAdd/"+0,
+                end: function () {
+                    location.reload();
+                }
+            });
             return ;
         }
         var selectedNode = selectedNodes[0];
