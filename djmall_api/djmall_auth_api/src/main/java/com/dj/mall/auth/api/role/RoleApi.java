@@ -42,8 +42,9 @@ public interface RoleApi {
      * 删除角色
      * @param id
      * @throws Exception
+     * @return
      */
-    void deleteRole(Integer id) throws Exception;
+    boolean deleteRole(Integer id) throws Exception;
 
     /**
      * 展示关联资源

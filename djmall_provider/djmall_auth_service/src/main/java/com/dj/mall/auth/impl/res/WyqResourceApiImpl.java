@@ -6,8 +6,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.auth.api.res.WyqResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.entity.res.ResourceEntity;
+import com.dj.mall.auth.entity.role.RoleResourceEntity;
 import com.dj.mall.auth.mapper.ResourcceMapper;
+import com.dj.mall.auth.service.role.RoleResourceService;
+import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.util.DozerUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +24,9 @@ import java.util.List;
 
 @Service
 public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity> implements WyqResourceApi {
+
+    @Autowired
+    private RoleResourceService roleResourceService;
 
     /**
      * 展示资源
@@ -48,9 +56,9 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
      * @throws Exception
      */
     @Override
-    public boolean addResource(ResourceDTO resourceDTO) throws Exception {
+    public void addResource(ResourceDTO resourceDTO) throws BusinessException {
         resourceDTO.setResourceCode(resourceDTO.getResourceCode().toUpperCase());
-        return this.save(DozerUtil.map(resourceDTO, ResourceEntity.class));
+        this.save(DozerUtil.map(resourceDTO, ResourceEntity.class));
     }
 
     /**
@@ -60,7 +68,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
      * @throws Exception
      */
     @Override
-    public void updateResource(ResourceDTO resourceDTO) throws Exception {
+    public void updateResource(ResourceDTO resourceDTO) throws BusinessException {
         super.updateById(DozerUtil.map(resourceDTO, ResourceEntity.class));
     }
 
@@ -70,8 +78,14 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
      * @throws Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delResource(ResourceDTO resourceDTO) throws Exception {
+        // 删除资源表
         super.removeByIds(resourceDTO.getResourceIds());
+        // 删除角色资源表
+        QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("resource_id", resourceDTO.getResourceIds());
+        roleResourceService.remove(queryWrapper);
     }
 
 }

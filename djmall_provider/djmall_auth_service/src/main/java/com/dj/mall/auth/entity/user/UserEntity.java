@@ -54,6 +54,10 @@ public class UserEntity {
      */
     private Integer roleId;
 
+    /**
+     * 角色昵称
+     */
+    private String nickName;
 
 
 }

@@ -46,4 +46,9 @@ public class UserDTO implements Serializable {
      *  角色ID
      */
     private Integer roleId;
+
+    /**
+     * 角色昵称
+     */
+    private String nickName;
 }
