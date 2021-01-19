@@ -18,7 +18,8 @@ public interface ResourceApi {
 
     void updateRes(ResourceDTO resourceDTO) throws BusinessException;
 
-    void delRes(List<Integer> resourceIds);
+    void delRes(List<Integer> resourceIds)throws Exception;;
 
 
+    ResourceDTO findResById(Integer id)throws Exception;;
 }

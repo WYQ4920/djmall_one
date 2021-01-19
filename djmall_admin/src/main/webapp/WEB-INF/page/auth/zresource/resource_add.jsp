@@ -28,7 +28,7 @@
               <option value="1">菜单</option>
               <option value="2">button</option>
             </select>
-    <button type="button" onclick="add()"></button>
+    <button type="button" onclick="add()" >提交</button>
 </form>
 </body>
 <script type="text/javascript">

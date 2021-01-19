@@ -180,7 +180,6 @@
                 if (200 == result.code){
                     layer.msg(result.msg);
                     window.location.reload();
-                    show();
                     return;
                 }
             }
