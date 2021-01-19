@@ -89,6 +89,7 @@
 		}, "请正确填写您的手机号码");
 
     })
+    alert(${user.userSex});
 </script>
 <style>
     .error {
@@ -102,14 +103,15 @@
     <label for="userName">用户名</label>
     <input type="text" name="userName" id="userName" value="${user.userName}"><br>
     <label for="userPhone">手机：</label>
-    <input type="text" name="userPhone" id="userPhone"><br>
+    <input type="text" name="userPhone" id="userPhone" value="${user.userPhone}"><br>
     <label for="userEmail">邮箱：</label>
-    <input type="email" name="userEmail" id="userEmail"><br>
+    <input type="email" name="userEmail" id="userEmail" value="${user.userEmail}"><br>
     <label for="userSex">性 别：</label>
-    <input type="radio" name="userSex" id="userSex" value="1" <c:if test="${user.userSex}==1">checked</c:if> >男
-    <input type="radio" name="userSex" id="userSex" value="2" <c:if test="${user.userSex}==2">checked</c:if>>女
+    <input type="radio" name="userSex" id="userSex" value="1" <c:if test="${user.userSex} == 1">checked</c:if> >男
+    <input type="radio" name="userSex" id="userSex" value="2" <c:if test="${user.userSex} == 2">checked</c:if> >女
     <br>
     <input type="submit" value="提交修改">
+
 </form>
 </body>
 </html>
