@@ -17,7 +17,7 @@
         <tr>
             <td>
                 <input type="hidden" name="parentId" value="${parentId}">
-                上级名称：${resourceName}
+                上级名称：<input type="text" name="resourceName" value="${resourceName}" disabled="disabled">
             </td>
         </tr>
         <tr>

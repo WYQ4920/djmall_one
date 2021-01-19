@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <td>
-                                资源编码：<input type="text" name="resourceCode" id="resourceCode">
+                                资源编码：<input type="text" name="resourceCode" id="resourceCode" disabled="disabled">
                             </td>
                         </tr>
                         <tr>
