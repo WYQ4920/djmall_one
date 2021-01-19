@@ -167,7 +167,6 @@
             ids = getChildNode(selectedNode);
         }
         ids += selectedNode.id;
-        alert(ids);
         $.post(
             "<%=request.getContextPath() %>/auth/resource/wyq/del",
             {"resourceIds": ids},
