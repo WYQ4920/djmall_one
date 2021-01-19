@@ -31,7 +31,12 @@ public class ResourceController {
     @Reference(check = false)
     private UserApi userApi;
 
-
+    /**
+     * left页面权限控制展示
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @GetMapping("resourceShow")
     public ResultModel<Object> resourceShow(HttpSession session) throws Exception {
         UserDTO user = (UserDTO) session.getAttribute("user");
