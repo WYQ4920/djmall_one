@@ -7,7 +7,7 @@ public class SystemConstant {
 
     // 定义判断常量数
     public static final int NUMBER = 0;
-    
+
     // 分页每页共几页
     public static final Integer SHOW_NUM = 3;
 
