@@ -16,7 +16,7 @@ public class UserVOResp {
     private String userName;
 
     /**
-     * 角色昵称
+     * 用户昵称
      */
     private String nickName;
 
@@ -41,8 +41,13 @@ public class UserVOResp {
     private Integer userSex;
 
     /**
-     * 角色ID
+     *  角色名称
      */
-    private Integer roleId;
+    private String roleName;
+
+    /**
+     * 用户性别展示
+     */
+    private String sexShow;
 
 }

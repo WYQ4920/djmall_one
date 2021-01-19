@@ -19,4 +19,22 @@
             aur.user_id = ${userId}
     </select>
 
+    <select id="findUserAll" resultType="com.dj.mall.auth.bo.user.UserBO">
+        SELECT
+            au.*,ar.role_name as roleName
+        FROM
+            djmall_auth_user au
+        LEFT JOIN djmall_auth_user_role aur ON au.id = aur.user_id
+        LEFT JOIN djmall_auth_role ar ON aur.role_id = ar.id
+        <where>
+        <if test="userEntity.userName != null and userEntity.userName!= ''">
+            au.user_name like "%"#{userEntity.userName}"%"
+        </if>
+        <if test="userEntity.userSex != null ">
+            AND au.user_sex = #{userEntity.userSex}
+        </if>
+        </where>
+        order by au.id desc
+    </select>
+
 </mapper>

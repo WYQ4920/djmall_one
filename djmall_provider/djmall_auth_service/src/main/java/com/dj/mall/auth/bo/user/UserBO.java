@@ -1,11 +1,13 @@
-package com.dj.mall.auth.dto.user;
+package com.dj.mall.auth.bo.user;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
+/**
+ * @author ZJJ
+ * @date 2021/1/19 15:12
+ */
 @Data
-public class UserDTO implements Serializable {
+public class UserBO {
 
     /**
      * 用户ID
@@ -33,22 +35,17 @@ public class UserDTO implements Serializable {
     private String userPhone;
 
     /**
-     * 用户邮箱
+     *  用户邮箱
      */
     private String userEmail;
 
     /**
-     * 用户性别 ：1为男，2为女
+     *  用户性别 ：1为男，2为女
      */
     private Integer userSex;
 
     /**
-     * 角色ID
-     */
-    private Integer roleId;
-
-    /**
-     * 角色昵称
+     * 用户昵称
      */
     private String nickName;
 
@@ -61,4 +58,15 @@ public class UserDTO implements Serializable {
      * 用户性别展示
      */
     private String sexShow;
+
+
+    public String getSexShow() {
+        if (userSex == 1){
+            return "男";
+        }
+        if (userSex == 2){
+            return "女";
+        }
+        return "";
+    }
 }

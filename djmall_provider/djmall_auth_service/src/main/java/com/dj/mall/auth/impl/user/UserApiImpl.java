@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.bo.user.UserBO;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.auth.entity.res.ResourceEntity;
@@ -15,7 +16,6 @@ import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -36,11 +36,14 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
     @Override
     public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name", userName).eq("user_pwd", userPwd);
+        queryWrapper.eq("user_name", userName);
         UserEntity userEntity = this.getOne(queryWrapper);
         UserDTO userDTO = DozerUtil.map(userEntity, UserDTO.class);
         if (userDTO == null) {
-            throw new BusinessException("用户名或密码不正确");
+            throw new BusinessException("用户名不存在");
+        }
+        if (!userDTO.getUserPwd().equals(userPwd)) {
+            throw new BusinessException("密码不正确");
         }
         return userDTO;
     }
@@ -52,13 +55,8 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      * @return
      */
     @Override
-    public List<UserDTO> findAll(UserDTO userDTO) {
-        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
-        if (!StringUtils.isEmpty(userDTO.getUserName())) {
-            queryWrapper.like("user_name", userDTO.getUserName());
-        }
-        List<UserEntity> list = this.list(queryWrapper);
+    public List<UserDTO> findUserAll(UserDTO userDTO) {
+        List<UserBO> list = getBaseMapper().findUserAll(DozerUtil.map(userDTO,UserEntity.class));
         return DozerUtil.mapList(list, UserDTO.class);
     }
 
