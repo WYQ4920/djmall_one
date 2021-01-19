@@ -14,13 +14,15 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.exedit.js"></script>
-
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.min.css">
+    <script src="<%=request.getContextPath()%>/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
     <form>
+        <input type="hidden" name="isDel" value="0">
         <input type="button" value="新增资源" onclick="toAdd()"><br>
         <input type="button" value="编辑" onclick="toUpdate()"><br>
-        <input type="button" value="删除">
+        <input type="button" value="删除"  onclick="del()">
     </form>
     <a id="treeDemo" class="ztree"></a>
 
@@ -76,8 +78,8 @@
     //展示基础数据
     function show(){
         $.post(
-            "<%=request.getContextPath() %>/res/resourceShow",
-            {},
+            "<%=request.getContextPath() %>/res/showResZtree",
+            {"isDel":0},
             function (res){
                 $.fn.zTree.init($("#treeDemo"), setting, res.data).expandAll(true);;//生成ztree
             }
@@ -85,14 +87,14 @@
     };
 
     //新增
-    function add(){
+    function toAdd(){
         // 获取当前被选中的节点数据集合
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
         var nodes = treeObj.getSelectedNodes();
         if(undefined == nodes || nodes.length == 0){
             location.href = "<%=request.getContextPath() %>/res/toAdd/"+0;
             return ;
-            var selectNodes =  treeObj.getSelectedNodes;
+            var selectNodes =  $.fn.zTree.getZTreeObj("treeDemo").getSelectedNodes;
             alert(selectNodes)
         }
     }
@@ -137,7 +139,7 @@
     }
 
     //去增加页面
-    function toUpd(){
+    function toUpdate(){
         // 获取当前被选中的节点数据集合
         var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
         var nodes = treeObj.getSelectedNodes();
@@ -155,7 +157,7 @@
     }
 
     //修改
-    function upd(){
+    function update(){
         $.post(
             "<%=request.getContextPath() %>/res/toUpdate",
             $("#fm").serialize(),
