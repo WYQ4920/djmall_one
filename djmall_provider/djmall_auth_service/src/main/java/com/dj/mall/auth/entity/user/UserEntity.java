@@ -50,11 +50,6 @@ public class UserEntity {
     private Integer userSex;
 
     /**
-     *  角色ID
-     */
-    private Integer roleId;
-
-    /**
      * 角色昵称
      */
     private String nickName;

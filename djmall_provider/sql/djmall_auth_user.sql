@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2021-01-19 10:07:56
+Date: 2021-01-19 14:55:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,16 +28,15 @@ CREATE TABLE `djmall_auth_user` (
   `user_phone` varchar(255) NOT NULL COMMENT '用户手机号',
   `user_email` varchar(255) NOT NULL COMMENT '电子邮箱',
   `user_sex` int(11) NOT NULL COMMENT '用户性别：1为男，2为女',
-  `role_id` int(11) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='权限管理：用户表';
 
 -- ----------------------------
 -- Records of djmall_auth_user
 -- ----------------------------
-INSERT INTO `djmall_auth_user` VALUES ('1', 'zs', '123456', '', '', '', '', '1', '1');
-INSERT INTO `djmall_auth_user` VALUES ('2', 'aa', '123456', '', '', '', '', '2', '2');
-INSERT INTO `djmall_auth_user` VALUES ('3', 'ss', '123456', '', '', '', '', '1', '1');
-INSERT INTO `djmall_auth_user` VALUES ('4', 'ab', '123456', '', '', '', '', '2', '1');
-INSERT INTO `djmall_auth_user` VALUES ('5', 'aaa', 'f0c69fc5845531fe3d42c98029480285', '', 'c8c47d3eff969778b420b105c931e8d9', '15211111111', '1@163.com', '1', '1');
-INSERT INTO `djmall_auth_user` VALUES ('6', 'aa1', '36693c5479c7069d532baa1471b407c4', '', '60022e38e2b2e307b6a88fa330666c1c', '15211111112', '2@163.com', '1', '2');
+INSERT INTO `djmall_auth_user` VALUES ('1', 'zs', 'f0c69fc5845531fe3d42c98029480285', '', 'c8c47d3eff969778b420b105c931e8d9', '', '', '1');
+INSERT INTO `djmall_auth_user` VALUES ('2', 'aa', 'f0c69fc5845531fe3d42c98029480285', '', 'c8c47d3eff969778b420b105c931e8d9', '', '', '2');
+INSERT INTO `djmall_auth_user` VALUES ('3', 'ss', 'f0c69fc5845531fe3d42c98029480285', '', 'c8c47d3eff969778b420b105c931e8d9', '', '', '1');
+INSERT INTO `djmall_auth_user` VALUES ('4', 'ab', 'f0c69fc5845531fe3d42c98029480285', '', 'c8c47d3eff969778b420b105c931e8d9', '', '', '2');
+INSERT INTO `djmall_auth_user` VALUES ('5', 'aaa', 'f0c69fc5845531fe3d42c98029480285', '', 'c8c47d3eff969778b420b105c931e8d9', '15211111111', '1@163.com', '1');
+INSERT INTO `djmall_auth_user` VALUES ('6', 'aa1', '36693c5479c7069d532baa1471b407c4', '', '60022e38e2b2e307b6a88fa330666c1c', '15211111112', '2@163.com', '1');
