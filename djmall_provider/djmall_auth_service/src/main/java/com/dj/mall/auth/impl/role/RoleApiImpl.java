@@ -11,7 +11,6 @@ import com.dj.mall.auth.entity.user.UserRoleEntity;
 import com.dj.mall.auth.service.role.RoleResourceService;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
-import com.dj.mall.auth.dto.role.RoleResourceDTO;
 import com.dj.mall.auth.dto.role.TreeDataDTO;
 import com.dj.mall.auth.entity.role.RoleEntity;
 import com.dj.mall.auth.mapper.role.RoleMapper;
@@ -99,16 +98,25 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
      * 删除角色
      * @param id 角色id
      * @throws Exception
+     * @return
      */
     @Override
-    public void deleteRole(Integer id) throws Exception {
+    public boolean deleteRole(Integer id) throws Exception {
+        // 用户角色表
+        QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("role_id", id);
+        List<UserRoleEntity> list = userRoleService.list(queryWrapper1);
+        if (SystemConstant.NUMBER != list.size()) {
+            return false;
+        }
+        userRoleService.remove(queryWrapper1);
+        // 角色表
         super.removeById(id);
+        // 角色资源表
         QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("role_id", id);
         roleResourceService.remove(queryWrapper);
-        QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
-        queryWrapper1.eq("role_id", id);
-        userRoleService.remove(queryWrapper1);
+        return true;
     }
 
     /**
@@ -119,21 +127,29 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
      */
     @Override
     public List<TreeDataDTO> findAll(RoleDTO roleDTO) throws Exception {
+        // 获取资源表全部信息
         List<ResourceDTO> resourceDTOList = resourceApi.findAll();
-        List<RoleResourceDTO> roleResourceDTOS = roleResourceService.findRoleResourceByRoleId(roleDTO.getId());
+        // 根据角色id获取角色对应的所有资源
+        QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id", roleDTO.getId());
+        List<RoleResourceEntity> resourceEntities = roleResourceService.list(queryWrapper);
+        // List<RoleResourceDTO> roleResourceDTOS = roleResourceService.findRoleResourceByRoleId(roleDTO.getId());
+        // 定义ztree集合
         List<TreeDataDTO> treeDataList = new ArrayList<>();
+        // 组装数据
         for (ResourceDTO res:resourceDTOList) {
             TreeDataDTO treeDataDTO = TreeDataDTO.builder()
                     .id(res.getId())
                     .parentId(res.getParentId())
                     .resourceName(res.getResourceName())
                     .build();
-            for (RoleResourceDTO rrs:roleResourceDTOS) {
+            for (RoleResourceEntity rrs:resourceEntities) {
                 if (rrs.getResourceId().equals(res.getId())) {
                     treeDataDTO.setChecked(true);
                     break;
                 }
             }
+            // 组装数据添加到集合中
             treeDataList.add(treeDataDTO);
         }
         return treeDataList;
@@ -146,10 +162,13 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
      */
     @Override
     public void saveRoleResource(RoleDTO roleDTO) throws Exception {
+        // 删除数据库已有数据
         QueryWrapper<RoleResourceEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("role_id", roleDTO.getId());
         roleResourceService.remove(queryWrapper);
+        // 定义角色资源表集合
         List<RoleResourceEntity> resourceEntities = new ArrayList<>();
+        // 添加数据
         for (Integer resourceIds:roleDTO.getResourceIds()) {
             resourceEntities.add(RoleResourceEntity.builder()
                     .roleId(roleDTO.getId())

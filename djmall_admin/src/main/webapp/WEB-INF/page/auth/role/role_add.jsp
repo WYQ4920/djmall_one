@@ -48,6 +48,7 @@
                                 if(result.code == 200){
                                     layer.close(index);
                                     layer.msg(result.msg);
+                                    window.location.reload();
                                     parent.location.href="<%=request.getContextPath() %>/auth/role/toShow";
                                     return;
                                 }

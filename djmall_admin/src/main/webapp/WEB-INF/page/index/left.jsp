@@ -23,11 +23,11 @@
 		<a href="<%=request.getContextPath() %>/role/toShow" target="right">角色管理</a><br>
 		<a href="<%=request.getContextPath() %>/auth/resource/toShow" target="right">WYQ -> 资源管理</a><br>
 		<a href="<%=request.getContextPath() %>/zjj/resource/toShow" target="right">Zjj 资源管理</a><br>
+		<%--<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户管理</a><br>
+		<a href="<%=request.getContextPath() %>/res/toShowResZtree" target="right">资源管理</a><br>
+		<a href="<%=request.getContextPath() %>/role/toShow" target="right">角色管理</a><br>
+		<a href="<%=request.getContextPath() %>/auth/resource/toShow" target="right">WYQ -> 资源管理</a><br>--%>
 	</center>
-	<%--<a href="<%=request.getContextPath() %>/user/toShow" target="right">用户管理</a><br>
-	<a href="<%=request.getContextPath() %>/res/toShowResZtree" target="right">资源管理</a><br>
-	<a href="<%=request.getContextPath() %>/role/toShow" target="right">角色管理</a><br>
-	<a href="<%=request.getContextPath() %>/auth/resource/toShow" target="right">WYQ -> 资源管理</a><br>--%>
 </body>
 <script type="text/javascript">
 

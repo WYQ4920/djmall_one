@@ -52,4 +52,5 @@ public class ResourceDTO implements Serializable {
      */
     private List<Integer> resourceIds;
 
+
 }

@@ -69,8 +69,11 @@ public class RoleController {
      */
     @PostMapping("del")
     public ResultModel del(Integer id) throws Exception {
-        roleApi.deleteRole(id);
-        return new ResultModel().success();
+        boolean result = roleApi.deleteRole(id);
+        if (result) {
+            return new ResultModel().success();
+        }
+        return new ResultModel().error("角色已有关联用户, 无法删除");
     }
 
     /**
@@ -79,9 +82,6 @@ public class RoleController {
     @GetMapping("showResRel")
     public ResultModel showResRel(RoleVOReq roleVOReq) throws Exception {
         List<TreeDataDTO> treeDataDTOS = roleApi.findAll(DozerUtil.map(roleVOReq, RoleDTO.class));
-        for (TreeDataDTO t:treeDataDTOS) {
-            System.out.println(t.getChecked());
-        }
         return new ResultModel().success(DozerUtil.mapList(treeDataDTOS, TreeDataVOResp.class));
     }
 
