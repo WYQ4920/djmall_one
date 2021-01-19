@@ -22,7 +22,7 @@
 	            },
 				userPwd:{
 	            	 required: true,
-	            	 rangelength:[3,9]
+	            	 /*rangelength:[3,9]*/
 	            }
 	            
 	        },
@@ -33,7 +33,7 @@
 	       		 },
 				userPwd: {
 			        required: "密码不能为空",
-			        rangelength: "密码长度应在3~9",
+			        /*rangelength: "密码长度应在3~9",*/
 	       		},
 	       		
 	   		 },
