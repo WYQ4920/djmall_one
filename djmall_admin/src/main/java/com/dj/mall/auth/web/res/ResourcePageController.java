@@ -33,13 +33,6 @@ public class ResourcePageController {
         return "res/add";
     }
 
-    @RequestMapping("/toUpd/{id}")
-    public String toUpdate(Model model,@PathVariable Integer id) throws Exception {
-
-        ResourceDTO one = resourceApi.findResById(id);
-        model.addAttribute("one",one);
-        return "res/update";
-    }
 
 
 
