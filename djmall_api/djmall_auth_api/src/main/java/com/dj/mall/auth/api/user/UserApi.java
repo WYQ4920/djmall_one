@@ -71,4 +71,12 @@ public interface UserApi {
      * @throws Exception
      */
     void giveRole(Integer userId,Integer roleId) throws Exception;
+
+    /**
+     *  通过用户id查找角色
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    Integer findRoleByUserId(Integer userId) throws Exception;
 }
