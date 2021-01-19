@@ -39,9 +39,7 @@ public class UserController {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
-        List<ResourceDTO> resList = userApi.getUserResource(userDTO.getId());
         session.setAttribute("user", userDTO);
-        session.setAttribute("resList", resList);
         return new ResultModel<>().success();
     }
 
