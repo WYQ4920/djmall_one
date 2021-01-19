@@ -47,7 +47,6 @@
             resourceIds += selectedNodes[i].id + ",";
         }
         resourceIds = resourceIds.substring(0, resourceIds.length - 1);
-        alert(resourceIds);
         $.post(
             "<%=request.getContextPath() %>/auth/role/saveRoleResource",
             {"id": ${id}, "resourceIds": resourceIds},
