@@ -28,9 +28,10 @@ public class ResourcePageController {
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
         if (id == SystemConstant.ERROR_ONEE) {
             model.addAttribute("resourceName", "顶级");
-        } /*else {
-            model.addAttribute("resourceName", resourceApi.findResById(id).getResourceName());
-        }*/
+        } else {
+            ResourceDTO resourceDTO = resourceApi.findResById(id);
+            model.addAttribute("resourceName", resourceDTO.getResourceName());
+        }
         model.addAttribute("parentId", id);
         return "res/add";
     }

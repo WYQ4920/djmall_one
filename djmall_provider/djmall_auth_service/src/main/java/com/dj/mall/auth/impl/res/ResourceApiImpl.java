@@ -104,5 +104,10 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
         super.removeByIds(resourceIds);
     }
 
+    @Override
+    public ResourceDTO findResById(Integer id) throws Exception {
+        return DozerUtil.map(super.getById(id), ResourceDTO.class);
+    }
+
 
 }
