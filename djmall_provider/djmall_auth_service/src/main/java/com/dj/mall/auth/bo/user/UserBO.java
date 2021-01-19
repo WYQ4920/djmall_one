@@ -1,5 +1,6 @@
 package com.dj.mall.auth.bo.user;
 
+import com.dj.mall.common.constant.UserConstant;
 import lombok.Data;
 
 /**
@@ -61,10 +62,10 @@ public class UserBO {
 
 
     public String getSexShow() {
-        if (userSex == 1){
+        if (userSex == UserConstant.SEX_NAM){
             return "男";
         }
-        if (userSex == 2){
+        if (userSex == UserConstant.SEX_WONAM){
             return "女";
         }
         return "";
