@@ -66,6 +66,7 @@ public class UserController {
     public ResultModel<Object> add(UserVOReq userVOReq,HttpSession session) throws Exception {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
+        Assert.hasText(userVOReq.getUserPhone(), "用户手机号不能为空");
         userApi.addUser(DozerUtil.map(userVOReq, UserDTO.class));
         return new ResultModel<>().success();
     }
@@ -93,6 +94,28 @@ public class UserController {
     @RequestMapping("checkUserName")
     public boolean checkUserName(String userName) throws Exception {
         return userApi.checkUserName(userName);
+    }
+
+    /**
+     *  用户邮箱查重
+     * @param userEmail
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("checkUserEmail")
+    public boolean checkUserEmail(String userEmail) throws Exception {
+        return userApi.checkUserEmail(userEmail);
+    }
+
+    /**
+     *  用户手机号查重
+     * @param userPhone
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("checkUserPhone")
+    public boolean checkUserPhone(String userPhone) throws Exception {
+        return userApi.checkUserPhone(userPhone);
     }
 
     /**

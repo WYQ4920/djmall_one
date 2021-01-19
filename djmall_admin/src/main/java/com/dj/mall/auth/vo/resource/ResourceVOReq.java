@@ -43,4 +43,8 @@ public class ResourceVOReq {
      */
     private Integer isDel;
 
+    /**
+     * 资源ID集合
+     */
+    private List<Integer> resourceIds;
 }
