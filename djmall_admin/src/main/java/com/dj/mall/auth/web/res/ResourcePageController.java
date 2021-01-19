@@ -26,7 +26,7 @@ public class ResourcePageController {
 
     @RequestMapping("/toAdd/{id}")
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
-        if (id == SystemConstant.ERROR_ONEE) {
+        if (id.equals(SystemConstant.ERROR_ONEE)) {
             model.addAttribute("resourceName", "顶级");
         } else {
             ResourceDTO resourceDTO = resourceApi.findResById(id);
