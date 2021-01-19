@@ -7,13 +7,18 @@ import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.entity.res.ResourceEntity;
 import com.dj.mall.auth.mapper.ResourcceMapper;
+import com.dj.mall.auth.service.role.RoleResourceService;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.util.DozerUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Service
 public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity> implements ResourceApi {
+
+    @Autowired
+    private RoleResourceService roleResourceService;
 
     /**
      * res展示
@@ -89,6 +94,9 @@ public class ResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEntity
     @Override
     public void delRes(List<Integer> resourceIds) {
         super.removeByIds(resourceIds);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.in("resource_id",resourceIds);
+        roleResourceService.remove(queryWrapper);
     }
 
     /**
