@@ -15,4 +15,9 @@ public class UserVOResp {
      */
     private String userName;
 
+    /**
+     * 角色昵称
+     */
+    private String nickName;
+
 }

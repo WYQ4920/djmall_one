@@ -42,6 +42,11 @@ $(function(){
           	 rangelength:[3,9],
           	 equalTo: "#userPwd"
           },
+			nickName:{
+				required: true,
+				rangelength:[2,8],
+				equalTo: "#userName",
+			},
            userSex:{
            	 required: true,          	 
            },
@@ -87,6 +92,10 @@ $(function(){
 		        rangelength: "确认密码的长度应在3~9",
 		        equalTo:"两次输入不一致"
        		},
+			nickName:{
+				required: "昵称不能为空",
+				equalTo:"不能和用户名重复"
+			},
        		userSex: {
 		        required: "性别不能为空",
        		},
@@ -143,6 +152,8 @@ $(function(){
 		<input type="hidden" name="salt" id="salt" value="${salt}">
 		<label for="userName">用户名:</label>
 		<input type="text" name="userName" id="userName"><br>
+		<label for="nickName">昵称:</label>
+		<input type="text" name="nickName" id="nickName"><br>
 		<label for="userPwd">密 码：</label>
 		<input type="text" name="userPwd" id="userPwd"><br>
 		<label for="userPwd_confirm">确认密码：</label>
