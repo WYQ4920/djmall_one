@@ -1,6 +1,7 @@
 package com.dj.mall.auth.entity.user;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -50,9 +51,8 @@ public class UserEntity {
     private Integer userSex;
 
     /**
-     * 角色昵称
+     * 用户昵称
      */
     private String nickName;
-
 
 }

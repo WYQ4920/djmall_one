@@ -21,10 +21,7 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    /**
-     * 启动时不检查
-     */
-    @Reference(check = false)
+    @Reference
     private UserApi userApi;
 
     /**
@@ -51,7 +48,7 @@ public class UserController {
      */
     @PostMapping("list")
     public ResultModel<Object> list(UserVOReq userVOReq) throws Exception {
-        List<UserDTO> list = userApi.findAll(DozerUtil.map(userVOReq, UserDTO.class));
+        List<UserDTO> list = userApi.findUserAll(DozerUtil.map(userVOReq, UserDTO.class));
         return new ResultModel<>().success(DozerUtil.mapList(list, UserVOResp.class));
     }
 
@@ -84,6 +81,13 @@ public class UserController {
         return new ResultModel<>().success();
     }
 
+    /**
+     * 获取用户密码盐
+     *
+     * @param userName
+     * @return
+     * @throws Exception
+     */
     @PostMapping("getSalt")
     public ResultModel getSalt(String userName) throws Exception {
         Assert.hasText(userName, "用户名不能为空");

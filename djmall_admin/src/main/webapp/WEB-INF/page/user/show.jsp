@@ -31,13 +31,14 @@
 					html+="<tr>";
 					html+="<td>"+result.data[i].id+"</td>";
 					html+="<td>"+result.data[i].userName+"</td>";
-					/*html+="<td>"+result.data.records[i].sex+"</td>";
-					html+="<td>"+result.data.records[i].age+"</td>";
-					html+="<td>"+result.data.records[i].nickName+"</td>";*/
+					html+="<td>"+result.data[i].nickName+"</td>";
+					html+="<td>"+result.data[i].sexShow+"</td>";
+					html+="<td>"+result.data[i].userPhone+"</td>";
+					html+="<td>"+result.data[i].userEmail+"</td>";
 					html+="<td>";
 					html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
 					/*html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'>";*/
-					html+="<input type='button' value='授予角色' onclick='upd("+result.data[i].id+")'>";
+					html+="<input type='button' value='授予角色' onclick='giveRole("+result.data[i].id+")'>";
 					html+="<td>";
 					html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'/>";
 					html+="</td>";
@@ -98,16 +99,6 @@
 		/*show(pageNum);*/
 		show();
 	}
-
-	/*function add(){
-		layer.open({
-			type : 2,
-			title : '注册页面',
-			shade : 0.5,
-			area : [ '380px', '360px' ],
-			content : '<%=request.getContextPath() %>/user/toAdd' //iframe的url
-		});
-	}*/
 	
 
 </script>
@@ -118,13 +109,18 @@
 <body>
 	<form id="fm">
 		用户名：<input type="text" name="userName"><br>
+		性 别：<input type="radio" name="userSex"  value="1" >男
+		<input type="radio" name="userSex" value="2">女
 		<input type="button" value="查询" onclick="query()">
-		<%--<input type="button" value="新增" onclick="add()">--%>
 		<br>
 		<table>
 			<tr>
 				<td>用户ID</td>
 				<td>用户名</td>
+				<td>昵称</td>
+				<td>性别</td>
+				<td>手机号</td>
+				<td>邮箱</td>
 				<td>操作</td>
 			</tr>
 			<tbody id="tb"></tbody>

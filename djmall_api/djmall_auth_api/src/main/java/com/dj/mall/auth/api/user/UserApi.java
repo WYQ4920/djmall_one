@@ -10,7 +10,7 @@ public interface UserApi {
 
     UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException;
 
-    List<UserDTO> findAll(UserDTO userDTO) throws Exception;
+    List<UserDTO> findUserAll(UserDTO userDTO) throws Exception;
 
     void addUser(UserDTO userDTO) throws Exception;
 
