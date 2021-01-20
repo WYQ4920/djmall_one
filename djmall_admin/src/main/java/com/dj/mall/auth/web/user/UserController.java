@@ -1,12 +1,15 @@
 package com.dj.mall.auth.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.auth.vo.user.UserVOReq;
 import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,9 @@ public class UserController {
     @Reference
     private UserApi userApi;
 
+    @Reference
+    private ResourceApi resourceApi;
+
     /**
      * 登录
      *
@@ -32,7 +38,9 @@ public class UserController {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
-        session.setAttribute("user", userDTO);
+        List<ResourceDTO> resList = userApi.getUserResource(userDTO.getId());
+        userDTO.setResourceList(resList);
+        session.setAttribute(UserConstant.USER_SESSION, userDTO);
         return new ResultModel<>().success();
     }
 
