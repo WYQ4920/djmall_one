@@ -49,7 +49,8 @@ public class UserController {
         //得到主体
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, userPwd);
-        subject.login(token);//发起请求认证
+        //发起请求认证
+        subject.login(token);
         return new ResultModel<>().success();
     }
 
@@ -146,13 +147,13 @@ public class UserController {
 
     /**
      * 删除用户
-     * @param userVOReq
+     * @param ids
      * @return
      * @throws Exception
      */
     @PostMapping("del")
-    public ResultModel del(UserVOReq userVOReq) throws Exception {
-        userApi.del(DozerUtil.map(userVOReq, UserDTO.class));
+    public ResultModel del(@RequestParam("ids[]") Integer[] ids) throws Exception {
+        userApi.del(ids);
         return new ResultModel().success();
     }
 
