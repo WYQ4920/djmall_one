@@ -25,19 +25,20 @@ public class WebMVCConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册拦截器
-        InterceptorRegistration loginRegistration = registry.addInterceptor(loginInterceptor);
+//        InterceptorRegistration loginRegistration = registry.addInterceptor(loginInterceptor);
         // 登录拦截
-        loginRegistration.addPathPatterns("/**");
-        loginRegistration.excludePathPatterns("/user/toLogin");
-        loginRegistration.excludePathPatterns("/user/login");
-        loginRegistration.excludePathPatterns("/user/toAdd");
-        loginRegistration.excludePathPatterns("/user/add");
-        loginRegistration.excludePathPatterns("/user/checkUserName");
-        loginRegistration.excludePathPatterns("/user/checkUserEmail");
-        loginRegistration.excludePathPatterns("/user/checkUserPhone");
-        loginRegistration.excludePathPatterns("/user/getSalt");
-        loginRegistration.excludePathPatterns("/static/**");
-        loginRegistration.excludePathPatterns("/error");
+//        loginRegistration.addPathPatterns("/**");
+        //放过拦截路径
+//        loginRegistration.excludePathPatterns("/user/toLogin");
+//        loginRegistration.excludePathPatterns("/user/login");
+//        loginRegistration.excludePathPatterns("/user/toAdd");
+//        loginRegistration.excludePathPatterns("/user/add");
+//        loginRegistration.excludePathPatterns("/user/checkUserName");
+//        loginRegistration.excludePathPatterns("/user/checkUserEmail");
+//        loginRegistration.excludePathPatterns("/user/checkUserPhone");
+//        loginRegistration.excludePathPatterns("/user/getSalt");
+//        loginRegistration.excludePathPatterns("/static/**");
+//        loginRegistration.excludePathPatterns("/error");
         // 权限拦截
         InterceptorRegistration authRegistration = registry.addInterceptor(authInterceptor);
         authRegistration.addPathPatterns("/user/toShow");

@@ -8,6 +8,9 @@ import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
@@ -33,6 +36,11 @@ public class UserController {
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
         session.setAttribute("user", userDTO);
+        //shiro认证
+        //得到主体
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, userPwd);
+        subject.login(token);//发起请求认证
         return new ResultModel<>().success();
     }
 
