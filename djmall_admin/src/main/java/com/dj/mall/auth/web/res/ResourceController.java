@@ -11,6 +11,7 @@ import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.apache.catalina.User;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,6 +60,7 @@ public class ResourceController {
      * @return
      * @throws Exception
      */
+    @RequiresPermissions("RESOURCE_MAMAGER")
     @PostMapping("showResZtree")
     public ResultModel<Object> showResZtree(ResourceVOReq resourceVOReq) throws Exception {
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
@@ -88,6 +90,7 @@ public class ResourceController {
      * @return
      * @throws Exception
      */
+    @RequiresPermissions("RESOURCE_ADD_BTN")
     @PostMapping("add")
     public ResultModel<Object> add(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
@@ -105,6 +108,7 @@ public class ResourceController {
      * @throws Exception
      */
     @PutMapping("update")
+    @RequiresPermissions("RESOURCE_UPDATE_BTN")
     public ResultModel<Object> update(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
@@ -119,6 +123,7 @@ public class ResourceController {
      * @return
      * @throws Exception
      */
+    @RequiresPermissions("RESOURCE_DEL_BTN")
     @PostMapping("/del")
     public ResultModel<Object> del(ResourceVOReq resourceVOReq) throws Exception {
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);

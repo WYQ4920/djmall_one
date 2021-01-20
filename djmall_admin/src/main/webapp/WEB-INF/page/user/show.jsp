@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
@@ -152,9 +153,19 @@
 		<input type="radio" name="userSex" value="2">女
 		<input type="button" value="查询" onclick="query()">
 		<br>
+
+		<shrio:hasPermission name="USER_UPDATE_BTN">
 		<input type="button" value="修改" onclick="upd()">
+		</shrio:hasPermission>
+
+		<shrio:hasPermission name="USER_DEL_BTN">
 		<input type="button" value="删除" onclick="del()">
+		</shrio:hasPermission>
+
+		<shrio:hasPermission name="USER_ADD_ROLE_BTN">
 		<input type="button" value="授权" onclick="giveRole()">
+		</shrio:hasPermission>
+
 		<table>
 			<tr>
 				<td></td>

@@ -52,7 +52,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
             throw new BusinessException("密码不正确");
         }
         List<ResourceDTO> userResource = this.getUserResource(userDTO.getId());
-        userDTO.setUserResList(userResource);
+        userDTO.setResourceList(userResource);
         return userDTO;
     }
 

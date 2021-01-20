@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +33,9 @@
 			<option value="2">按钮</option>
 		</select><br>
 
+		<shrio:hasPermission name="RESOURCE_ADD_BTN">
 		<input type="submit" onclick="toAdd()">
+		</shrio:hasPermission>
 	</form>
 </body>
 <script type="text/javascript">

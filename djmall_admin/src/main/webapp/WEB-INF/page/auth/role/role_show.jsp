@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +30,17 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
+                    html +="<shrio:hasPermission name='ROLE_ADD_RESOURCE_BTN'>"
                     html += "<input type='button' value='关联资源' onclick='toResRelZtree("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html +="</shrio:hasPermission>"
                     html += "<span style='color: cornflowerblue'>|</span>";
+                    html += "<shrio:hasPermission name='ROLE_UPDATE_BTN'>"
                     html += "<input type='button' value='编辑' onclick='upd("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html +="</shrio:hasPermission>"
                     html += "<span style='color: cornflowerblue'>|</span>";
+                    html +="<shrio:hasPermission name='ROLE_DEL_BTN'>"
                     html += "<input type='button' value='删除' onclick='del("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html +="</shrio:hasPermission>"
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -97,7 +104,9 @@
 <form id="fm">
     角色名：<input type="text" name="roleName"/>
     <input type="button" value="查询" onclick="check()"/>&nbsp;
+    <shrio:hasPermission name="ROLE_ADD_BTN">
     <input type="button" value="新增" onclick="add()"/>
+    </shrio:hasPermission>
 </form>
 <br>
 <table cellspacing="0" cellpadding="10" border="1px solid">

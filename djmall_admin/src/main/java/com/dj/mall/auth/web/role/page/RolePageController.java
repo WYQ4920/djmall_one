@@ -5,6 +5,7 @@ import com.dj.mall.auth.api.role.RoleApi;
 import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.vo.role.RoleVOResp;
 import com.dj.mall.common.util.DozerUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,7 @@ public class RolePageController {
     /**
      * 去展示
      */
+    @RequiresPermissions("ROLE_MANAGER")
     @GetMapping("toShow")
     public String toShow() {
         return "auth/role/role_show";
@@ -36,6 +38,7 @@ public class RolePageController {
     /**
      * 去新增
      */
+    @RequiresPermissions("ROLE_ADD_BTN")
     @GetMapping("toAdd")
     public String toAdd() {
         return "auth/role/role_add";
@@ -45,6 +48,7 @@ public class RolePageController {
      * 去修改
      */
     @GetMapping("toUpdate")
+    @RequiresPermissions("ROLE_UPDATE_BTN")
     public String toUpdate(Integer id, ModelMap map) throws Exception {
         RoleDTO role = roleApi.findRoleById(id);
         map.put("role", DozerUtil.map(role, RoleVOResp.class));
@@ -54,6 +58,7 @@ public class RolePageController {
     /**
      * 去展示关联资源
      */
+    
     @GetMapping("toResRelZtree")
     public String toResRelZtree(Integer id, ModelMap map) {
         map.put("id", id);
