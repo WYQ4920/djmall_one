@@ -56,7 +56,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("add")
-    public ResultModel<Object> add(UserVOReq userVOReq, HttpSession session) throws Exception {
+    public ResultModel<Object> add(UserVOReq userVOReq) throws BusinessException {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
         Assert.hasText(userVOReq.getUserPhone(), "用户手机号不能为空");
