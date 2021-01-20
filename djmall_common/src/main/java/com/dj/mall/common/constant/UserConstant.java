@@ -12,4 +12,6 @@ public interface UserConstant {
 
     int SEX_WONAM = 2;
 
+    String RESOURCE_TYPE = "1";
+
 }

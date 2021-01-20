@@ -29,18 +29,22 @@
 				var pageHtml = "";
 				for (var i = 0; i < result.data.length; i++) {
 					html+="<tr>";
+					html += "<td>";
+					html += "<input type='checkbox' name='ids' value='"+result.data[i].id+"'/>";
+					/*html += "<input type='hidden' id='"+result.data[i].id+"' value='"+result.data[i].userStatus+"' />";*/
+					html += "</td>";
 					html+="<td>"+result.data[i].id+"</td>";
 					html+="<td>"+result.data[i].userName+"</td>";
 					html+="<td>"+result.data[i].nickName+"</td>";
 					html+="<td>"+result.data[i].sexShow+"</td>";
 					html+="<td>"+result.data[i].userPhone+"</td>";
 					html+="<td>"+result.data[i].userEmail+"</td>";
-					html+="<td>";
-					html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
-					html+="<input type='button' value='授予角色' onclick='giveRole("+result.data[i].id+")'>";
-					html+="<td>";
+					/*html+="<input type='button' value='修改' onclick='upd("+result.data[i].id+")'>";
+					html+="<input type='button' value='授予角色' onclick='giveRole("+result.data[i].id+")'>";*/
+					/*html+="<td>";
 					html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'/>";
-					html+="</td>";
+					html+="</td>";*/
+					html+="<td>"+result.data[i].roleName+"</td>";
 					html+="</td>";
 					html+="</tr>";
 				}
@@ -70,21 +74,41 @@
 		show(pageNum);
 	}*/
 	  					
-	function upd(id){
+	function upd(){
+		var chk_value =[];
+		$('input:checkbox[name="ids"]:checked').each(function(){ //遍历，将所有选中的值放到数组中
+			chk_value.push($(this).val());
+		});
+		if(chk_value.length<1){
+			layer.msg("至少勾选一项");
+			return;
+		}
+		if(chk_value.length>1){
+			layer.msg("只能勾选一项");
+			return;
+		}
 		layer.open({
 			type : 2,
 			title : '修改',
 			shade : 0.5,
 			area : [ '380px', '360px' ],
-			content : '<%=request.getContextPath() %>/user/toUpdate/'+id //iframe的url
+			content : '<%=request.getContextPath() %>/user/toUpdate/'+chk_value[0] //iframe的url
 		});
 		
 	}	
 	
-	function del(id){
+	function del(){
+		var chk_value =[];
+		$('input:checkbox[name="ids"]:checked').each(function(){ //遍历，将所有选中的值放到数组中
+			chk_value.push($(this).val());
+		});
+		if(chk_value.length<1){
+			layer.msg("至少勾选一项");
+			return;
+		}
 		$.post(
 			"<%=request.getContextPath() %>/user/del",
-			{"id":id,"isDel":0},
+			{"ids":chk_value},
 			function(result){
 				if(result.code!=200){
 					layer.msg(result.msg);
@@ -99,8 +123,20 @@
 		show();
 	}
 
-	function giveRole(userId){
-		location.href="<%=request.getContextPath() %>/user/toGiveRole?userId="+userId;
+	function giveRole(){
+		var chk_value =[];
+		$('input:checkbox[name="ids"]:checked').each(function(){ //遍历，将所有选中的值放到数组中
+			chk_value.push($(this).val());
+		});
+		if(chk_value.length<1){
+			layer.msg("至少勾选一项");
+			return;
+		}
+		if(chk_value.length>1){
+			layer.msg("只能勾选一项");
+			return;
+		}
+		location.href="<%=request.getContextPath() %>/user/toGiveRole?userId="+chk_value[0];
 	}
 	
 
@@ -116,15 +152,19 @@
 		<input type="radio" name="userSex" value="2">女
 		<input type="button" value="查询" onclick="query()">
 		<br>
+		<input type="button" value="修改" onclick="upd()">
+		<input type="button" value="删除" onclick="del()">
+		<input type="button" value="授权" onclick="giveRole()">
 		<table>
 			<tr>
+				<td></td>
 				<td>用户ID</td>
 				<td>用户名</td>
 				<td>昵称</td>
 				<td>性别</td>
 				<td>手机号</td>
 				<td>邮箱</td>
-				<td>操作</td>
+				<td>角色名</td>
 			</tr>
 			<tbody id="tb"></tbody>
 		</table>

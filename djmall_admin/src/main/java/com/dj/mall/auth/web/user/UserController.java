@@ -1,12 +1,15 @@
 package com.dj.mall.auth.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.dj.mall.auth.api.res.ResourceApi;
 import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.auth.vo.user.UserVOReq;
 import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -23,6 +26,9 @@ public class UserController {
     @Reference
     private UserApi userApi;
 
+    @Reference
+    private ResourceApi resourceApi;
+
     /**
      * 登录
      *
@@ -35,6 +41,9 @@ public class UserController {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
+        List<ResourceDTO> resList = userApi.getUserResource(userDTO.getId());
+        userDTO.setResourceList(resList);
+        session.setAttribute(UserConstant.USER_SESSION, userDTO);
         session.setAttribute("user", userDTO);
         //shiro认证
         //得到主体
@@ -64,7 +73,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("add")
-    public ResultModel<Object> add(UserVOReq userVOReq, HttpSession session) throws Exception {
+    public ResultModel<Object> add(UserVOReq userVOReq) throws BusinessException {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
         Assert.hasText(userVOReq.getUserPhone(), "用户手机号不能为空");

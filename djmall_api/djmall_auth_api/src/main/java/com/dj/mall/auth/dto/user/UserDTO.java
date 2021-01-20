@@ -1,8 +1,10 @@
 package com.dj.mall.auth.dto.user;
 
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class UserDTO implements Serializable {
@@ -61,4 +63,9 @@ public class UserDTO implements Serializable {
      * 用户性别展示
      */
     private String sexShow;
+
+    /**
+     * 资源信息集合
+     */
+    private List<ResourceDTO> resourceList;
 }

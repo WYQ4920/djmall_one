@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <td>
-                                资源编码：<input type="text" name="resourceCode" id="resourceCode">
+                                资源编码：<input type="text" name="resourceCode" id="resourceCode" disabled="disabled">
                             </td>
                         </tr>
                         <tr>
@@ -167,7 +167,6 @@
             ids = getChildNode(selectedNode);
         }
         ids += selectedNode.id;
-        alert(ids);
         $.post(
             "<%=request.getContextPath() %>/auth/resource/wyq/del",
             {"resourceIds": ids},

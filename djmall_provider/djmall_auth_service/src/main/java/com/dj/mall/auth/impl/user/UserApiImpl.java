@@ -19,6 +19,7 @@ import com.dj.mall.common.util.DozerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -74,7 +75,10 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addUser(UserDTO userDTO) throws Exception {
+    public void addUser(UserDTO userDTO) throws BusinessException {
+        if (userDTO.getUserName().equals(userDTO.getNickName())){
+           throw new BusinessException("用户名和昵称一致");
+        }
         // 用户表新增
         UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
         super.save(userEntity);
@@ -219,11 +223,11 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void del(UserDTO userDTO) throws Exception {
+    public void del(Integer[] ids) throws Exception {
         //删除用户id
-        this.removeById(userDTO.getId());
+        this.removeByIds(Arrays.asList(ids));
         QueryWrapper<UserRoleEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", userDTO.getId());
+        queryWrapper.in("user_id", Arrays.asList(ids));
         this.userRoleService.remove(queryWrapper);
     }
 

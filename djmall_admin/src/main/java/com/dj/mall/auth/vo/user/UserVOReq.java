@@ -2,6 +2,8 @@ package com.dj.mall.auth.vo.user;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserVOReq {
 
@@ -46,8 +48,14 @@ public class UserVOReq {
     private Integer roleId;
 
     /**
-     * 角色昵称
+     * 用户昵称
      */
     private String nickName;
+
+    /**
+     * 用户ID数组
+     */
+    private Integer[] ids;
+    //private List<Integer> ids;
 
 }
