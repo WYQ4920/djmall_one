@@ -1,6 +1,8 @@
 package com.dj.mall.auth.config;
 
-import com.alibaba.dubbo.common.json.JSONObject;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -92,7 +94,7 @@ public class CustomExceptionHandler {
              if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
                  response.setStatus(HttpStatus.OK.value());
                  response.setContentType("text/json;charset=UTF-8");
-//                 response.getWriter().print(JSONObject.toJSON(new ResultModel().error(403, "403")));
+                 response.getWriter().print(JSONObject.toJSON(new ResultModel().error(403, "403")));
              } else {
                  response.sendRedirect(request.getContextPath() + "/403.jsp");
              }
