@@ -129,13 +129,13 @@ public class UserController {
 
     /**
      * 删除用户
-     * @param userVOReq
+     * @param ids
      * @return
      * @throws Exception
      */
     @PostMapping("del")
-    public ResultModel del(UserVOReq userVOReq) throws Exception {
-        userApi.del(DozerUtil.map(userVOReq, UserDTO.class));
+    public ResultModel del(@RequestParam("ids[]") Integer[] ids) throws Exception {
+        userApi.del(ids);
         return new ResultModel().success();
     }
 
