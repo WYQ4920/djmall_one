@@ -101,10 +101,10 @@ public interface UserApi {
     /**
      * 用户删除
      *
-     * @param userDTO
+     * @param ids
      * @throws Exception
      */
-    void del(UserDTO userDTO) throws Exception;
+    void del(Integer[] ids) throws Exception;
 
     /**
      * 用户授予角色
