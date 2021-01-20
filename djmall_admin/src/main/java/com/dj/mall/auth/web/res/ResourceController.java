@@ -8,12 +8,14 @@ import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.auth.vo.resource.ResourceVOReq;
 import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.apache.catalina.User;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,8 +42,14 @@ public class ResourceController {
     @GetMapping("resourceShow")
     public ResultModel<Object> resourceShow(HttpSession session) throws Exception {
         UserDTO user = (UserDTO) session.getAttribute("user");
-        List<ResourceDTO> resList = userApi.getUserResource(user.getId());
-        return new ResultModel<>().success(resList);
+        List<ResourceDTO> resList = user.getResourceList();
+        List<ResourceDTO> list = new ArrayList<>();
+        for (ResourceDTO res:resList) {
+            if (UserConstant.RESOURCE_TYPE.equals(res.getResourceType())) {
+                list.add(res);
+            }
+        }
+        return new ResultModel<>().success(DozerUtil.mapList(list, ResourceVOResp.class));
     }
 
     /**
