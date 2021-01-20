@@ -6,6 +6,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
  * Shiro配置
  */
 @Configuration
+@DependsOn("shiroRealm") // 强制使该Bean加载时 -> 优先加载依赖的其他Bean的Id
 public class ShiroConfiguration {
 
     /**
@@ -47,9 +49,9 @@ public class ShiroConfiguration {
         // 设置securityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 设置默认登录的 URL，身份认证失败会访问该 URL
-        shiroFilterFactoryBean.setLoginUrl("/toLogin");
+        shiroFilterFactoryBean.setLoginUrl("/user/toLogin");
         // 设置成功之后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/toIndex");
+        shiroFilterFactoryBean.setSuccessUrl("/index/toIndex");
         // 设置未授权界面，权限认证失败会访问该 URL
         shiroFilterFactoryBean.setUnauthorizedUrl("/403.jsp");
         Map<String, String> filters = new LinkedHashMap<>();
@@ -63,7 +65,6 @@ public class ShiroConfiguration {
         filters.put("/user/checkUserPhone", "anon");
         filters.put("/user/getSalt", "anon");
         filters.put("/static/**", "anon");
-        filters.put("/error", "anon");
         // authc 表示必须认证才可访问
         filters.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filters);

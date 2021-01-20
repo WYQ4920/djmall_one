@@ -40,7 +40,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      * @throws BusinessException
      */
     @Override
-    public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException {
+    public UserDTO findUserByNameAndPwd(String userName, String userPwd) throws Exception, BusinessException {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName);
         UserEntity userEntity = this.getOne(queryWrapper);
@@ -51,6 +51,8 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         if (!userDTO.getUserPwd().equals(userPwd)) {
             throw new BusinessException("密码不正确");
         }
+        List<ResourceDTO> userResource = this.getUserResource(userDTO.getId());
+        userDTO.setUserResList(userResource);
         return userDTO;
     }
 

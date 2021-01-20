@@ -1,17 +1,22 @@
 package com.dj.mall.auth.config;
 
 
+import com.alibaba.dubbo.common.json.JSONObject;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
-//import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.UnauthorizedException;
 
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 自定义异常处理器
@@ -80,20 +85,20 @@ public class CustomExceptionHandler {
      * @param ex
      * @return
      */
-    // @ExceptionHandler(UnauthorizedException.class)
-    // public void unauthorizedExceptionHandler(HttpServletRequest request, HttpServletResponse response, UnauthorizedException ex) {
-    //     ex.printStackTrace();
-    //     try {
-    //         // 判断请求方式的 页面请求 Ajax请求
-    //         if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
-    //             response.setStatus(HttpStatus.OK.value());
-    //             response.setContentType("text/json;charset=UTF-8");
-    //             response.getWriter().print(JSONObject.toJSON(new ResultModel().error(403, "403")));
-    //         } else {
-    //             response.sendRedirect(request.getContextPath() + "/403.jsp");
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    // }
+     @ExceptionHandler(UnauthorizedException.class)
+     public void unauthorizedExceptionHandler(HttpServletRequest request, HttpServletResponse response, UnauthorizedException ex) {
+         ex.printStackTrace();
+         try {
+             // 判断请求方式的 页面请求 Ajax请求
+             if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+                 response.setStatus(HttpStatus.OK.value());
+                 response.setContentType("text/json;charset=UTF-8");
+                 response.getWriter().print(JSONObject(new ResultModel().error(403, "403")));
+             } else {
+                 response.sendRedirect(request.getContextPath() + "/403.jsp");
+             }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
 }

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +19,24 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/zTree_v3/js/jquery.ztree.exedit.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.min.css">
     <script src="<%=request.getContextPath()%>/static/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <form>
         <input type="hidden" name="isDel" value="0">
-        <input type="button" value="新增资源" onclick="toAdd()"><br>
-        <input type="button" value="编辑" onclick="toUpdate()"><br>
+
+        <shrio:hasPermission name="RESOURCE_ADD_BTN">
+        <input type="button" value="新增资源" onclick="toAdd()">
+        </shrio:hasPermission>
+
+        <shrio:hasPermission name="RESOURCE_UPDATE_BTN">
+        <input type="button" value="编辑" onclick="toUpdate()">
+        </shrio:hasPermission>
+        
+        <shrio:hasPermission name="RESOURCE_DEL_BTN">
         <input type="button" value="删除"  onclick="del()">
+        </shrio:hasPermission>
+
     </form>
     <a id="treeDemo" class="ztree"></a>
 
@@ -70,7 +84,7 @@
             },
             key: {
                 name: "resourceName",  //zTree 节点数据保存节点名称的属性名称  默认值："name"
-                url: ""
+                url: "xurl"
             }
         }
     };

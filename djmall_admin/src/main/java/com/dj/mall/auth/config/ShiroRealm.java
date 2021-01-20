@@ -1,5 +1,8 @@
 package com.dj.mall.auth.config;
 
+import com.dj.mall.auth.dto.res.ResourceDTO;
+import com.dj.mall.auth.dto.user.UserDTO;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,6 +12,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 自定义Realm
@@ -23,10 +28,14 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        // 创建简单授权信息
+        UserDTO user = (UserDTO) SecurityUtils.getSubject().getSession().getAttribute("user");
+        List<ResourceDTO> userResList = user.getResourceList();
+        //创建简单授权信息
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
-//        simpleAuthorInfo.addStringPermission("/test");
-        return simpleAuthorInfo;
+        for (ResourceDTO list : userResList) {
+            simpleAuthorInfo.addStringPermission(list.getResourceCode());
+        }
+        return  simpleAuthorInfo;
     }
 
     /**

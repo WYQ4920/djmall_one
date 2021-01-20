@@ -17,7 +17,7 @@ public interface UserApi {
      * @return
      * @throws BusinessException
      */
-    UserDTO findUserByNameAndPwd(String userName, String userPwd) throws BusinessException;
+    UserDTO findUserByNameAndPwd(String userName, String userPwd) throws Exception, BusinessException;
 
     /**
      * 用户展示
