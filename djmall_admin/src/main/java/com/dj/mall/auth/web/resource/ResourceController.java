@@ -10,7 +10,6 @@ import com.dj.mall.auth.vo.resource.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
-import org.apache.catalina.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -61,8 +60,8 @@ public class ResourceController {
      * @return
      * @throws Exception
      */
-    @RequiresPermissions("RESOURCE_MAMAGER")
     @PostMapping("showResZtree")
+    @RequiresPermissions("RESOURCE_MANAGER")
     public ResultModel<Object> showResZtree(ResourceVOReq resourceVOReq) throws Exception {
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
         List<ResourceDTO> list = resourceApi.findAll1(resourceDTO);
@@ -91,8 +90,8 @@ public class ResourceController {
      * @return
      * @throws Exception
      */
-    @RequiresPermissions("RESOURCE_ADD_BTN")
     @PostMapping("add")
+    @RequiresPermissions("RESOURCE_ADD_BTN")
     public ResultModel<Object> add(ResourceVOReq resourceVOReq) throws Exception {
         Assert.hasText(resourceVOReq.getResourceName(), "资源名不能为空");
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
@@ -124,8 +123,8 @@ public class ResourceController {
      * @return
      * @throws Exception
      */
-    @RequiresPermissions("RESOURCE_DEL_BTN")
     @PostMapping("/del")
+    @RequiresPermissions("RESOURCE_DEL_BTN")
     public ResultModel<Object> del(ResourceVOReq resourceVOReq) throws Exception {
         ResourceDTO resourceDTO = DozerUtil.map(resourceVOReq, ResourceDTO.class);
         resourceApi.delRes(resourceDTO.getResourceIds());

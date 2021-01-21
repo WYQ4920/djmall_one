@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,7 +171,9 @@ $(function(){
 			<input type="radio" name="userSex" id="userSex" value="1" checked>男
 			<input type="radio" name="userSex" id="userSex" value="2">女
 		<br>
-		<input type="submit" value="提交注册">
+		<shrio:hasPermission name="USER_REGISTER_BTN">
+			<input type="submit" value="提交注册">
+		</shrio:hasPermission>
 	</form>
 
 </body>

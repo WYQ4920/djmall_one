@@ -9,6 +9,7 @@ import com.dj.mall.auth.vo.role.RoleVOResp;
 import com.dj.mall.auth.vo.user.UserVOResp;
 import com.dj.mall.common.util.DozerUtil;
 import com.dj.mall.common.util.PasswordSecurityUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,11 +34,13 @@ public class UserPageController {
     }
 
     @RequestMapping("toShow")
+    @RequiresPermissions("USER_MANAGER")
     public String toShow() {
         return "user/show";
     }
 
     @RequestMapping("toUpdate/{id}")
+    @RequiresPermissions("USER_UPDATE_BTN")
     public String toUpdate(@PathVariable Integer id, Model model) throws Exception {
         UserDTO userDTO = userApi.findUserById(id);
         model.addAttribute("user", DozerUtil.map(userDTO, UserVOResp.class));
@@ -45,6 +48,7 @@ public class UserPageController {
     }
 
     @RequestMapping("toAdd")
+    @RequiresPermissions("USER_REGISTER_BTN")
     public String toAdd(Model model) throws Exception {
         model.addAttribute("salt", PasswordSecurityUtil.generateSalt());
         List<RoleDTO> roleList = roleApi.getRoleList();
@@ -53,6 +57,7 @@ public class UserPageController {
     }
 
     @RequestMapping("toGiveRole")
+    @RequiresPermissions("USER_ADD_ROLE_BTN")
     public String totoGiveRole(Integer userId, Model model) throws Exception {
         model.addAttribute("userId",userId);
         Integer roleId = userApi.findRoleByUserId(userId);

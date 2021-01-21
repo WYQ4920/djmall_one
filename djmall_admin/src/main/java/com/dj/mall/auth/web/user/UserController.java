@@ -13,6 +13,7 @@ import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,7 @@ public class UserController {
      * @return
      */
     @PostMapping("list")
+    @RequiresPermissions("USER_MANAGER")
     public ResultModel<Object> list(UserVOReq userVOReq) throws Exception {
         List<UserDTO> list = userApi.findUserAll(DozerUtil.map(userVOReq, UserDTO.class));
         return new ResultModel<>().success(DozerUtil.mapList(list, UserVOResp.class));
@@ -89,6 +91,7 @@ public class UserController {
      * @return
      */
     @PutMapping("update")
+    @RequiresPermissions("USER_UPDATE_BTN")
     public ResultModel<Object> update(UserVOReq userVOReq) throws BusinessException {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         userApi.updateUser(DozerUtil.map(userVOReq, UserDTO.class));
@@ -152,6 +155,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("del")
+    @RequiresPermissions("USER_DEL_BTN")
     public ResultModel del(@RequestParam("ids[]") Integer[] ids) throws Exception {
         userApi.del(ids);
         return new ResultModel().success();
@@ -165,6 +169,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("giveRole")
+    @RequiresPermissions("USER_ADD_ROLE_BTN")
     public ResultModel giveRole(Integer userId,Integer roleId) throws Exception{
         userApi.giveRole(userId,roleId);
         return new ResultModel().success();

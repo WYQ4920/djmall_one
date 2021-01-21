@@ -24,19 +24,15 @@
 <body>
     <form>
         <input type="hidden" name="isDel" value="0">
-
         <shrio:hasPermission name="RESOURCE_ADD_BTN">
-        <input type="button" value="新增资源" onclick="toAdd()">
+            <input type="button" value="新增资源" onclick="toAdd()">
         </shrio:hasPermission>
-
         <shrio:hasPermission name="RESOURCE_UPDATE_BTN">
-        <input type="button" value="编辑" onclick="toUpdate()">
+            <input type="button" value="编辑" onclick="toUpdate()">
         </shrio:hasPermission>
-        
         <shrio:hasPermission name="RESOURCE_DEL_BTN">
-        <input type="button" value="删除"  onclick="del()">
+            <input type="button" value="删除"  onclick="del()">
         </shrio:hasPermission>
-
     </form>
     <a id="treeDemo" class="ztree"></a>
 

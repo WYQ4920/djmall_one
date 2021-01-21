@@ -30,7 +30,7 @@
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.roleName +"</td>";
                     html += "<td>";
-                    html +="<shrio:hasPermission name='ROLE_ADD_RESOURCE_BTN'>"
+                    html +="<shrio:hasPermission name='ROLE_RELEVANCE_RESOURCE_BTN'>"
                     html += "<input type='button' value='关联资源' onclick='toResRelZtree("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html +="</shrio:hasPermission>"
                     html += "<span style='color: cornflowerblue'>|</span>";
@@ -103,7 +103,9 @@
 <br>
 <form id="fm">
     角色名：<input type="text" name="roleName"/>
-    <input type="button" value="查询" onclick="check()"/>&nbsp;
+    <shrio:hasPermission name="ROLE_MANAGER">
+        <input type="button" value="查询" onclick="check()"/>&nbsp;
+    </shrio:hasPermission>
     <shrio:hasPermission name="ROLE_ADD_BTN">
     <input type="button" value="新增" onclick="add()"/>
     </shrio:hasPermission>

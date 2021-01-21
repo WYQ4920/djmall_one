@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,9 @@
 <br>
 <form id="fm">
     <input type="hidden" name="userId" value="${userId}">
-    <input type="button" value="确定" onclick="giveRole()"/>&nbsp;
+    <shrio:hasPermission name="USER_ADD_ROLE_BTN">
+        <input type="button" value="确定" onclick="giveRole()"/>&nbsp;
+    </shrio:hasPermission>
     <br>
     <table cellspacing="0" cellpadding="10" border="1px solid">
         <tr align="center">

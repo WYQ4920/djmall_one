@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +109,7 @@
 		<input type="password" name="userPwd" id="userPwd"><br>
 		<input type="submit" value="登录">
 		<input type="button" value="注册" onclick="add()">
-	</form>	
+	</form>
 
 </body>
 </html>

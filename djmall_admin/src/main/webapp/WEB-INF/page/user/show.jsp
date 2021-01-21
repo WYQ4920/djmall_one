@@ -151,9 +151,10 @@
 		用户名：<input type="text" name="userName"><br>
 		性 别：<input type="radio" name="userSex"  value="1" >男
 		<input type="radio" name="userSex" value="2">女
-		<input type="button" value="查询" onclick="query()">
+		<shrio:hasPermission name="USER_MANAGER">
+			<input type="button" value="查询" onclick="query()">
+		</shrio:hasPermission>
 		<br>
-
 		<shrio:hasPermission name="USER_UPDATE_BTN">
 		<input type="button" value="修改" onclick="upd()">
 		</shrio:hasPermission>

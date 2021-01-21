@@ -9,6 +9,7 @@ import com.dj.mall.auth.vo.role.RoleVOResp;
 import com.dj.mall.auth.vo.role.TreeDataVOResp;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.util.DozerUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,6 +81,7 @@ public class RoleController {
      * 展示关联资源
      */
     @GetMapping("showResRel")
+    @RequiresPermissions("ROLE_RELEVANCE_RESOURCE_BTN")
     public ResultModel showResRel(RoleVOReq roleVOReq) throws Exception {
         List<TreeDataDTO> treeDataDTOS = roleApi.findAll(DozerUtil.map(roleVOReq, RoleDTO.class));
         return new ResultModel().success(DozerUtil.mapList(treeDataDTOS, TreeDataVOResp.class));
@@ -89,6 +91,7 @@ public class RoleController {
      * 保存角色资源
      */
     @PostMapping("saveRoleResource")
+    @RequiresPermissions("ROLE_SAVE_BTN")
     public ResultModel saveRoleResource(RoleVOReq roleVOReq) throws Exception {
         roleApi.saveRoleResource(DozerUtil.map(roleVOReq, RoleDTO.class));
         return new ResultModel().success();

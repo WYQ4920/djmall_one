@@ -16,14 +16,14 @@ public class ResourcePageController {
     @Reference(check = false)
     private ResourceApi resourceApi;
 
-    @RequiresPermissions("RESOURCE_MAMAGER")
     @RequestMapping("toShowResZtree")
+    @RequiresPermissions("RESOURCE_MANAGER")
     public String toShowResZtree() throws Exception {
         return "auth/resource/show";
     }
 
-    @RequiresPermissions("RESOURCE_ADD_BTN")
     @RequestMapping("/toAdd/{id}")
+    @RequiresPermissions("RESOURCE_ADD_BTN")
     public String toAdd(@PathVariable Integer id, Model model) throws Exception {
         if (id == 0) {
             model.addAttribute("resourceName", "顶级");

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +110,9 @@
     <input type="radio" name="userSex"  id="userSex" value="1" <c:if test="${user.userSex==1}">checked</c:if> >男
     <input type="radio" name="userSex"  id="userSex" value="2" <c:if test="${user.userSex==2}">checked</c:if> >女
     <br>
-    <input type="submit" value="提交修改">
+    <shrio:hasPermission name="USER_UPDATE_BTN">
+        <input type="submit" value="提交修改">
+    </shrio:hasPermission>
 </form>
 </body>
 </html>

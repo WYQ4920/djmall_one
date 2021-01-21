@@ -1,4 +1,4 @@
-package com.dj.mall.auth.web.role.page;
+package com.dj.mall.auth.web.role;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.role.RoleApi;
@@ -29,8 +29,8 @@ public class RolePageController {
     /**
      * 去展示
      */
-    @RequiresPermissions("ROLE_MANAGER")
     @GetMapping("toShow")
+    @RequiresPermissions("ROLE_MANAGER")
     public String toShow() {
         return "auth/role/role_show";
     }
@@ -38,8 +38,8 @@ public class RolePageController {
     /**
      * 去新增
      */
-    @RequiresPermissions("ROLE_ADD_BTN")
     @GetMapping("toAdd")
+    @RequiresPermissions("ROLE_ADD_BTN")
     public String toAdd() {
         return "auth/role/role_add";
     }
@@ -60,6 +60,7 @@ public class RolePageController {
      */
     
     @GetMapping("toResRelZtree")
+    @RequiresPermissions("ROLE_RELEVANCE_RESOURCE_BTN")
     public String toResRelZtree(Integer id, ModelMap map) {
         map.put("id", id);
         return "auth/role/role_resource";
