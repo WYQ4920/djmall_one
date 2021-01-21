@@ -46,11 +46,9 @@ public class UserController {
         userDTO.setResourceList(resList);
         session.setAttribute(UserConstant.USER_SESSION, userDTO);
         session.setAttribute("user", userDTO);
-        //shiro认证
-        //得到主体
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, userPwd);
-        //发起请求认证
+        // Shrio 认证
+        Subject subject= SecurityUtils.getSubject();
+        UsernamePasswordToken token= new UsernamePasswordToken(userName,userPwd);
         subject.login(token);
         return new ResultModel<>().success();
     }
