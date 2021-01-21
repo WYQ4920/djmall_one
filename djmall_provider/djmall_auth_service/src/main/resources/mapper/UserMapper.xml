@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.mall.auth.mapper.user.UserMapper">
 
-    <select id="getUserResourceByUserId" resultType="com.dj.mall.auth.entity.res.ResourceEntity">
+    <select id="getUserResourceByUserId" resultType="com.dj.mall.auth.bo.resource.ResourceBO">
         SELECT
             ar.id,
             ar.resource_name,
@@ -21,7 +21,15 @@
 
     <select id="findUserAll" resultType="com.dj.mall.auth.bo.user.UserBO">
         SELECT
-            au.*,ar.role_name as roleName
+            au.id,
+            au.user_name,
+            au.user_pwd,
+            au.nick_name,
+            au.salt,
+            au.user_phone,
+            au.user_email,
+            au.user_sex,
+            ar.role_name as roleName
         FROM
             djmall_auth_user au
         LEFT JOIN djmall_auth_user_role aur ON au.id = aur.user_id
