@@ -41,12 +41,11 @@ public class ResourceController {
      */
     @GetMapping("resourceShow")
     public ResultModel<Object> resourceShow(HttpSession session) throws Exception {
-        UserDTO user = (UserDTO) session.getAttribute("user");
+        UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
         List<ResourceDTO> resList = user.getResourceList();
         List<ResourceDTO> list = new ArrayList<>();
         for (ResourceDTO res:resList) {
-            if (UserConstant.RESOURCE_TYPE.equals(res.getResourceType())
-                    || UserConstant.RESOURCE_TYPE_BTN.equals(res.getResourceType())) {
+            if (UserConstant.RESOURCE_TYPE.equals(res.getResourceType())) {
                 list.add(res);
             }
         }

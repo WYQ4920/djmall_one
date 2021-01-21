@@ -2,6 +2,7 @@ package com.dj.mall.auth.config;
 
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.common.constant.UserConstant;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -28,7 +29,7 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        UserDTO user = (UserDTO) SecurityUtils.getSubject().getSession().getAttribute("user");
+        UserDTO user = (UserDTO) SecurityUtils.getSubject().getSession().getAttribute(UserConstant.USER_SESSION);
         List<ResourceDTO> userResList = user.getResourceList();
         //创建简单授权信息
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
