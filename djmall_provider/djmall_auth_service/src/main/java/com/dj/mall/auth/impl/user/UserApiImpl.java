@@ -78,8 +78,8 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void addUser(UserDTO userDTO) throws BusinessException {
-        if (userDTO.getUserName().equals(userDTO.getNickName())){
-           throw new BusinessException("用户名和昵称一致");
+        if (userDTO.getUserName().equals(userDTO.getNickName())) {
+            throw new BusinessException("用户名和昵称一致");
         }
         // 用户表新增
         UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
@@ -265,7 +265,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
     @Override
     public Integer findRoleByUserId(Integer userId) throws Exception {
         QueryWrapper<UserRoleEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id",userId);
+        queryWrapper.eq("user_id", userId);
         UserRoleEntity userRole = userRoleService.getOne(queryWrapper);
         return userRole.getRoleId();
     }
