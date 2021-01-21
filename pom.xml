@@ -12,6 +12,7 @@
         <module>djmall_common</module>
         <module>djmall_platform</module>
         <module>djmall_provider</module>
+
     </modules>
     <name>djmall</name>
     <description>大型商城平台</description>

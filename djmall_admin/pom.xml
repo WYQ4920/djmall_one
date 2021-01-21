@@ -78,6 +78,12 @@
 
         <dependency>
             <groupId>com.dj.djmall</groupId>
+            <artifactId>djmall_dict_api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dj.djmall</groupId>
             <artifactId>djmall_common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
