@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.auth.api.role.RoleApi;
 import com.dj.mall.auth.api.user.UserApi;
+import com.dj.mall.auth.bo.resource.ResourceBO;
 import com.dj.mall.auth.bo.user.UserBO;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
@@ -161,8 +162,8 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     public List<ResourceDTO> getUserResource(Integer userId) throws Exception {
-        List<ResourceEntity> resourceEntities = getBaseMapper().getUserResourceByUserId(userId);
-        return DozerUtil.mapList(resourceEntities, ResourceDTO.class);
+        List<ResourceBO> resourceBOS = getBaseMapper().getUserResourceByUserId(userId);
+        return DozerUtil.mapList(resourceBOS, ResourceDTO.class);
     }
 
     /**
@@ -220,7 +221,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
     /**
      * 删除用户
      *
-     * @param userDTO
+     * @param ids
      * @throws Exception
      */
     @Override
