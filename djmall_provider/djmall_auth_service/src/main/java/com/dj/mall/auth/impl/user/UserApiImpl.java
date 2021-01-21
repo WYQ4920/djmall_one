@@ -10,7 +10,6 @@ import com.dj.mall.auth.bo.user.UserBO;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
-import com.dj.mall.auth.entity.res.ResourceEntity;
 import com.dj.mall.auth.entity.user.UserEntity;
 import com.dj.mall.auth.entity.user.UserRoleEntity;
 import com.dj.mall.auth.mapper.user.UserMapper;

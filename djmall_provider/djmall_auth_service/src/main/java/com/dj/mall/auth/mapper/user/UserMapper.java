@@ -3,7 +3,6 @@ package com.dj.mall.auth.mapper.user;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dj.mall.auth.bo.resource.ResourceBO;
 import com.dj.mall.auth.bo.user.UserBO;
-import com.dj.mall.auth.entity.res.ResourceEntity;
 import com.dj.mall.auth.entity.user.UserEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;

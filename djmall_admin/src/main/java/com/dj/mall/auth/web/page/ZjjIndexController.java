@@ -1,4 +1,4 @@
-package com.dj.mall.auth.web;
+package com.dj.mall.auth.web.page;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

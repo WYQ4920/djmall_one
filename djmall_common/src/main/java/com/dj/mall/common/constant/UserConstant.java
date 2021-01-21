@@ -14,4 +14,6 @@ public interface UserConstant {
 
     String RESOURCE_TYPE = "1";
 
+    String RESOURCE_TYPE_BTN = "2";
+
 }

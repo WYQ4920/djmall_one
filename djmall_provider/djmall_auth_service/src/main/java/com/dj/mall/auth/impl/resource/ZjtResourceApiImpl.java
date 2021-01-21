@@ -1,11 +1,11 @@
-package com.dj.mall.auth.impl.res;
+package com.dj.mall.auth.impl.resource;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.auth.api.res.ZjtResourceApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
-import com.dj.mall.auth.entity.res.ResourceEntity;
-import com.dj.mall.auth.mapper.ResourcceMapper;
+import com.dj.mall.auth.entity.resource.ResourceEntity;
+import com.dj.mall.auth.mapper.resource.ResourcceMapper;
 import com.dj.mall.common.constant.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
 

@@ -1,4 +1,4 @@
-package com.dj.mall.auth.web.user;
+package com.dj.mall.auth.web.user.page;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.role.RoleApi;

@@ -1,4 +1,4 @@
-package com.dj.mall.auth.web.res.page;
+package com.dj.mall.auth.web.resource.page;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.WyqResourceApi;
@@ -25,7 +25,7 @@ public class WyqResourcePageController {
     /**
      * 页面前缀
      */
-    private static final String PAGE_PREFIX = "/auth/resource";
+    private static final String PAGE_PREFIX = "/auth/resource/wyq";
 
     /**
      * 去展示资源

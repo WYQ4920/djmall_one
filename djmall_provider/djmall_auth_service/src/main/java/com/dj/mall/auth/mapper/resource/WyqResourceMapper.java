@@ -1,7 +1,7 @@
 package com.dj.mall.auth.mapper.resource;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dj.mall.auth.entity.res.ResourceEntity;
+import com.dj.mall.auth.entity.resource.ResourceEntity;
 
 /**
  * @Author WYQ

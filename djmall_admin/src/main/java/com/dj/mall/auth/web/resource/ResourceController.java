@@ -1,4 +1,4 @@
-package com.dj.mall.auth.web.res;
+package com.dj.mall.auth.web.resource;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.ResourceApi;
@@ -46,7 +46,8 @@ public class ResourceController {
         List<ResourceDTO> resList = user.getResourceList();
         List<ResourceDTO> list = new ArrayList<>();
         for (ResourceDTO res:resList) {
-            if (UserConstant.RESOURCE_TYPE.equals(res.getResourceType())) {
+            if (UserConstant.RESOURCE_TYPE.equals(res.getResourceType())
+                    || UserConstant.RESOURCE_TYPE_BTN.equals(res.getResourceType())) {
                 list.add(res);
             }
         }

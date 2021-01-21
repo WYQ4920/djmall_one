@@ -1,4 +1,4 @@
-package com.dj.mall.auth.web.res.page;
+package com.dj.mall.auth.web.resource.page;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.res.ZjtResourceApi;
@@ -24,7 +24,7 @@ public class ZjtResourcePageController {
      */
     @GetMapping("toZtreeShow")
     public String toZtreeShow() {
-        return "auth/zresource/resource_show";
+        return "auth/resource/zjt/resource_show";
     }
 
     /**
@@ -45,6 +45,6 @@ public class ZjtResourcePageController {
             modelMap.put("parentId", "顶级");
         }
         modelMap.put("parentId", parentId);
-        return "auth/zresource/resource_add";
+        return "auth/resource/zjt/resource_add";
     }
 }
