@@ -39,11 +39,19 @@ public interface DictApi {
      * @param code
      * @return
      */
-    DictDTO findByUpdCode(String code)throws Exception;
+    DictDTO findByUpdCode(String code) throws Exception;
 
     /**
      *
      * @param dictDTO
      */
     void updateDict(DictDTO dictDTO) throws BusinessException;
+
+    /**
+     * 根据父级code获取字典信息
+     * @param dictCode
+     * @return
+     * @throws Exception
+     */
+    List<DictDTO> findDictByCode(String dictCode)throws Exception;
 }

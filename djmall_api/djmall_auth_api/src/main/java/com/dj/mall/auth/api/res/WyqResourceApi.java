@@ -18,7 +18,7 @@ public interface WyqResourceApi {
      * @return
      * @throws Exception
      */
-    List<ResourceDTO> findResourceAllByName() throws Exception;
+    List<ResourceDTO> findResourceAll() throws Exception;
 
     /**
      * 获取对应角色资源

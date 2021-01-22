@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,7 +50,9 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" onclick="add()" value="新增资源">
+                <shrio:hasPermission name="WYQ_RESOURCE_ADD_BTN">
+                    <input type="submit" onclick="add()" value="新增资源">
+                </shrio:hasPermission>
             </td>
         </tr>
     </table>

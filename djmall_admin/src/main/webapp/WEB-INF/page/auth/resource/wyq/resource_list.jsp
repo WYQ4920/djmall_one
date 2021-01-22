@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="shrio" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,18 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <button type="button" onclick="toAdd()" class="btn btn-primary">新增资源</button>&nbsp;
-    <button type="button" onclick="toUpdate()" class="btn btn-primary">修改资源</button>&nbsp;
-    <button type="button" onclick="del()" class="btn btn-primary">删除资源</button>&nbsp;
-<form id="fm">
+    <form id="fm">
+        <input type="hidden" name="isDel" value="0">
+        <shrio:hasPermission name="WYQ_RESOURCE_ADD_BTN">
+            <button type="button" onclick="toAdd()" class="btn btn-primary">新增资源</button>&nbsp;
+        </shrio:hasPermission>
+        <shrio:hasPermission name="WYQ_RESOURCE_UPDATE_BTN">
+            <button type="button" onclick="toUpdate()" class="btn btn-primary">修改资源</button>&nbsp;
+        </shrio:hasPermission>
+        <shrio:hasPermission name="WYQ_RESOURCE_DEL_BTN">
+            <button type="button" onclick="del()" class="btn btn-primary">删除资源</button>&nbsp;
+        </shrio:hasPermission>
+    </form>
     <div id="resourceList" class="ztree"></div><br>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -62,7 +71,6 @@
             </div>
         </div>
     </div>
-</form>
 </body>
 <script type="text/javascript">
 

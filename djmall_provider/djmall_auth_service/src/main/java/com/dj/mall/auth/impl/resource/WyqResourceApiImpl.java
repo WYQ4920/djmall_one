@@ -35,7 +35,7 @@ public class WyqResourceApiImpl extends ServiceImpl<ResourcceMapper, ResourceEnt
      * @throws Exception
      */
     @Override
-    public List<ResourceDTO> findResourceAllByName() throws Exception {
+    public List<ResourceDTO> findResourceAll() throws Exception {
         return DozerUtil.mapList(super.list(), ResourceDTO.class);
     }
 
