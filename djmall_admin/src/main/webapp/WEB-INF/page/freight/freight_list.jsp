@@ -38,6 +38,7 @@
         )
     }
 
+    /* 隐藏效果 */
     function display(value) {
         if (value == "▲") {
             $("#result").hide();
@@ -49,15 +50,14 @@
         }
     }
 
+    /* 新增 */
     function add(){
         $.post(
             "<%=request.getContextPath() %>/freight/add",
             $("#fm").serialize(),
             function(result){
                 if (200 == result.code){
-                    if (0 == $("#num").val()) {
-                        $("#pinkage").html("已包邮")
-                    }
+                    layer.msg(result.msg);
                     window.location.reload();
                     return;
                 }
@@ -67,6 +67,7 @@
         )
     }
 
+    /* 修改 */
     function toUpdate(id){
         layer.open({
             type: 2,
@@ -90,7 +91,6 @@
                 </select>
             运费:
                 <input name="freight" id="num">
-                <span style="font-size: 12px;color: red" id="pinkage"></span>
                 <button type="button" onclick="add()">新增</button>
         </form>
     </div>
