@@ -24,4 +24,5 @@ public class DictVOReq {
      */
     private String dictName;
 
+
 }

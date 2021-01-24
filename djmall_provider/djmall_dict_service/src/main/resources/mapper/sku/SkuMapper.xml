@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.mall.dict.mapper.sku.SkuMapper">
+
+
+    <select id="findByProductType" resultType="com.dj.mall.dict.bo.sku.SkuBO">
+        SELECT
+
+            dd.`code` as product_type,
+            dd.dict_name,
+            GROUP_CONCAT(psg.attr_id) as attr_ids,
+            GROUP_CONCAT(pa.attr_name) as attr_name
+        FROM
+            djmall_dict dd
+                LEFT JOIN djmall_dict_product_sku_gm psg ON dd. CODE = psg.product_type
+                LEFT JOIN djmall_dict_product_attr pa  on psg.attr_id = pa.id
+        WHERE
+            dd.parent_code = #{productType}
+        GROUP BY  dd.`code`;
+    </select>
+</mapper>
