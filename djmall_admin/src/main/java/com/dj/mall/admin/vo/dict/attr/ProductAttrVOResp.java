@@ -1,6 +1,9 @@
 package com.dj.mall.admin.vo.dict.attr;
 
+import com.dj.mall.admin.vo.dict.attr.value.ProductAttrValueVOReq;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Author WYQ
@@ -24,4 +27,5 @@ public class ProductAttrVOResp {
      * 商品属性值
      */
     private String attrValue;
+
 }

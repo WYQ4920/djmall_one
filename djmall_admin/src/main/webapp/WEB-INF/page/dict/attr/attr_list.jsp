@@ -25,7 +25,7 @@
                     html += "<tr>";
                     html += "<td>"+ data.id +"</td>";
                     html += "<td>"+ data.attrName +"</td>";
-                    html += "<td>"+ data.attrValueList.attrValue +"</td>";
+                    html += "<td>"+ data.attrValue +"</td>";
                     html += "<td>";
                     html += "<shrio:hasPermission name='PRODUCT_RELEVANCE_ATTRIBUTE_VALUE_BTN'>"
                     html += "<input type='button' value='关联属性值' onclick='toRelevance("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
@@ -70,7 +70,7 @@
 <shrio:hasPermission name="PRODUCT_ATTRIBUTE_ADD_BTN">
     <form id="fm">
         属性名:
-            <input name="attrName">
+            <input type="text" name="attrName">
         <button type="button" onclick="add()">新增商品属性</button>
     </form>
 </shrio:hasPermission>

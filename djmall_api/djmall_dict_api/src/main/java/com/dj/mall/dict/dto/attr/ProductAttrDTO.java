@@ -26,5 +26,6 @@ public class ProductAttrDTO implements Serializable {
     /**
      * 商品属性值
      */
-    private List<ProductAttrValueDTO> attrValueList;
+    private String attrValue;
+
 }

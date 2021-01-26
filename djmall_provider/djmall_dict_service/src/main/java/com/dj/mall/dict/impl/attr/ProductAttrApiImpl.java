@@ -8,9 +8,7 @@ import com.dj.mall.common.util.DozerUtil;
 import com.dj.mall.dict.api.attr.ProductAttrApi;
 import com.dj.mall.dict.bo.attr.ProductAttrBO;
 import com.dj.mall.dict.dto.attr.ProductAttrDTO;
-import com.dj.mall.dict.dto.attr.ProductAttrValueDTO;
 import com.dj.mall.dict.entity.attr.ProductAttrEntity;
-import com.dj.mall.dict.entity.attr.ProductAttrValueEntity;
 import com.dj.mall.dict.mapper.attr.ProductAttrMapper;
 
 import java.util.List;
@@ -51,15 +49,14 @@ public class ProductAttrApiImpl extends ServiceImpl<ProductAttrMapper, ProductAt
     }
 
     /**
-     * 展示商品属性值表
+     * 根据商品属性id查
+     * @param id
      * @return
      * @throws Exception
      */
     @Override
-    public ProductAttrDTO findProductAttrValueAll(Integer id) throws Exception {
-        ProductAttrDTO productAttrList = DozerUtil.map(super.getById(id), ProductAttrDTO.class);
-        productAttrList.setAttrValueList(getBaseMapper().findProductAttrValueAll(id));
-        return productAttrList;
+    public ProductAttrDTO findAttrById(Integer id) throws Exception {
+        return DozerUtil.map(super.getById(id), ProductAttrDTO.class);
     }
 
 }

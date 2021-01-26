@@ -1,18 +1,14 @@
-package com.dj.mall.admin.vo.dict.attr.value;
+package com.dj.mall.dict.bo.attr;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @Author WYQ
- * @Date 2021/1/24 12:13
+ * @Date 2021/1/25 0:11
  */
 
 @Data
-public class ProductAttrValueVOResp {
+public class ProductAttrValueBO {
 
     /**
      * 商品属性值id

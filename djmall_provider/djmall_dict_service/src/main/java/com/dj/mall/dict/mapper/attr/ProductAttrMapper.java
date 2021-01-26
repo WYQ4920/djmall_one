@@ -2,8 +2,11 @@ package com.dj.mall.dict.mapper.attr;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dj.mall.dict.bo.attr.ProductAttrBO;
+import com.dj.mall.dict.bo.attr.ProductAttrValueBO;
+import com.dj.mall.dict.dto.attr.ProductAttrDTO;
 import com.dj.mall.dict.dto.attr.ProductAttrValueDTO;
 import com.dj.mall.dict.entity.attr.ProductAttrEntity;
+import com.dj.mall.dict.entity.attr.ProductAttrValueEntity;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -21,5 +24,4 @@ public interface ProductAttrMapper extends BaseMapper<ProductAttrEntity> {
      */
     List<ProductAttrBO> findProductAttrAll() throws DataAccessException;
 
-    List<ProductAttrValueDTO> findProductAttrValueAll(Integer id);
 }
