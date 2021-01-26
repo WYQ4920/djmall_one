@@ -1,6 +1,7 @@
 package com.dj.mall.dict.entity.attr;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -30,5 +31,7 @@ public class ProductAttrEntity {
     /**
      * 商品属性值
      */
-    private List<ProductAttrValueEntity> attrValueList;
+    @TableField(exist = false)
+    private String attrValue;
+
 }

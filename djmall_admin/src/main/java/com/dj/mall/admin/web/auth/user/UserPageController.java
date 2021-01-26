@@ -48,7 +48,6 @@ public class UserPageController {
     }
 
     @RequestMapping("toAdd")
-    @RequiresPermissions("USER_REGISTER_BTN")
     public String toAdd(Model model) throws Exception {
         model.addAttribute("salt", PasswordSecurityUtil.generateSalt());
         List<RoleDTO> roleList = roleApi.getRoleList();

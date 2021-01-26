@@ -26,10 +26,11 @@ public interface ProductAttrApi {
     void addAttr(ProductAttrDTO productAttrDTO) throws BusinessException;
 
     /**
-     * 展示商品属性值表
+     * 根据商品属性id查
      * @param id
      * @return
      * @throws Exception
      */
-    ProductAttrDTO findProductAttrValueAll(Integer id) throws Exception;
+    ProductAttrDTO findAttrById(Integer id) throws Exception;
+
 }

@@ -26,5 +26,6 @@ public class ProductAttrBO {
     /**
      * 商品属性值
      */
-    private List<ProductAttrValueEntity> attrValueList;
+    private String attrValue;
+
 }

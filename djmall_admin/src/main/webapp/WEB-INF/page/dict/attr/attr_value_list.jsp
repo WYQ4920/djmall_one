@@ -15,19 +15,19 @@
     })
 
     function search(){
-        $.get(
-            "<%=request.getContextPath() %>/attr/listValue",
-            {"id":'${id}'},
+        $.post(
+            "<%=request.getContextPath() %>/product/attr/listValue",
+            {"attrId":'${list.id}'},
             function(result){
                 let html = "";
                 for (let i = 0; i < result.data.length; i++) {
                     let data = result.data[i];
                     html += "<tr>";
-                    html += "<td>"+ data.attrValueList.id +"</td>";
-                    html += "<td>"+ data.attrValueList.attrValue +"</td>";
+                    html += "<td>"+ data.id +"</td>";
+                    html += "<td>"+ data.attrValue +"</td>";
                     html += "<td>";
                     html += "<shrio:hasPermission name='RELEVANCE_ATTRIBUTE_VALUE_REMOVE_BTN'>"
-                    html += "<input type='button' value='移除' onclick='remove("+ data.attrValueList.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
+                    html += "<input type='button' value='移除' onclick='remove("+ data.id +")' style='color: cornflowerblue;border: white;background-color: white'>";
                     html +="</shrio:hasPermission>"
                     html += "</td>";
                     html += "</tr>";
@@ -40,15 +40,15 @@
     /* 新增 */
     function add(){
         $.post(
-            "<%=request.getContextPath() %>/attr/addValue",
+            "<%=request.getContextPath() %>/product/attr/addAttrValue",
             $("#fm").serialize(),
             function(result){
-                if (200 == result.code){
+                if (200 != result.code){
                     layer.msg(result.msg);
-                    window.location.reload();
                     return;
                 }
-                layer.msg(result.msg);
+                window.location.reload();
+                search();
                 return;
             }
         )
@@ -57,7 +57,7 @@
     /* 移除 */
     function remove(id){
         $.post(
-            "<%=request.getContextPath() %>/auth/removeValue",
+            "<%=request.getContextPath() %>/product/attr/removeAttrValue",
             {"id":id},
             function(result){
                 if (200 != result.code){
@@ -65,6 +65,7 @@
                     return;
                 }
                 search();
+                return;
             }
         )
     }
@@ -73,10 +74,12 @@
 <body>
 <shrio:hasPermission name="RELEVANCE_ATTRIBUTE_VALUE_ADD_BTN">
     <form id="fm">
+        <input name="attrId" value="${list.id}" type="hidden">
         属性名:
-            <input name="attrName" value="" disabled="disabled"><br>
-        已关联属性值  属性值:
-            <input name="attrValue">
+            <input type="text" name="attrName" value="${list.attrName}" disabled="disabled"><br>
+        已关联属性值:<br>
+            属性值:
+            <input type="text" name="attrValue">
         <button type="button" onclick="add()">新增</button>
     </form>
 </shrio:hasPermission>

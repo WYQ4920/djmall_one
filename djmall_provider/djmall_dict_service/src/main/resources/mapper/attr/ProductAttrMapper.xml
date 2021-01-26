@@ -12,14 +12,5 @@
         LEFT JOIN djmall_dict_product_attr_value pav ON dpa.id = pav.attr_id
         GROUP BY pav.attr_id
     </select>
-    <select id="findProductAttrValueAll" resultType="com.dj.mall.dict.dto.attr.ProductAttrValueDTO">
-        select
-            id,
-            attr_id,
-            attr_value
-        from
-            djmall_dict_product_attr_value
-        where
-            attr_id = ${id}
-    </select>
+
 </mapper>

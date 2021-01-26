@@ -27,5 +27,6 @@ public class ProductAttrVOReq {
     /**
      * 商品属性值
      */
-    private List<ProductAttrValueVOReq> attrValueList;
+    private String attrValue;
+
 }
