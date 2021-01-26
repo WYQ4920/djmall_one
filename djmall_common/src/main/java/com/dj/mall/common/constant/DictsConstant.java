@@ -8,4 +8,10 @@ public interface DictsConstant {
 
     //code
     String CODE = "SYSTEM";
+
+    // 字典编码
+    String DICT_CODE = "EXPRESS_COMPANY";
+
+    //包邮
+    String pinkage = "0";
 }
