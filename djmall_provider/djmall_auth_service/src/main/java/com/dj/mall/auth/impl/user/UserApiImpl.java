@@ -51,8 +51,16 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         if (!userDTO.getUserPwd().equals(userPwd)) {
             throw new BusinessException("密码不正确");
         }
-        List<ResourceDTO> userResource = this.getUserResource(userDTO.getId());
-        userDTO.setResourceList(userResource);
+        //  List<ResourceDTO> userResource = this.getUserResource(userDTO.getId());
+        //  userDTO.setResourceList(userResource);
+        // 获取登录用户的角色
+        QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("user_id", userDTO.getId());
+        UserRoleEntity userRoleEntity = userRoleService.getOne(queryWrapper1);
+        if (userRoleEntity == null) {
+            throw new BusinessException("用户无角色，请联系管理员！");
+        }
+        userDTO.setRoleId(userRoleEntity.getRoleId());
         return userDTO;
     }
 

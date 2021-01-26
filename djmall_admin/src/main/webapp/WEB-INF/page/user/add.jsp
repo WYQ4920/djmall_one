@@ -171,9 +171,9 @@ $(function(){
 			<input type="radio" name="userSex" id="userSex" value="1" checked>男
 			<input type="radio" name="userSex" id="userSex" value="2">女
 		<br>
-		<shrio:hasPermission name="USER_REGISTER_BTN">
+		<%--<shrio:hasPermission name="USER_REGISTER_BTN">--%>
 			<input type="submit" value="提交注册">
-		</shrio:hasPermission>
+		<%--</shrio:hasPermission>--%>
 	</form>
 
 </body>

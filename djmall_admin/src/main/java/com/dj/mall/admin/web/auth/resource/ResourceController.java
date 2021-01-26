@@ -8,9 +8,13 @@ import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.admin.vo.resource.ResourceVOReq;
 import com.dj.mall.admin.vo.resource.ResourceVOResp;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.constant.CacheKeyConstant;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +37,9 @@ public class ResourceController {
     @Reference(check = false)
     private UserApi userApi;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * left页面权限控制展示
      * @param session
@@ -42,7 +49,10 @@ public class ResourceController {
     @GetMapping("resourceShow")
     public ResultModel<Object> resourceShow(HttpSession session) throws Exception {
         UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
-        List<ResourceDTO> resList = user.getResourceList();
+        //List<ResourceDTO> resList = user.getResourceList();
+        // 从缓存中取
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        List<ResourceDTO> resList = (List<ResourceDTO>) hashOperations.get(CacheKeyConstant.ROLE_ALL,CacheKeyConstant.ROLE_ID_PRE+user.getRoleId());
         List<ResourceDTO> list = new ArrayList<>();
         for (ResourceDTO res:resList) {
             if (UserConstant.RESOURCE_TYPE.equals(res.getResourceType())) {

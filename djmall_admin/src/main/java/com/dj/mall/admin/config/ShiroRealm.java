@@ -2,6 +2,7 @@ package com.dj.mall.admin.config;
 
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.common.constant.CacheKeyConstant;
 import com.dj.mall.common.constant.UserConstant;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,6 +13,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,6 +26,9 @@ import java.util.List;
 @Component
 public class ShiroRealm extends AuthorizingRealm {
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * 授权
      * @param principalCollection
@@ -30,10 +37,12 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         UserDTO user = (UserDTO) SecurityUtils.getSubject().getSession().getAttribute(UserConstant.USER_SESSION);
-        List<ResourceDTO> userResList = user.getResourceList();
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        List<ResourceDTO> resList = (List<ResourceDTO>) hashOperations.get(CacheKeyConstant.ROLE_ALL,CacheKeyConstant.ROLE_ID_PRE+user.getRoleId());
+        //List<ResourceDTO> userResList = user.getResourceList();
         //创建简单授权信息
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
-        for (ResourceDTO list : userResList) {
+        for (ResourceDTO list : resList) {
             simpleAuthorInfo.addStringPermission(list.getResourceCode());
         }
         return  simpleAuthorInfo;

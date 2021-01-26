@@ -194,4 +194,16 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
         return DozerUtil.mapList(super.list(), RoleDTO.class);
     }
 
+    /**
+     * 通过角色id 获取对应的资源集合
+     *
+     * @param roleId 角色id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<ResourceDTO> getRoleResource(Integer roleId) throws Exception {
+        return DozerUtil.mapList(getBaseMapper().getRoleResourceByRoleId(roleId), ResourceDTO.class);
+    }
+
 }

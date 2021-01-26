@@ -1,5 +1,6 @@
 package com.dj.mall.auth.api.role;
 
+import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.role.TreeDataDTO;
 import com.dj.mall.common.base.ResultModel;
@@ -71,4 +72,12 @@ public interface RoleApi {
      * @throws Exception
      */
     List<RoleDTO> getRoleList() throws Exception;
+
+    /**
+     * 通过角色id 获取对应的资源集合
+     * @param roleId 角色id
+     * @return
+     * @throws Exception
+     */
+    List<ResourceDTO> getRoleResource(Integer roleId) throws Exception;
 }

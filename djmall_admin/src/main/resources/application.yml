@@ -15,6 +15,11 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  # redis 配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
 dubbo:
   application:
     name: admin # 应用名
