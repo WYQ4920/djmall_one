@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2021-01-21 10:13:52
+Date: 2021-01-27 21:33:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `djmall_dict`;
 CREATE TABLE `djmall_dict` (
   `code` varchar(255) DEFAULT NULL,
-  `p_code` varchar(255) DEFAULT NULL,
+  `parent_code` varchar(255) DEFAULT NULL,
   `dict_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -35,7 +35,7 @@ INSERT INTO `djmall_dict` VALUES ('ORDER_STAUS', 'SYSTEM', '订单状态');
 INSERT INTO `djmall_dict` VALUES ('PRODUCT_STATUS', 'SYSTEM', '商品状态');
 INSERT INTO `djmall_dict` VALUES ('PRODUCT_TYPE', 'SYSTEM', '商品类型');
 INSERT INTO `djmall_dict` VALUES ('EXPPESS_COMPANY', 'SYSTEM', '物流公司');
-INSERT INTO `djmall_dict` VALUES ('PAY_ON_DELIVERY', 'SYSYTEM', '货到付款');
+INSERT INTO `djmall_dict` VALUES ('PAY_ON_DELIVERY', 'PAY_TYPE', '货到付款');
 INSERT INTO `djmall_dict` VALUES ('SF', 'EXPPESS_COMPANY', '顺丰');
 INSERT INTO `djmall_dict` VALUES ('YD', 'EXPPESS_COMPANY', '韵达');
 INSERT INTO `djmall_dict` VALUES ('YT', 'EXPPESS_COMPANY', '圆通');
@@ -54,3 +54,7 @@ INSERT INTO `djmall_dict` VALUES ('PHONE', 'PRODUCT_TYPE', '手机');
 INSERT INTO `djmall_dict` VALUES ('SHOES', 'PRODUCT_TYPE', '鞋');
 INSERT INTO `djmall_dict` VALUES ('CLOSTHES', 'PRODUCT_TYPE', '衣服');
 INSERT INTO `djmall_dict` VALUES ('COMPUTER', 'PRODUCT_TYPE', '电脑');
+INSERT INTO `djmall_dict` VALUES ('MAN', 'USER_SEX', '男');
+INSERT INTO `djmall_dict` VALUES ('WOMAN', 'USER_SEX', '女');
+INSERT INTO `djmall_dict` VALUES ('NORMAL', 'USER_STATUS', '正常');
+INSERT INTO `djmall_dict` VALUES ('UNACTIVATED', 'USER_STATUS', '未激活');

@@ -104,7 +104,7 @@
 	<form id="fm">
 		<input type="hidden" name="salt" id="salt">
 		<label for="userName">用户名：</label>
-		<input type="text" name="userName" id="userName" onblur="getSalt(this.value)"/><br>
+		<input type="text" name="userName" id="userName" onblur="getSalt(this.value)" placeholder="请输入用户名"/><br>
 		<label for="userPwd">密 码：</label>
 		<input type="password" name="userPwd" id="userPwd"><br>
 		<input type="submit" value="登录">

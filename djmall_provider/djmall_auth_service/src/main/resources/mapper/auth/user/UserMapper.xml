@@ -21,25 +21,30 @@
 
     <select id="findUserAll" resultType="com.dj.mall.auth.bo.user.UserBO">
         SELECT
-            au.id,
-            au.user_name,
-            au.user_pwd,
-            au.nick_name,
-            au.salt,
-            au.user_phone,
-            au.user_email,
-            au.user_sex,
-            ar.role_name as roleName
+        au.id,
+        au.user_name,
+        au.user_pwd,
+        au.nick_name,
+        au.salt,
+        au.user_phone,
+        au.user_email,
+        au.user_sex,
+        ar.role_name AS roleName,
+        dt.dict_name AS sexShow
         FROM
-            djmall_auth_user au
+        djmall_auth_user au
         LEFT JOIN djmall_auth_user_role aur ON au.id = aur.user_id
         LEFT JOIN djmall_auth_role ar ON aur.role_id = ar.id
+        LEFT JOIN djmall_dict dt ON au.user_sex = dt.`code`
         <where>
-        <if test="userEntity.userName != null and userEntity.userName!= ''">
-            au.user_name like "%"#{userEntity.userName}"%"
+        <if test="userBO.userName != null and userBO.userName!= ''">
+            au.user_name like "%"#{userBO.userName}"%"
         </if>
-        <if test="userEntity.userSex != null ">
-            AND au.user_sex = #{userEntity.userSex}
+        <if test="userBO.userSex != null and userBO.userSex != '' ">
+            AND au.user_sex = #{userBO.userSex}
+        </if>
+        <if test="userBO.roleId != null ">
+            AND ar.id = #{userBO.roleId}
         </if>
         </where>
         order by au.id desc

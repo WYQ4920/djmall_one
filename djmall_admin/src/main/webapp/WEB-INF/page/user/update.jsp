@@ -30,14 +30,14 @@
                 userSex: {
                     required: true,
                 },
-				userPhone:{
-					required:true,
-					isphoneNum:true,
-				},
-				userEmail:{
-					required:true,
-					email:true,
-				},
+                userPhone: {
+                    required: true,
+                    isphoneNum: true,
+                },
+                userEmail: {
+                    required: true,
+                    email: true,
+                },
             },
             messages: {
                 userName: {
@@ -49,15 +49,15 @@
                     rangelength: "密码长度应在3~9",
                 },
                 userSex: {
-                 required: "性别不能为空",
+                    required: "性别不能为空",
                 },
-				userPhone:{
-					required:"不能为空",
-				},
-				userEmail: {
-					required: "不能为空",
-					email: "请输入正确的邮箱规则",
-				}
+                userPhone: {
+                    required: "不能为空",
+                },
+                userEmail: {
+                    required: "不能为空",
+                    email: "请输入正确的邮箱规则",
+                }
 
 
             },
@@ -82,12 +82,12 @@
                     });
             }
         });
-		//自定义手机号验证
-		jQuery.validator.addMethod("isphoneNum", function(value, element) {
-			var length = value.length;
-			var mobile = /^1[3|5|7|8]{1}[0-9]{9}$/;
-			return this.optional(element) || (length == 11 && mobile.test(value));
-		}, "请正确填写您的手机号码");
+        //自定义手机号验证
+        jQuery.validator.addMethod("isphoneNum", function (value, element) {
+            var length = value.length;
+            var mobile = /^1[3|5|7|8]{1}[0-9]{9}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
 
     })
 </script>
@@ -106,9 +106,11 @@
     <input type="text" name="userPhone" id="userPhone" value="${user.userPhone}"><br>
     <label for="userEmail">邮箱：</label>
     <input type="email" name="userEmail" id="userEmail" value="${user.userEmail}"><br>
-   <label for="userSex">性 别：</label>
-    <input type="radio" name="userSex"  id="userSex" value="1" <c:if test="${user.userSex==1}">checked</c:if> >男
-    <input type="radio" name="userSex"  id="userSex" value="2" <c:if test="${user.userSex==2}">checked</c:if> >女
+    <label for="userSex">性 别：</label>
+    <c:forEach items="${userSexMap}" var="s">
+        <input type="radio" name="userSex" id="userSex" value="${s.key}"
+               <c:if test="${user.userSex==s.key}">checked</c:if>>${s.value}
+    </c:forEach>
     <br>
     <shrio:hasPermission name="USER_UPDATE_BTN">
         <input type="submit" value="提交修改">

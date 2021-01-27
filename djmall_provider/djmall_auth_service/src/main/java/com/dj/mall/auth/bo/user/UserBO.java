@@ -41,9 +41,9 @@ public class UserBO {
     private String userEmail;
 
     /**
-     *  用户性别 ：1为男，2为女
+     *  用户性别 ：MAN为男，WOMAN为女
      */
-    private Integer userSex;
+    private String userSex;
 
     /**
      * 用户昵称
@@ -60,14 +60,8 @@ public class UserBO {
      */
     private String sexShow;
 
-
-    public String getSexShow() {
-        if (userSex == UserConstant.SEX_NAM){
-            return "男";
-        }
-        if (userSex == UserConstant.SEX_WONAM){
-            return "女";
-        }
-        return "";
-    }
+    /**
+     * 用户角色ID
+     */
+    private Integer roleId;
 }

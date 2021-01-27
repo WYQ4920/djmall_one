@@ -72,7 +72,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     public List<UserDTO> findUserAll(UserDTO userDTO) {
-        List<UserBO> list = getBaseMapper().findUserAll(DozerUtil.map(userDTO, UserEntity.class));
+        List<UserBO> list = getBaseMapper().findUserAll(DozerUtil.map(userDTO, UserBO.class));
         return DozerUtil.mapList(list, UserDTO.class);
     }
 

@@ -143,7 +143,6 @@
         location.href = "<%=request.getContextPath() %>/user/toGiveRole?userId=" + chk_value[0];
     }
 
-
 </script>
 <style>
 
@@ -154,8 +153,16 @@
     用户名：<input type="text" name="userName" autocomplete="off" placeholder="请输入用户名">
     <br>
     <%--<i class="layui-icon layui-icon-search" style="font-size: 20px; color: #1E9FFF;"></i>--%>
-    性 别：<input type="radio" name="userSex" value="1">男
-    <input type="radio" name="userSex" value="2">女
+    性 别：
+    <c:forEach items="${userSexMap}" var="s">
+        <input type="radio" name="userSex" value="${s.key}">${s.value}
+    </c:forEach><br>
+
+    级别：
+    <c:forEach items="${roleList}" var="role">
+        <input type="radio" name="roleId" id="roleId" value="${role.id}">${role.roleName}
+    </c:forEach>
+
     <shrio:hasPermission name="USER_MANAGER">
         <input type="button" value="查询" onclick="query()" class="layui-btn layui-btn-normal layui-btn-xs">
     </shrio:hasPermission>

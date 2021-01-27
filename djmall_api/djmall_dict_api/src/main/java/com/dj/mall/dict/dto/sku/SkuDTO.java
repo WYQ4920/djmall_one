@@ -2,12 +2,14 @@ package com.dj.mall.dict.dto.sku;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Author zhengyk
  * @Date 2021/1/24 21:10
  */
 @Data
-public class SkuDTO {
+public class SkuDTO implements Serializable {
 
     /**
      * 商品类型

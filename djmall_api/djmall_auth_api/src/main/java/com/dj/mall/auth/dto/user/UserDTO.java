@@ -40,9 +40,9 @@ public class UserDTO implements Serializable {
     private String userEmail;
 
     /**
-     * 用户性别 ：1为男，2为女
+     *  用户性别 ：MAN为男，WOMAN为女
      */
-    private Integer userSex;
+    private String userSex;
 
     /**
      * 角色ID
