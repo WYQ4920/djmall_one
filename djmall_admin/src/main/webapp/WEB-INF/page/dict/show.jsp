@@ -19,7 +19,7 @@
 <body>
     <form id="fm">
         分类上级：
-        <select name="parentCode" id="parentCode" onchange="change1()">
+        <select name="parentCode" id="parentCode" >
             <option value="SYSTEM">SYSTEM</option>
             <c:forEach items="${dictList}" var="l" >
                 <option value='${l.code}'>${l.dictName}</option>
@@ -54,9 +54,6 @@
         show()
     });
 
-    function change1(){
-        show()
-    };
 
     function show(){
         $.post(
