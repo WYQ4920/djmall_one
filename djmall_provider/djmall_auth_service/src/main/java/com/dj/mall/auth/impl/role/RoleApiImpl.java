@@ -15,9 +15,12 @@ import com.dj.mall.auth.dto.role.TreeDataDTO;
 import com.dj.mall.auth.entity.role.RoleEntity;
 import com.dj.mall.auth.mapper.role.RoleMapper;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.constant.CacheKeyConstant;
 import com.dj.mall.common.constant.SystemConstant;
 import com.dj.mall.common.util.DozerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -40,6 +43,10 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
 
     @Autowired
     private UserRoleService userRoleService;
+
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 角色展示
@@ -181,6 +188,10 @@ public class RoleApiImpl extends ServiceImpl<RoleMapper, RoleEntity> implements 
                     .build());
         }
         roleResourceService.saveBatch(resourceEntities);
+        //更新redis缓存覆盖
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        hashOperations.put(CacheKeyConstant.ROLE_ALL,CacheKeyConstant.ROLE_ID_PRE+roleDTO.getId(),this.getRoleResource(roleDTO.getId()));
+
     }
 
     /**
