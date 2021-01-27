@@ -18,21 +18,6 @@
 </head>
 <body>
     <form id="fm">
-       <%-- 分类上级：
-        <select name="parentCode" id="parentCode" onchange="change1()">
-            <option value="SYSTEM">SYSTEM</option>
-            <c:forEach items="${dictList}" var="l" >
-                <option value='${l.code}'>${l.dictName}</option>
-            </c:forEach>
-        </select><br>
-
-        <label for="dictName"> 分类名称:</label>
-        <input type="text" name="dictName" id="dictName"><br>
-
-        <label for="code">分类code:</label>
-        <input type="text" name="code" id="code">
-
-        <input type="submit" value="新增">--%>
 
         <table width="500" hight="300" cellspacing="0" cellpadding="10" border="1px">
             <tr  align="center">
@@ -68,8 +53,8 @@
                 for (var i = 0; i < result.data.length; i++) {
                     html+="<tr align='center'>";
                     html+="<td>"+i+++"</td>";
-                    html+="<td>"+result.data[i].DictName+"</td>";
-                    html+="<td>"+result.data[i].AttrName+"</td>";
+                    html+="<td>"+result.data[i].dictName+"</td>";
+                    html+="<td>"+result.data[i].attrName+"</td>";
                     html+="<td>";
                     html+="<input type='button' value='关联属性' name='checkedCode' onclick='upd1(\""+result.data[i].code+"\")'>";
                     html+="</td>";
@@ -84,69 +69,6 @@
 
     }
 
-    /* 新增 */
-   /* $(function(){
-        $("#fm").validate({
-            rules:{
-                dictName:{
-                    required:true,
-                    remote: {
-                        type: "post",
-                        url: "<%=request.getContextPath()%>/dict/checkDictName",
-                        data:{
-                            dictName: f unction() {
-                                return $("#dictName").val();
-                            }
-                        }
-                    }
-                },
-                code:{
-                    required:true,
-                    remote: {
-                        type: "post",
-                        url: "<%=request.getContextPath()%>/dict/checkCode",
-                        data:{
-                            code: function() {
-                                return $("#code").val();
-                            }
-                        }
-                    }
-                },
-            },
-            messages:{
-                dictName:{
-                    required:"字典名必填",
-                    remote:"字典名重复"
-
-                },
-                code: {
-                    required: "请输入编码",
-                    remote:"字典code重复"
-                }
-            },
-            submitHandler:function(fm){
-                var index = layer.load(4, {shade:0.2});
-                $.post(
-                    "<%=request.getContextPath()%>/dict/add",
-                    $("#fm").serialize(),
-                    function(result){
-                        layer.msg(result.msg, {
-                            /!* icon: 1, *!/
-                            time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
-                        }, function(){
-                            if(result.code == 200){
-                                layer.close(index);
-                                show();
-                                return;
-                            }
-                            layer.close(index);
-                            layer.msg(result.msg);
-                            return;
-                        });
-                    });
-            }
-        });
-    })*/
 
     /*
     修改
@@ -161,8 +83,6 @@
         });
 
     }
-
-
 
 
 </script>
