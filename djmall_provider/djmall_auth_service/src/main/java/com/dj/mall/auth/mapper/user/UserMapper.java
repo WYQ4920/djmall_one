@@ -21,11 +21,10 @@ public interface UserMapper extends BaseMapper<UserEntity> {
 
 
     /**
-     *  用户展示
-     * @param userEntity
-     * @param userId
+     * 用户展示
+     * @param userBO user的bo实体类
      * @return
      * @throws DataAccessException
      */
-    List<UserBO> findUserAll(@Param("userEntity") UserEntity userEntity) throws DataAccessException;
+    List<UserBO> findUserAll(@Param("userBO") UserBO userBO) throws DataAccessException;
 }
