@@ -32,10 +32,9 @@ public class DictController {
      * @throws Exception
      */
     @PostMapping("show")
-    public ResultModel<Object> show(String parentCode) throws Exception {
-        List<DictDTO> list = dictApi.findByCode(parentCode);
-        List<DictVOResp> list1 = DozerUtil.mapList(list, DictVOResp.class);
-        return new ResultModel<>().success(list1);
+    public ResultModel<Object> show() throws Exception {
+        List<DictDTO> dictList = dictApi.findAllDict();
+        return new ResultModel<>().success(DozerUtil.mapList(dictList,DictVOResp.class));
     }
 
     /**
@@ -59,10 +58,7 @@ public class DictController {
     @PostMapping("checkCode")
     public Boolean checkCode(String code) throws Exception{
         List<DictDTO> list = dictApi.findByCode(code);
-        if(list.isEmpty()){
-            return true;
-        }
-        return false;
+        return list.isEmpty();
     }
 
     /**

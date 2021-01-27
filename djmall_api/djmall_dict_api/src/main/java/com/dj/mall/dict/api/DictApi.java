@@ -12,7 +12,7 @@ import java.util.List;
 public interface DictApi {
 
     /**
-     * 展示dict 通过code查
+     * 通过code查
      * @param code
      * @return
      * @throws Exception
@@ -54,4 +54,11 @@ public interface DictApi {
      * @throws Exception
      */
     List<DictDTO> findDictByCode(String dictCode)throws Exception;
+
+    /**
+     * 展示全部字典数据
+     * @return
+     * @throws Exception
+     */
+    List<DictDTO> findAllDict() throws Exception;
 }

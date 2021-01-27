@@ -9,6 +9,10 @@ import com.dj.mall.dict.api.DictApi;
 import com.dj.mall.dict.dto.DictDTO;
 import com.dj.mall.dict.entity.DictEntity;
 import com.dj.mall.dict.mapper.dict.DictMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,9 +23,11 @@ import java.util.List;
 @Service
 public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements DictApi {
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
-     * 展示dict 通过code查
+     * 通过code查
      *
      * @param code
      * @return
@@ -51,17 +57,21 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
     }
 
     /**
-     * add dict
+     * add dict 新增字典
      *
      * @param dictDTO
      * @throws Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void addDict(DictDTO dictDTO) throws Exception {
         DictEntity dictEntity = DozerUtil.map(dictDTO, DictEntity.class);
         Boolean aBoolean = this.findBydictName(dictEntity.getDictName());
         if (aBoolean) {
             super.save(dictEntity);
+            // 新增数据存入缓存
+            HashOperations hashOperations = redisTemplate.opsForHash();
+            hashOperations.put(dictDTO.getParentCode(),dictDTO.getCode(),dictDTO.getDictName());
             return;
         }
         throw new BusinessException("重名");
@@ -82,9 +92,12 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
     }
 
     /**
+     * 修改字典
      * @param dictDTO
+     * @throws BusinessException
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateDict(DictDTO dictDTO) throws BusinessException {
         DictEntity dictEntity = DozerUtil.map(dictDTO, DictEntity.class);
         QueryWrapper queryWrapper = new QueryWrapper();
@@ -98,6 +111,9 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
         dictEntity2.setDictName(dictEntity.getDictName());
         queryWrapper1.eq("code", dictEntity.getCode());
         super.update(dictEntity2, queryWrapper1);
+        // 修改数据存入缓存
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        hashOperations.put(dictDTO.getParentCode(),dictDTO.getCode(),dictDTO.getDictName());
     }
 
     /**
@@ -111,6 +127,18 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
         QueryWrapper<DictEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_code", dictCode);
         return DozerUtil.mapList(super.list(queryWrapper), DictDTO.class);
+    }
+
+    /**
+     * 展示全部字典数据
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<DictDTO> findAllDict() throws Exception {
+
+        return DozerUtil.mapList(super.list(),DictDTO.class);
     }
 
 }
