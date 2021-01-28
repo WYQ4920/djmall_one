@@ -2,6 +2,7 @@ package com.dj.mall.dict.api;
 
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.dict.dto.DictDTO;
+import com.dj.mall.dict.dto.attr.ProductAttrDTO;
 
 import java.util.List;
 
@@ -61,4 +62,11 @@ public interface DictApi {
      * @throws Exception
      */
     List<DictDTO> findAllDict() throws Exception;
+
+    /**
+     * 根据sku商品类型查询商品属性
+     * @param productType 商品类型
+     * @return
+     */
+    List<ProductAttrDTO> findAttrAndSku(String productType) throws Exception;
 }

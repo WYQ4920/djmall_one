@@ -172,9 +172,7 @@
 			<input type="radio" name="userSex" id="userSex" value="${s.key}">${s.value}
 		</c:forEach>
 		<br>
-		<%--<shrio:hasPermission name="USER_REGISTER_BTN">--%>
 		<input type="submit" value="提交注册">
-		<%--</shrio:hasPermission>--%>
 	</form>
 
 </body>

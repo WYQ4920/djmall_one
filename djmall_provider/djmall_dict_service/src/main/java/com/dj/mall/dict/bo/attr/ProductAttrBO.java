@@ -28,4 +28,8 @@ public class ProductAttrBO {
      */
     private String attrValue;
 
+    /**
+     * 商品属性值集合
+     */
+    private List<ProductAttrValueBO> attrValueList;
 }

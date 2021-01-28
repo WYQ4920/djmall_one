@@ -32,4 +32,5 @@ public interface ProductAttrValueApi {
      * @throws BusinessException
      */
     void removeAttrValue(Integer id) throws BusinessException;
-}
+
+  }

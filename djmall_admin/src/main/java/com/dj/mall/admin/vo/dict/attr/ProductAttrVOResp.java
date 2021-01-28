@@ -1,6 +1,6 @@
 package com.dj.mall.admin.vo.dict.attr;
 
-import com.dj.mall.admin.vo.dict.attr.value.ProductAttrValueVOReq;
+import com.dj.mall.dict.dto.attr.ProductAttrValueDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -28,4 +28,8 @@ public class ProductAttrVOResp {
      */
     private String attrValue;
 
+    /**
+     * 商品属性值集合
+     */
+    private List<ProductAttrValueDTO> attrValueList;
 }

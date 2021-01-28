@@ -2,5 +2,17 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.mall.dict.mapper.dict.DictMapper">
 
-
+    <select id="findAttrByProductType" resultType="com.dj.mall.dict.bo.attr.ProductAttrBO">
+        SELECT
+            pa.id,
+            pa.attr_name,
+            GROUP_CONCAT(pav.id) AS attrValueId,
+            GROUP_CONCAT(pav.attr_value) AS attrValue
+        FROM
+            djmall_dict_product_attr pa
+        LEFT JOIN djmall_dict_product_attr_value pav ON pa.id= pav.attr_id
+        LEFT JOIN djmall_dict_product_sku_gm psg ON psg.attr_id = pa.id
+        WHERE psg.product_type = #{productType}
+        GROUP BY pav.attr_id
+    </select>
 </mapper>
