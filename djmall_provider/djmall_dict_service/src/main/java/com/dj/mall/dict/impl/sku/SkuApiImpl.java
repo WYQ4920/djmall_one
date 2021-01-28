@@ -51,7 +51,8 @@ public class SkuApiImpl extends ServiceImpl<SkuMapper, SkuEntity> implements Sku
     public List<SkuDTO> findByCode(String code) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("product_type", code);
-        return super.list(queryWrapper);
+        List<SkuBO> list = super.list(queryWrapper);
+        return  DozerUtil.mapList(list, SkuDTO.class);
     }
 
     /**
@@ -67,11 +68,13 @@ public class SkuApiImpl extends ServiceImpl<SkuMapper, SkuEntity> implements Sku
         Integer[] attrIdArr = (Integer[]) ConvertUtils.convert(skuBO.getAttrIds().split(","),Integer.class);
 
         //创建新增的实体类集合 放入 attrId productType
-        SkuEntity skuEntity  = new SkuEntity();
+
         List<SkuEntity> addList = new ArrayList<>();
         for (Integer i : attrIdArr) {
+            SkuEntity skuEntity  = new SkuEntity();
             skuEntity.setAttrId(i);
             skuEntity.setProductType(skuBO.getProductType());
+            addList.add(skuEntity);
         }
 
         //删除old

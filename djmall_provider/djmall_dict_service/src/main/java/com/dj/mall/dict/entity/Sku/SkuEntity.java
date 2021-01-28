@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Author zhengyk
  * @Date 2021/1/24 21:11
  */
 @Data
 @TableName("djmall_dict_product_sku_gm")
-public class SkuEntity {
+public class SkuEntity  {
 
     /**
      * skuId

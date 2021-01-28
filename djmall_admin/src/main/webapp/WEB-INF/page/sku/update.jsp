@@ -15,7 +15,7 @@
 </head>
 <body>
 <form id="fm">
-    <input type="hidden" name="productType" value="${voResp.productType}">
+    <input type="type" name="productType" value="${voResp.productType}">
     <table>
         <tr>
             <td>编号</td>
@@ -25,11 +25,10 @@
 
         <c:forEach items="${list}" var="l" >
             <tr>
-
                 <td>
-                    <c:forEach items="${list1}" var="l1">
-                    <input type="checkbox" value="${l.id}"  name="attrIds" <c:if test="${l1.atrId == this.value}">checked</c:if>> ${list.size}
-                    </c:forEach>
+
+                    <input type="checkbox" value="${l.id}"    name="attrIds">
+
                 </td>
 
                 <td>

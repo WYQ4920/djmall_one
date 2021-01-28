@@ -1,8 +1,10 @@
 package com.dj.mall.dict.dto.sku;
 
+import com.dj.mall.dict.dto.attr.ProductAttrDTO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author zhengyk
@@ -31,4 +33,6 @@ public class SkuDTO implements Serializable {
      * 属性 ids(String)
      */
     private String attrIds;
+
+
 }

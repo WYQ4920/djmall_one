@@ -1,5 +1,6 @@
 package com.dj.mall.dict.dto.attr;
 
+import com.dj.mall.dict.dto.sku.SkuDTO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -37,6 +38,11 @@ public class ProductAttrDTO implements Serializable {
      * 商品属性值
      */
     private String attrValue;
+
+    /**
+     *
+     */
+    private List<SkuDTO> attrList;
 
     /**
      * 商品属性值集合

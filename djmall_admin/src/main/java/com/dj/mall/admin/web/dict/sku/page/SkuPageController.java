@@ -46,8 +46,10 @@ public class SkuPageController {
         model.addAttribute("voResp", voResp);
 
         List<ProductAttrDTO> list = productAttrApi.findProductAttrAll();
+
         model.addAttribute("list", list);
-        return "dict/update";
+
+        return "sku/update";
     }
 
 }

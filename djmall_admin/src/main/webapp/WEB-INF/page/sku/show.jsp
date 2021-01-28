@@ -52,11 +52,11 @@
                 var pageHtml = "";
                 for (var i = 0; i < result.data.length; i++) {
                     html+="<tr align='center'>";
-                    html+="<td>"+i+++"</td>";
+                    html+="<td>"+i+"</td>";
                     html+="<td>"+result.data[i].dictName+"</td>";
                     html+="<td>"+result.data[i].attrName+"</td>";
                     html+="<td>";
-                    html+="<input type='button' value='关联属性' name='checkedCode' onclick='upd1(\""+result.data[i].code+"\")'>";
+                    html+="<input type='button' value='关联属性' name='checkedCode' onclick='upd1(\""+result.data[i].productType+"\")'>";
                     html+="</td>";
                     html+="</tr>";
                 }
@@ -87,9 +87,5 @@
 
 </script>
 <style>
-    .error{
-        color:red;
-        font-size:10px;
-    }
 </style>
 </html>
