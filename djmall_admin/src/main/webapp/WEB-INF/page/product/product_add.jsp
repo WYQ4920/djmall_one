@@ -26,7 +26,7 @@
                     html += "<td>";
                     for (var a = 0; a < result.data[i].attrValueList.length; a++) {
                         var dta = result.data[i].attrValueList[a];
-                        html += "<input type='checkbox' value='+ dta.attrId +'>"+ dta.attrValue;
+                        html += "<input type='checkbox' value='+ dta.id +'>"+ dta.attrValue;
                     }
                     html += "</td>";
                     html += "</tr>";

@@ -61,4 +61,15 @@ public class ProductAttrValueApiImpl extends ServiceImpl<ProductAttrValueMapper,
         queryWrapper.eq("id", id);
         super.remove(queryWrapper);
     }
+
+    /**
+     * 根据属性值查询
+     * @param
+     * @return
+     * @throws BusinessException
+     */
+    @Override
+    public List<ProductAttrValueDTO> findProductAttrValue() throws BusinessException {
+        return DozerUtil.mapList(super.list(), ProductAttrValueDTO.class);
+    }
 }

@@ -33,4 +33,11 @@ public interface ProductAttrValueApi {
      */
     void removeAttrValue(Integer id) throws BusinessException;
 
-  }
+    /**
+     * 根据属性值查询
+     * @param
+     * @return
+     * @throws BusinessException
+     */
+    List<ProductAttrValueDTO> findProductAttrValue() throws BusinessException;
+}

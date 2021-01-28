@@ -9,15 +9,10 @@ import com.dj.mall.dict.api.DictApi;
 import com.dj.mall.dict.api.attr.ProductAttrApi;
 import com.dj.mall.dict.api.attr.ProductAttrValueApi;
 import com.dj.mall.dict.api.sku.SkuApi;
-import com.dj.mall.dict.bo.attr.ProductAttrBO;
-import com.dj.mall.dict.bo.attr.ProductAttrValueBO;
-import com.dj.mall.dict.bo.sku.SkuBO;
 import com.dj.mall.dict.dto.DictDTO;
 import com.dj.mall.dict.dto.attr.ProductAttrDTO;
 import com.dj.mall.dict.dto.attr.ProductAttrValueDTO;
-import com.dj.mall.dict.dto.sku.SkuDTO;
 import com.dj.mall.dict.entity.DictEntity;
-import com.dj.mall.dict.entity.Sku.SkuEntity;
 import com.dj.mall.dict.mapper.dict.DictMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
@@ -36,12 +31,6 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
 
     @Autowired
     private RedisTemplate redisTemplate;
-
-    @Autowired
-    private SkuApi skuApi;
-
-    @Autowired
-    private ProductAttrApi productAttrApi;
 
     @Autowired
     private ProductAttrValueApi productAttrValueApi;
@@ -170,10 +159,10 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
     public List<ProductAttrDTO> findAttrAndSku(String productType) throws Exception{
         // 根据商品类型获得商品属性名
         List<ProductAttrDTO> attrList = DozerUtil.mapList(getBaseMapper().findAttrByProductType(productType), ProductAttrDTO.class);
+        // 查询商品属性值全部
+        List<ProductAttrValueDTO> productAttrValue = productAttrValueApi.findProductAttrValue();
         // 根据商品名id获得商品属性值
         for (ProductAttrDTO attr : attrList) {
-            // 商品属性名
-            ProductAttrDTO productAttrDTO = new ProductAttrDTO();
             // 把属性值以逗号拆分
             String[] attrValues = attr.getAttrValue().split(",");
             // 商品属性值集合
@@ -181,7 +170,12 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
             for (String value : attrValues) {
                 // 商品属性值实体类
                 ProductAttrValueDTO attrValue = new ProductAttrValueDTO();
-                attrValue.setAttrValue(value);
+                for (ProductAttrValueDTO i : productAttrValue) {
+                    if (value.equals(i.getAttrValue())) {
+                        attrValue.setId(i.getId());
+                        attrValue.setAttrValue(value);
+                    }
+                }
                 attrValueList.add(attrValue);
             }
             attr.setAttrValueList(attrValueList);
