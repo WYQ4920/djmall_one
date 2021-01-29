@@ -223,7 +223,7 @@
 
         <shrio:hasPermission name="USER_RESET_PWD_BTN">
         <input type="button" value="重置密码" class="layui-btn layui-btn-normal layui-btn-sm" onclick="resetPwd()">
-        <shrio:hasPermission name="USER_RESET_PWD_BTN">
+        </shrio:hasPermission>
     </div>
     <table class="layui-table" style="margin: 20px;width: auto;child-align: auto" cellspacing="0" cellpadding="10">
         <tr align="center">
