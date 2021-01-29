@@ -36,12 +36,12 @@ public class UserBO {
     private String userPhone;
 
     /**
-     *  用户邮箱
+     * 用户邮箱
      */
     private String userEmail;
 
     /**
-     *  用户性别 ：MAN为男，WOMAN为女
+     * 用户性别 ：MAN为男，WOMAN为女
      */
     private String userSex;
 
@@ -51,7 +51,7 @@ public class UserBO {
     private String nickName;
 
     /**
-     *  角色名称
+     * 角色名称
      */
     private String roleName;
 
@@ -64,4 +64,14 @@ public class UserBO {
      * 用户角色ID
      */
     private Integer roleId;
+
+    /**
+     * 用户状态：NORMAL为正常，UNACTIVATED为未激活
+     */
+    private String userStatus;
+
+    /**
+     * 用户状态展示
+     */
+    private String statusShow;
 }

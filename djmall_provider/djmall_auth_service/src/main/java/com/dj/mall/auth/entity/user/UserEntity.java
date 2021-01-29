@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 用户实体类
@@ -12,6 +13,7 @@ import lombok.Data;
  */
 @Data
 @TableName("djmall_auth_user")
+@Accessors(chain = true)
 public class UserEntity {
 
     /**
@@ -54,5 +56,10 @@ public class UserEntity {
      * 用户昵称
      */
     private String nickName;
+
+    /**
+     * 用户状态：NORMAL为正常，UNACTIVATED为未激活
+     */
+    private String userStatus;
 
 }

@@ -56,6 +56,15 @@ public class UserVOReq {
      * 用户ID数组
      */
     private Integer[] ids;
-    //private List<Integer> ids;
+
+    /**
+     * 用户状态：NORMAL为正常，UNACTIVATED为未激活
+     */
+    private String userStatus;
+
+    /**
+     * 用户状态展示
+     */
+    private String statusShow;
 
 }
