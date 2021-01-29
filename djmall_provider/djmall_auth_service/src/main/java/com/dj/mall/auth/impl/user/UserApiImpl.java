@@ -1,5 +1,6 @@
 package com.dj.mall.auth.impl.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,11 +15,17 @@ import com.dj.mall.auth.entity.user.UserEntity;
 import com.dj.mall.auth.entity.user.UserRoleEntity;
 import com.dj.mall.auth.mapper.user.UserMapper;
 import com.dj.mall.auth.service.user.UserRoleService;
+import com.dj.mall.cmpt.EMailApi;
 import com.dj.mall.common.base.BusinessException;
+import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
+import com.dj.mall.common.util.PasswordSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +37,12 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
 
     @Autowired
     private RoleApi roleApi;
+
+    @Reference
+    private EMailApi eMailApi;
+
+    @Value("${system.email.restPwd}")
+    private String resetPwdText;
 
     /**
      * 用户登录
@@ -50,6 +63,9 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         }
         if (!userDTO.getUserPwd().equals(userPwd)) {
             throw new BusinessException("密码不正确");
+        }
+        if (userDTO.getUserStatus().equals(UserConstant.USER_STATUS_NOT_ACTIVE)){
+            throw new BusinessException("还未激活，请去邮箱激活！");
         }
         //  List<ResourceDTO> userResource = this.getUserResource(userDTO.getId());
         //  userDTO.setResourceList(userResource);
@@ -85,16 +101,32 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addUser(UserDTO userDTO) throws BusinessException {
+    public void addUser(UserDTO userDTO) throws BusinessException,Exception {
         if (userDTO.getUserName().equals(userDTO.getNickName())) {
             throw new BusinessException("用户名和昵称一致");
         }
         // 用户表新增
         UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
+        // 默认为激活状态
+        userEntity.setUserStatus(UserConstant.USER_STATUS_ACTIVE);
+        // 商户为未激活状态
+        if (userDTO.getRoleId().equals(UserConstant.MERCHANT_ROLE_ID)){
+            userEntity.setUserStatus(UserConstant.USER_STATUS_NOT_ACTIVE);
+        }
         super.save(userEntity);
+        // 用户角色关联
         UserRoleEntity userRoleEntity = new UserRoleEntity()
                 .setUserId(userEntity.getId()).setRoleId(userDTO.getRoleId());
         userRoleService.save(userRoleEntity);
+        // 注册的用户是商户--发邮件
+        if (userDTO.getRoleId().equals(UserConstant.MERCHANT_ROLE_ID)){
+
+            String emailText="<h2>恭喜注册成功，<a href='http://localhost:8081/admin/user/active?id="
+                    +userEntity.getId()+"'>点我激活</a></h2>";
+            // 发激活邮件
+            //eMailApi.sendMailHTML(userDTO.getUserEmail(),"激活邮件",emailText);
+            System.out.println(emailText);
+        }
     }
 
     /**
@@ -290,5 +322,35 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         return roleList;
     }
 
+    /**
+     * 重置密码
+     *
+     * @param admin 登录的管理员
+     * @param id    重置密码的用户id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean resetPwd(UserDTO admin, Integer id) throws Exception {
+        // 随机6位数密码
+        String random = PasswordSecurityUtil.generateRandom(6);
+        String salt = PasswordSecurityUtil.generateSalt();
+        // 生成新的密码
+        String newPwd = PasswordSecurityUtil.generatePassword(PasswordSecurityUtil.enCode32(random), salt);
+        // 修改密码
+        UserEntity userEntity = new UserEntity().setId(id).setUserPwd(newPwd).setSalt(salt);
+        super.updateById(userEntity);
+        // 通过id查要修改的用户
+        UserEntity userEntity1 = super.getById(id);
+
+        LocalDateTime now = LocalDateTime.now();
+        // 日期转换
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String emailText = String.format(resetPwdText, userEntity1.getNickName(),admin.getNickName(), dateTimeFormatter.format(now),random);
+        // 发送邮件
+        //eMailApi.sendMailHTML(userEntity1.getUserEmail(),"重置密码邮件",emailText);
+        System.out.println(emailText);
+        return true;
+    }
 
 }

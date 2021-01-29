@@ -119,7 +119,7 @@
                     function (result) {
                         layer.msg(result.msg, {
                             /* icon: 1, */
-                            time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+                            time: 1000 //1.0秒关闭（如果不配置，默认是3秒）
                         }, function () {
                             //do something
                             if (result.code == "200") {

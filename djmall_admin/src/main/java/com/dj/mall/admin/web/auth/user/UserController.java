@@ -17,6 +17,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class UserController {
      * @return
      */
     @PostMapping("login")
-    public ResultModel<Object> login(String userName, String userPwd, HttpSession session) throws Exception,BusinessException {
+    public ResultModel<Object> login(String userName, String userPwd, HttpSession session) throws Exception, BusinessException {
         Assert.hasText(userName, "用户名不能为空");
         Assert.hasText(userPwd, "密码不能为空");
         UserDTO userDTO = userApi.findUserByNameAndPwd(userName, userPwd);
@@ -75,7 +76,7 @@ public class UserController {
      * @throws Exception
      */
     @PostMapping("add")
-    public ResultModel<Object> add(UserVOReq userVOReq) throws BusinessException {
+    public ResultModel<Object> add(UserVOReq userVOReq) throws BusinessException, Exception {
         Assert.hasText(userVOReq.getUserName(), "用户名不能为空");
         Assert.hasText(userVOReq.getUserPwd(), "用户密码不能为空");
         Assert.hasText(userVOReq.getUserPhone(), "用户手机号不能为空");
@@ -149,6 +150,7 @@ public class UserController {
 
     /**
      * 删除用户
+     *
      * @param ids
      * @return
      * @throws Exception
@@ -162,6 +164,7 @@ public class UserController {
 
     /**
      * 用户授予角色
+     *
      * @param userId
      * @param roleId
      * @return
@@ -169,8 +172,22 @@ public class UserController {
      */
     @PostMapping("giveRole")
     @RequiresPermissions("USER_ADD_ROLE_BTN")
-    public ResultModel giveRole(Integer userId,Integer roleId) throws Exception{
-        userApi.giveRole(userId,roleId);
+    public ResultModel giveRole(Integer userId, Integer roleId) throws Exception {
+        userApi.giveRole(userId, roleId);
+        return new ResultModel().success();
+    }
+
+    /**
+     * 重置密码
+     * @param admin 登录的管理员
+     * @param id 重置密码的用户id
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("resetPwd")
+    @RequiresPermissions("USER_RESET_PWD_BTN")
+    public ResultModel resetPwd(@SessionAttribute(UserConstant.USER_SESSION) UserDTO admin, Integer id) throws Exception {
+        userApi.resetPwd(admin, id);
         return new ResultModel().success();
     }
 }

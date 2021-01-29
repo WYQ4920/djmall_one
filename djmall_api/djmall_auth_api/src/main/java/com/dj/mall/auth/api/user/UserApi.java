@@ -34,7 +34,7 @@ public interface UserApi {
      * @return
      * @throws Exception
      */
-    void addUser(UserDTO userDTO) throws BusinessException;
+    void addUser(UserDTO userDTO) throws BusinessException, Exception;
 
     /**
      * 通过Id 查用户
@@ -131,4 +131,13 @@ public interface UserApi {
      * @throws Exception
      */
     List<RoleDTO> findAllRole() throws Exception;
+
+    /**
+     * 重置密码
+     * @param admin 登录的管理员
+     * @param id 重置密码的用户id
+     * @return
+     * @throws Exception
+     */
+    boolean resetPwd(UserDTO admin, Integer id) throws Exception;
 }

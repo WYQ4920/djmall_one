@@ -64,6 +64,7 @@ public class ShiroConfiguration {
         filters.put("/user/checkUserEmail", "anon");
         filters.put("/user/checkUserPhone", "anon");
         filters.put("/user/getSalt", "anon");
+        filters.put("/user/active", "anon");
         filters.put("/static/**", "anon");
         // authc 表示必须认证才可访问
         filters.put("/**", "authc");

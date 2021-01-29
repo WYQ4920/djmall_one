@@ -35,3 +35,7 @@ logging:
   level:
     com.dj.mall.auth.mapper:
       debug
+
+system:
+  email:
+    restPwd: 尊敬的%s，您的密码已被管理员%s，于%s重置为%s。为了您的账户安全，请及时修改。

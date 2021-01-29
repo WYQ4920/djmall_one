@@ -7,6 +7,7 @@ import com.dj.mall.auth.api.role.RoleApi;
 import com.dj.mall.auth.api.user.UserApi;
 import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import com.dj.mall.common.util.PasswordSecurityUtil;
@@ -16,7 +17,6 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -95,5 +95,17 @@ public class UserPageController {
         return "user/login";
     }
 
+    /**
+     * 商户激活
+     * @param id 用户id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("active")
+    public String active(Integer id) throws Exception {
+        UserDTO userDTO = UserDTO.builder().id(id).userStatus(UserConstant.USER_STATUS_ACTIVE).build();
+        userApi.updateUser(userDTO);
+        return "user/active";
+    }
 
 }

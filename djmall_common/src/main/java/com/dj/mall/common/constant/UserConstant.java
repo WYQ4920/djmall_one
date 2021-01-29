@@ -16,4 +16,19 @@ public interface UserConstant {
 
     String RESOURCE_TYPE_BTN = "2";
 
+    /**
+     * 商户的角色id
+     */
+    Integer MERCHANT_ROLE_ID = 3;
+
+    /**
+     * 用户正常状态
+     */
+    String USER_STATUS_ACTIVE = "NORMAL";
+
+    /**
+     * 用户未激活状态
+     */
+    String USER_STATUS_NOT_ACTIVE = "UNACTIVATED";
+
 }

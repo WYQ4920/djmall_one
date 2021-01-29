@@ -20,6 +20,7 @@
         show();
     })
 
+    /*用户展示*/
     function show() {
         $.post(
             "<%=request.getContextPath() %>/user/list",
@@ -49,6 +50,7 @@
                     html+="<input type='button' value='删除' onclick='del("+result.data[i].id+")'/>";
                     html+="</td>";*/
                     html += "<td>" + result.data[i].roleName + "</td>";
+                    html += "<td>" + result.data[i].statusShow + "</td>";
                     html += "</td>";
                     html += "</tr>";
                 }
@@ -78,6 +80,7 @@
         show(pageNum);
     }*/
 
+    /*用户修改*/
     function upd() {
         var chk_value = [];
         $('input:checkbox[name="ids"]:checked').each(function () { //遍历，将所有选中的值放到数组中
@@ -101,6 +104,7 @@
 
     }
 
+    /*用户删除*/
     function del() {
         var chk_value = [];
         $('input:checkbox[name="ids"]:checked').each(function () { //遍历，将所有选中的值放到数组中
@@ -122,11 +126,13 @@
             })
     }
 
+    /*查询*/
     function query() {
         /*show(pageNum);*/
         show();
     }
 
+    /*授予角色*/
     function giveRole() {
         var chk_value = [];
         $('input:checkbox[name="ids"]:checked').each(function () { //遍历，将所有选中的值放到数组中
@@ -141,6 +147,32 @@
             return;
         }
         location.href = "<%=request.getContextPath() %>/user/toGiveRole?userId=" + chk_value[0];
+    }
+
+    /*重置密码*/
+    function resetPwd() {
+        var chk_value = [];
+        $('input:checkbox[name="ids"]:checked').each(function () { //遍历，将所有选中的值放到数组中
+            chk_value.push($(this).val());
+        });
+        if (chk_value.length < 1) {
+            layer.msg("至少勾选一项");
+            return;
+        }
+        if (chk_value.length > 1) {
+            layer.msg("只能勾选一项");
+            return;
+        }
+        $.post(
+            "<%=request.getContextPath() %>/user/resetPwd",
+            {"id": chk_value[0]},
+            function (result) {
+                if (result.code != 200) {
+                    layer.msg(result.msg);
+                    return;
+                }
+                show();
+            })
     }
 
 </script>
@@ -163,6 +195,15 @@
         <input type="radio" name="roleId" id="roleId" value="${role.id}">${role.roleName}
     </c:forEach>
 
+    <br>
+    用户状态：
+    <select name="userStatus">
+        <option value="">--请选择--</option>
+        <c:forEach items="${userStatusMap}" var="st">
+            <option value="${st.key}">${st.value}</option>
+        </c:forEach>
+    </select>
+
     <shrio:hasPermission name="USER_MANAGER">
         <input type="button" value="查询" onclick="query()" class="layui-btn layui-btn-normal layui-btn-xs">
     </shrio:hasPermission>
@@ -179,6 +220,10 @@
         <shrio:hasPermission name="USER_ADD_ROLE_BTN">
             <input type="button" value="授权" class="layui-btn layui-btn-normal layui-btn-sm" onclick="giveRole()">
         </shrio:hasPermission>
+
+        <shrio:hasPermission name="USER_RESET_PWD_BTN">
+        <input type="button" value="重置密码" class="layui-btn layui-btn-normal layui-btn-sm" onclick="resetPwd()">
+        <shrio:hasPermission name="USER_RESET_PWD_BTN">
     </div>
     <table class="layui-table" style="margin: 20px;width: auto;child-align: auto" cellspacing="0" cellpadding="10">
         <tr align="center">
@@ -190,6 +235,7 @@
             <td>手机号</td>
             <td>邮箱</td>
             <td>角色名</td>
+            <td>用户状态</td>
         </tr>
         <tbody id="tb"></tbody>
     </table>

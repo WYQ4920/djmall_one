@@ -30,12 +30,14 @@
         au.user_email,
         au.user_sex,
         ar.role_name AS roleName,
-        dt.dict_name AS sexShow
+        dt.dict_name AS sexShow,
+        ddt.dict_name AS statusShow
         FROM
         djmall_auth_user au
         LEFT JOIN djmall_auth_user_role aur ON au.id = aur.user_id
         LEFT JOIN djmall_auth_role ar ON aur.role_id = ar.id
         LEFT JOIN djmall_dict dt ON au.user_sex = dt.`code`
+        LEFT JOIN djmall_dict ddt ON au.user_status = ddt.`code`
         <where>
         <if test="userBO.userName != null and userBO.userName!= ''">
             au.user_name like "%"#{userBO.userName}"%"
@@ -45,6 +47,9 @@
         </if>
         <if test="userBO.roleId != null ">
             AND ar.id = #{userBO.roleId}
+        </if>
+        <if test="userBO.userStatus != null and userBO.userStatus != '' ">
+            AND au.user_status = #{userBO.userStatus}
         </if>
         </where>
         order by au.id desc
