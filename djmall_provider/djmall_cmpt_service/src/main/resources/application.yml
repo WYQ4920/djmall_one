@@ -1,0 +1,28 @@
+spring:
+  mail:
+    host: smtp.163.com #SMTP服务器地址 smtp.qq.com
+    username: zjj961021@163.com #登陆账号
+    password: KOWMCIKNBYOJELT #登陆密码（或授权码）改成自己的
+    properties:
+      from: zjj96021@163.com #邮件发信人（即真实邮箱）改成自己的
+
+# 数据源
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/djmall?characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&useSSL=false
+system:
+  email:
+    restpwd: 尊敬的%s，您的密码已被管理员%s，于%s重置为%s。为了您的账户安全，请及时修改。
+
+# Dubbo
+dubbo:
+  application:
+    name: email-cmpt-service # 应用名
+    qos-enable: false # 关闭在线调试
+  registry:
+    address: zookeeper://localhost:2181 # 注册中心地址
+  protocol:
+    name: dubbo # 协议名
+    port: 20882 # 服务端口

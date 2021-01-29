@@ -28,6 +28,12 @@
             <artifactId>djmall_auth_api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.dj.djmall</groupId>
+            <artifactId>djmall_cmpt_api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

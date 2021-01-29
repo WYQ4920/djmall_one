@@ -15,6 +15,7 @@
         <module>djmall_auth_service</module>
         <module>djmall_dict_service</module>
         <module>djmall_product_service</module>
+        <module>djmall_cmpt_service</module>
     </modules>
 
     <properties>
