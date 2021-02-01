@@ -1,4 +1,4 @@
-package com.dj.mall.admin.web.dict.sku.page;
+package com.dj.mall.admin.web.dict.sku;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.admin.vo.dict.sku.SkuVOResp;
 import com.dj.mall.dict.api.attr.ProductAttrApi;
