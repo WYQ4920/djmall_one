@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author WYQ
@@ -63,4 +64,8 @@ public class ProductSkuDTO implements Serializable {
      */
     private Date updateTime;
 
+    /**
+     * sku集合
+     */
+    private List<ProductSkuDTO> skuList;
 }

@@ -30,7 +30,7 @@
                     // }
                     for (var a = 0; a < result.data[i].attrValueList.length; a++) {
                         var dta = result.data[i].attrValueList[a];
-                        html += "<input type='checkbox' value='+ dta.id +'>"+ dta.attrValue;
+                        html += "<input type='checkbox' value='"+ dta.attrValue +"'>"+ dta.attrValue;
                     }
                     html += "</td>";
                     html += "</tr>";
@@ -40,10 +40,10 @@
         )
     }
 
-    //新增自定义SKU属性
+    //新增  +自定义SKU属性
     function addCustomAttr(){
-        var content = "属性名:<input type='text' id='cAttrName'/><br>";
-        content += "属性值<input type='text' id='cAttrValue'/>";
+        var content = "属性名:<input type='text' id='AttrName'/><br>";
+        content += "属性值<input type='text' id='AttrValue'/>";
         content += "(多个值之间,分割)";
         layer.open({
             type: 1,
@@ -55,11 +55,11 @@
             btn: ['确认', '取消'],
             yes: function(index, layero){
                 var html = "<tr>";
-                html += "<td>" + $("#cAttrName").val();
-                html += "<input type='hidden' value='" + $("#cAttrName").val() + "'/>";
+                html += "<td>" + $("#AttrName").val();
+                html += "<input type='hidden' value='" + $("#AttrName").val() + "'/>";
                 html += "</td>";
                 html += "<td>";
-                var values = $("#cAttrValue").val().split(",");
+                var values = $("#AttrValue").val().split(",");
                 for(var i = 0; i< values.length; i++) {
                     html += "<input type='checkbox' value='" + values[i] + "'/>" + values[i];
                 }
@@ -73,26 +73,25 @@
 
     //生成SKU
     function createSKU(){
-        var tbody = $("#skuAttr");
         //获取所有属性
         var trs = $("#skuAttr tr");
-        //声明新数组 attrValue
+        //声明新数组
         var attrValue = new Array;
         for (var i = 0; i < trs.length; i++){
             //js对象
             var tr = trs[i];
-            //js对象转jquery对象      查找被选中的属性值
+            //js对象转jquery对象
             var checkboxs = $(tr).find(":checked");
             if(checkboxs.length == 0){
                 continue;
             }
             var attrValues = new Array();
-            for(var j = 0; j <checkboxs.length; j++){
+            for(var j = 0; j < checkboxs.length; j++){
                 attrValues.push(checkboxs[j].value);
             }
             attrValue.push(attrValues);
         }
-        //笛卡尔积组合SKU集合
+        //笛卡尔积组合Sku集合
         var skuList = dkej(attrValue);
         var html = " ";
         for(var i = 0; i < skuList.length; i++){
@@ -165,19 +164,19 @@
 <body>
     <form id="fm">
         名称
-            <input type="text" name=""><br>
+            <input type="text" name="productName"><br>
         邮费
-            <select name="postage">
+            <select name="productPostage">
 <%--                <option>顺丰-包邮</option>--%>
 <%--                <option>韵达-15</option>--%>
                 <c:forEach items="${freightList}" var="f">
-                    <option>${f.dictCode}-${f.freight}</option>
+                    <option value="${f.dictCode}">${f.dictCode}-${f.freight}</option>
                 </c:forEach>
             </select><br>
         描述
-            <textarea></textarea><br>
+            <textarea name="productDes"></textarea><br>
         图片
-            <input type="file" name="file"><br>
+<%--            <input type="file" name="productImg"><br>--%>
         分类
             <select name="productType" onchange="search()">
                 <option value="">请选择</option>
@@ -187,7 +186,7 @@
             </select><br>
         SKU
             <input type="button" value="+" onclick="addCustomAttr()">
-            <input type="button" value="生成SKU" onclick="creatSKU()"><br>
+            <input type="button" value="生成SKU" onclick="createSKU()"><br>
         <%-- 分类联动展示 --%>
         <table cellspacing="0" cellpadding="10" border="1px solid">
             <tr align="center">
@@ -206,7 +205,7 @@
                 <td>折扣(%)</td>
                 <td>操作</td>
             </tr>
-            <tbody id="skuList"></tbody>
+            <tbody id="skuList" align="center"></tbody>
         </table>
         <button type="button" onclick="addProduct()">新增</button>
     </form>

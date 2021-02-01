@@ -1,11 +1,16 @@
 package com.dj.mall.admin.vo.product;
 
+import lombok.Data;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author WYQ
  * @Date 2021/2/1 11:00
  */
+
+@Data
 public class ProductSkuVOReq {
 
     /**
@@ -57,5 +62,10 @@ public class ProductSkuVOReq {
      * 更新时间
      */
     private Date updateTime;
+
+    /**
+     * sku集合
+     */
+    private List<ProductSkuVOReq> skuList;
 
 }

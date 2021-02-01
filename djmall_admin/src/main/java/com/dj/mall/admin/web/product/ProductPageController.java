@@ -6,6 +6,8 @@ import com.dj.mall.dict.api.DictApi;
 import com.dj.mall.dict.api.freight.FreightApi;
 import com.dj.mall.dict.dto.DictDTO;
 import com.dj.mall.dict.dto.freight.FreightDTO;
+import com.dj.mall.product.api.ProductApi;
+import com.dj.mall.product.dto.ProductDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ import java.util.List;
 public class ProductPageController {
 
     @Reference
+    private ProductApi productApi;
+
+    @Reference
     private DictApi dictApi;
 
     @Reference
@@ -32,7 +37,9 @@ public class ProductPageController {
      * @return
      */
     @RequestMapping("toList")
-    public String toList() {
+    public String toList(ModelMap map) throws Exception {
+        List<ProductDTO> productList = productApi.findProductAndDict();
+        map.put("productList", productList);
         return "/product/product_list";
     }
 
@@ -46,6 +53,15 @@ public class ProductPageController {
         map.put("freightList", freightList);
         map.put("productList", productList);
         return "/product/product_add";
+    }
+
+    /**
+     * 去修改
+     */
+    @RequestMapping("toUpdate")
+    public String toUpdate(Integer id, ModelMap map) {
+        map.put("id", id);
+        return "/product/product_update";
     }
 
 }
