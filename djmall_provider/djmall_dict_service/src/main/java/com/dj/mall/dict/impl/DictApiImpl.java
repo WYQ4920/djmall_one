@@ -157,30 +157,49 @@ public class DictApiImpl extends ServiceImpl<DictMapper, DictEntity> implements 
      */
     @Override
     public List<ProductAttrDTO> findAttrAndSku(String productType) throws Exception{
-        // 根据商品类型获得商品属性名
+        // 根据商品类型获得商品属性名属性值
         List<ProductAttrDTO> attrList = DozerUtil.mapList(getBaseMapper().findAttrByProductType(productType), ProductAttrDTO.class);
         // 查询商品属性值全部
         List<ProductAttrValueDTO> productAttrValue = productAttrValueApi.findProductAttrValue();
-        // 根据商品名id获得商品属性值
+        // 遍历商品属性集合
         for (ProductAttrDTO attr : attrList) {
             // 把属性值以逗号拆分
             String[] attrValues = attr.getAttrValue().split(",");
             // 商品属性值集合
             List<ProductAttrValueDTO> attrValueList = new ArrayList<>();
+            // 遍历商品属性值数组
             for (String value : attrValues) {
                 // 商品属性值实体类
                 ProductAttrValueDTO attrValue = new ProductAttrValueDTO();
+                // 遍历商品属性值集合
                 for (ProductAttrValueDTO i : productAttrValue) {
+                    // 属性值是否相等
                     if (value.equals(i.getAttrValue())) {
+                        // 放入商品属性值及id
                         attrValue.setId(i.getId());
                         attrValue.setAttrValue(value);
                     }
                 }
+                // 将值放入商品属性值集合中
                 attrValueList.add(attrValue);
             }
+            // 将商品属性值集合放入要返回的前台的商品属性集合中
             attr.setAttrValueList(attrValueList);
         }
         return attrList;
+    }
+
+    /**
+     * 根据父级code查询
+     * @param parentCode
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<DictDTO> findByParentCode(String parentCode) throws Exception {
+        QueryWrapper<DictEntity> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("parent_code", parentCode);
+        return DozerUtil.mapList(super.list(queryWrapper), DictDTO.class);
     }
 
 }

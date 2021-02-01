@@ -69,4 +69,12 @@ public interface DictApi {
      * @return
      */
     List<ProductAttrDTO> findAttrAndSku(String productType) throws Exception;
+
+    /**
+     * 根据父级code查询
+     * @param parentCode
+     * @return
+     * @throws Exception
+     */
+    List<DictDTO> findByParentCode(String parentCode) throws Exception;
 }
