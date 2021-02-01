@@ -25,11 +25,11 @@ public class ProductController {
     private DictApi dictApi;
 
     /**
-     * 展示商品属性
+     * 展示商品属性及属性值
      * @param productType
      * @return
      */
-    @GetMapping("list")
+    @GetMapping("listClassify")
     public ResultModel list(String productType) throws Exception {
         List<ProductAttrDTO> productAttrList = dictApi.findAttrAndSku(productType);
         return new ResultModel().success(DozerUtil.mapList(productAttrList, ProductAttrVOResp.class));
