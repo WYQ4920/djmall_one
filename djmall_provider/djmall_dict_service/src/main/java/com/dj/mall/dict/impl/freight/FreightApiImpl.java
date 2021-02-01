@@ -83,4 +83,15 @@ public class FreightApiImpl extends ServiceImpl<FreightMapper, FreightEntity> im
         super.updateById(DozerUtil.map(freightDTO, FreightEntity.class));
     }
 
+    /**
+     * 查询邮费
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<FreightDTO> findFreightAndDict() throws Exception {
+        List<FreightBO>  freightList = getBaseMapper().findFreightAndDict();
+        return DozerUtil.mapList(freightList, FreightDTO.class);
+    }
+
 }

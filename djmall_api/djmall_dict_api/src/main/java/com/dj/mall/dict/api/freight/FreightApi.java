@@ -39,4 +39,11 @@ public interface FreightApi {
      * @throws Exception
      */
     void updateFreight(FreightDTO freightDTO) throws BusinessException;
+
+    /**
+     * 查询邮费
+     * @return
+     * @throws Exception
+     */
+    List<FreightDTO> findFreightAndDict() throws Exception;
 }
