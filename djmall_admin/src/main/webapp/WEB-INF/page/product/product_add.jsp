@@ -163,14 +163,14 @@
 </script>
 <body>
     <form id="fm">
+        <input type="hidden" name="productGiveLike" value="0">
+        <input type="hidden" name="productOrderCount" value="0">
         名称
             <input type="text" name="productName"><br>
         邮费
             <select name="productPostage">
-<%--                <option>顺丰-包邮</option>--%>
-<%--                <option>韵达-15</option>--%>
                 <c:forEach items="${freightList}" var="f">
-                    <option value="${f.dictCode}">${f.dictCode}-${f.freight}</option>
+                    <option>${f.dictCode}-${f.freight}</option>
                 </c:forEach>
             </select><br>
         描述
