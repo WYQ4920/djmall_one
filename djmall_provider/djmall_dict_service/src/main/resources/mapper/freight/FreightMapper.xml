@@ -2,16 +2,19 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.mall.dict.mapper.freight.FreightMapper">
 
-    <sql id="FREIGHT_COLUMN">
-        id,
-        dict_code,
-        freight
-    </sql>
-
     <select id="findFreightAll" resultType="com.dj.mall.dict.bo.freight.FreightBO">
         SELECT
             df.id,
             dd.dict_name AS dict_code,
+            df.freight
+        FROM
+            djmall_freight df
+        LEFT JOIN djmall_dict dd ON df.dict_code = dd.`code`
+    </select>
+
+    <select id="findFreightAndDict" resultType="com.dj.mall.dict.bo.freight.FreightBO">
+        SELECT
+            dd.dict_name AS dictCode,
             df.freight
         FROM
             djmall_freight df

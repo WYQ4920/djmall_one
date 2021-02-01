@@ -19,4 +19,11 @@ public interface FreightMapper extends BaseMapper<FreightEntity> {
      * @throws DataAccessException
      */
     List<FreightBO> findFreightAll() throws DataAccessException;
+
+    /**
+     * 查询邮费
+     * @return
+     * @throws DataAccessException
+     */
+    List<FreightBO> findFreightAndDict() throws DataAccessException;
 }
