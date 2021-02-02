@@ -109,6 +109,7 @@
 		<input type="password" name="userPwd" id="userPwd"><br>
 		<input type="submit" value="登录">
 		<input type="button" value="注册" onclick="add()">
+		<a href="<%=request.getContextPath() %>/user/toForgetPwd">忘记密码？点我找回</a>
 	</form>
 
 </body>

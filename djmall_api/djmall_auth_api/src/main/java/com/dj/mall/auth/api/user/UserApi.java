@@ -140,4 +140,10 @@ public interface UserApi {
      * @throws Exception
      */
     boolean resetPwd(UserDTO admin, Integer id) throws Exception;
+
+    /**
+     * 忘记密码修改
+     * @param userDTO
+     */
+    void updatePwd(UserDTO userDTO);
 }

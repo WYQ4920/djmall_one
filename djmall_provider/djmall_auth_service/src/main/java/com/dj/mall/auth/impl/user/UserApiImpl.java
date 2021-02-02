@@ -354,4 +354,21 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         return true;
     }
 
+    /**
+     * 忘记密码修改
+     *
+     * @param userDTO
+     */
+    @Override
+    public void updatePwd(UserDTO userDTO) {
+        UserEntity userEntity = DozerUtil.map(userDTO, UserEntity.class);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_phone", userEntity.getUserPhone());
+
+        UserEntity userEntity1 = new UserEntity().setUserPwd(userEntity.getUserPwd()).setSalt(userEntity.getSalt());
+        super.update(userEntity1, queryWrapper);
+
+
+    }
+
 }

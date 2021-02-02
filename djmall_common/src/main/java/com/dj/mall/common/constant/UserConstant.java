@@ -31,4 +31,9 @@ public interface UserConstant {
      */
     String USER_STATUS_NOT_ACTIVE = "UNACTIVATED";
 
+    /**
+     *
+     */
+    String SESSION_VERIFY_CODE = "SESSION_VERIFY_CODE";
+
 }
