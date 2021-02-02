@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.admin.vo.dict.attr.ProductAttrVOResp;
 import com.dj.mall.admin.vo.product.ProductSkuVOReq;
 import com.dj.mall.admin.vo.product.ProductVOReq;
+import com.dj.mall.admin.vo.product.ProductVOResp;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
@@ -43,7 +44,7 @@ public class ProductController {
      * @return
      */
     @GetMapping("listClassify")
-    public ResultModel list(String productType) throws Exception {
+    public ResultModel listClassify(String productType) throws Exception {
         List<ProductAttrDTO> productAttrList = dictApi.findAttrAndSku(productType);
         return new ResultModel().success(DozerUtil.mapList(productAttrList, ProductAttrVOResp.class));
     }
@@ -61,6 +62,18 @@ public class ProductController {
         UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
         productApi.addProduct(DozerUtil.map(productVOReq, ProductDTO.class), DozerUtil.map(productSkuList, ProductSkuDTO.class), user.getRoleId());
         return new ResultModel().success();
+    }
+
+
+    /**
+     * 展示商品
+     * @param productVOReq
+     * @return
+     */
+    @GetMapping("list")
+    public ResultModel list(ProductVOReq productVOReq) throws Exception {
+        List<ProductDTO> productList = productApi.findProductAll(DozerUtil.map(productVOReq, ProductDTO.class));
+        return new ResultModel().success(DozerUtil.mapList(productList, ProductVOResp.class));
     }
 
 }

@@ -24,4 +24,12 @@ public interface ProductApi {
      * @throws Exception
      */
     void addProduct(ProductDTO productDTO, ProductSkuDTO productSkuList, Integer id) throws Exception;
+
+    /**
+     * 展示商品
+     * @param productDTO
+     * @return
+     * @throws Exception
+     */
+    List<ProductDTO> findProductAll(ProductDTO productDTO) throws Exception;
 }

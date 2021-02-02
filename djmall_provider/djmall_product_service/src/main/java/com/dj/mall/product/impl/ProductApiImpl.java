@@ -1,6 +1,7 @@
 package com.dj.mall.product.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.common.constant.ProductConstant;
 import com.dj.mall.common.util.DozerUtil;
@@ -63,5 +64,20 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
             productSku.setUpdateTime(new Date());
         }
         productSkuApi.addProductSku(productSkuList.getSkuList());
+    }
+
+    /**
+     * 展示商品
+     * @param productDTO
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<ProductDTO> findProductAll(ProductDTO productDTO) throws Exception {
+        QueryWrapper<ProductEntity> queryWrapper = new QueryWrapper<>();
+        if (null != productDTO.getProductName()) {
+            queryWrapper.like("product_name", productDTO.getProductName());
+        }
+        return DozerUtil.mapList(super.list(queryWrapper), ProductDTO.class);
     }
 }

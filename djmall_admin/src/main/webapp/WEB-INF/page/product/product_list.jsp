@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>展示商品表</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css" media="all">
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/static/bootstrap/css/bootstrap.min.css">
@@ -24,7 +25,7 @@
                 for (var i = 0; i < result.data.length; i++) {
                     var data = result.data[i];
                     html += "<tr>";
-                    html += "<input type='checkbox' name='id' value='+ data.id +'>";
+                    html += "<td><input type='checkbox' name='id' value='"+ data.id +"'></td>";
                     html += "<td>"+ data.productName +"</td>";
                     html += "<td>"+ data.productType +"</td>";
                     html += "<td>"+ data.productStatus +"</td>";
@@ -69,22 +70,22 @@
 <body>
 <br>
 <form id="fm">
-    名称
+    &nbsp&nbsp&nbsp&nbsp名称
         <input type="text" name="productName"/><br>
-    分类
+    &nbsp&nbsp&nbsp&nbsp分类
         <c:forEach items="${productList}" var="p">
-            <input type="checkbox" name="productType" value="${p.productType}">${p.productType}
-        </c:forEach><br>
-    <button type="button" onclick="search()" class="btn btn-default btn-sm" style="margin:5px">搜索</button><br>
-    <button type="button" onclick="toAdd()" class="btn btn-default" style="margin:5px">新增</button>
+            &nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="productType" value="${p.productType}">${p.productType}
+        </c:forEach>
+    <button type="button" onclick="search()" class="btn btn-default btn-sm" style="margin:5px 20px">搜索</button><br><br>
+    <button type="button" onclick="toAdd()" class="btn btn-default" style="margin:5px 20px">新增</button>
     <button type="button" onclick="toUpdate()" class="btn btn-default" style="margin:5px">修改</button>
     <button type="button" onclick="upOrDown()" class="btn btn-default" style="margin:5px">上架/下架</button>
     <button type="button" onclick="queryComment()" class="btn btn-default" style="margin:5px">查看评论</button>
     <button type="button" onclick="loadTemplate()" class="btn btn-default" style="margin:5px">下载导入模板</button>
     <button type="button" onclick="toLead()" class="btn btn-default" style="margin:5px">导入</button>
 </form>
-<table cellspacing="0" cellpadding="10" border="1px solid">
-    <tr>
+<table cellspacing="0" cellpadding="10" border="1px solid" class="layui-table" style="margin: 20px;width: auto;child-align: auto" >
+    <tr align="center">
         <td><input type="checkbox"></td>
         <td>名称</td>
         <td>类型</td>
@@ -95,7 +96,7 @@
         <td>点赞量</td>
         <td>订单量</td>
     </tr>
-    <tbody id="tb"></tbody>
+    <tbody id="tb" align="center"></tbody>
 </table>
 </body>
 </html>
