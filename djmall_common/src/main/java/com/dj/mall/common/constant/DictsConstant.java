@@ -14,4 +14,5 @@ public interface DictsConstant {
 
     //包邮
     String pinkage = "0";
+
 }

@@ -62,4 +62,9 @@ public class ProductDTO implements Serializable {
      */
     private Integer isDel;
 
+    /**
+     * 图片byte数组
+     */
+    private byte[] img;
+
 }

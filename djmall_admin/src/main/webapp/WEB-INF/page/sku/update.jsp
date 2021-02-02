@@ -15,7 +15,7 @@
 </head>
 <body>
 <form id="fm">
-    <input type="type" name="productType" value="${voResp.productType}">
+    <input type="type" name="productType" value="${code}">
     <table>
         <tr>
             <td>编号</td>

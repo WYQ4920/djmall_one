@@ -30,7 +30,7 @@
                     html += "<td>"+ data.productType +"</td>";
                     html += "<td>"+ data.productStatus +"</td>";
                     html += "<td>"+ data.productPostage +"</td>";
-                    html += "<td>"+ data.productImg +"</td>";
+                    html += "<td><img src='http://qnue446o0.hn-bkt.clouddn.com/"+ data.productImg +"'></td>";
                     html += "<td>"+ data.productDes +"</td>";
                     html += "<td>"+ data.productGiveLike +"</td>";
                     html += "<td>"+ data.productOrderCount +"</td>";
@@ -74,7 +74,7 @@
         <input type="text" name="productName"/><br>
     &nbsp&nbsp&nbsp&nbsp分类
         <c:forEach items="${productList}" var="p">
-            &nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="productType" value="${p.productType}">${p.productType}
+            &nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="productType" value="${p.code}">${p.dictName}
         </c:forEach>
     <button type="button" onclick="search()" class="btn btn-default btn-sm" style="margin:5px 20px">搜索</button><br><br>
     <button type="button" onclick="toAdd()" class="btn btn-default" style="margin:5px 20px">新增</button>

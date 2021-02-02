@@ -33,11 +33,6 @@ public class SkuApiImpl extends ServiceImpl<SkuMapper, SkuEntity> implements Sku
     @Override
     public List<SkuDTO> findByProductType(String productType) {
         List<SkuBO> list = this.baseMapper.findByProductType(productType);
-        for (SkuBO skuBO : list) {
-            if (null == skuBO.getAttrName()){
-                skuBO.setDictName("null");
-            }
-        }
         return DozerUtil.mapList(list, SkuDTO.class);
     }
 
@@ -64,26 +59,37 @@ public class SkuApiImpl extends ServiceImpl<SkuMapper, SkuEntity> implements Sku
     public void updateSku(SkuDTO skuDTO) {
         SkuBO skuBO = DozerUtil.map(skuDTO, SkuBO.class);
 
-        //将AttrIds转为Integer数组
-        Integer[] attrIdArr = (Integer[]) ConvertUtils.convert(skuBO.getAttrIds().split(","),Integer.class);
+        if(null == skuDTO.getAttrIds()){
 
-        //创建新增的实体类集合 放入 attrId productType
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("product_type", skuBO.getProductType());
+            super.remove(queryWrapper);
 
-        List<SkuEntity> addList = new ArrayList<>();
-        for (Integer i : attrIdArr) {
-            SkuEntity skuEntity  = new SkuEntity();
-            skuEntity.setAttrId(i);
-            skuEntity.setProductType(skuBO.getProductType());
-            addList.add(skuEntity);
+            }else {
+
+                //将AttrIds转为Integer数组
+                Integer[] attrIdArr = (Integer[]) ConvertUtils.convert(skuBO.getAttrIds().split(","),Integer.class);
+
+                //创建新增的实体类集合 放入 attrId productType
+
+                List<SkuEntity> addList = new ArrayList<>();
+                for (Integer i : attrIdArr) {
+                    SkuEntity skuEntity  = new SkuEntity();
+                    skuEntity.setAttrId(i);
+                    skuEntity.setProductType(skuBO.getProductType());
+                    addList.add(skuEntity);
+
+                    QueryWrapper queryWrapper = new QueryWrapper();
+                    queryWrapper.eq("product_type", skuBO.getProductType());
+                    super.remove(queryWrapper);
+
+                    // 新增new
+                    super.saveBatch(addList);
+                  }
+
         }
 
-        //删除old
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("product_type", skuBO.getProductType());
-        super.remove(queryWrapper);
 
-        // 新增new
-        super.saveBatch(addList);
 
 
     }

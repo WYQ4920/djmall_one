@@ -38,7 +38,7 @@ public class ProductPageController {
      */
     @RequestMapping("toList")
     public String toList(ModelMap map) throws Exception {
-        List<ProductDTO> productList = productApi.findProductAndDict();
+        List<DictDTO> productList = dictApi.findByParentCode(ProductConstant.PRODUCT_TYPE);
         map.put("productList", productList);
         return "/product/product_list";
     }

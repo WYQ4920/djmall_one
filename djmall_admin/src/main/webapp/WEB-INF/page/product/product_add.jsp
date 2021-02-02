@@ -146,18 +146,28 @@
 
     /* 新增商品 */
     function addProduct(){
-        $.post(
-            "<%=request.getContextPath() %>/product/addProduct",
-            $("#fm").serialize(),
-            function(result) {
-                if (result.code == 200) {
-                    layer.msg("添加成功");
+        var index = layer.load(2,{shade:0.4});
+        var formData = new FormData($("#fm")[0]);
+        $.ajax({
+            url:"<%=request.getContextPath()%>/product/addProduct",
+            dataType:'json',
+            type:'post',
+            data: formData,
+            processData : false, // 使数据不做处理
+            contentType : false, // 不要设置Content-Type请求头信息
+            success:function (result){            	  			layer.msg(result.msg,{
+                time:800
+            },function(){
+                if(result.code == 200){
+                    location.reload();
+                    layer.close(index);
                     return;
                 }
-                layer.msg(result.msg);
-                return;
+                layer.close(index);
+            });
             }
-        )
+        })
+
     }
 
 </script>

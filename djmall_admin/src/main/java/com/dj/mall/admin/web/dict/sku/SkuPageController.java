@@ -43,7 +43,7 @@ public class SkuPageController {
             voResp.setProductType(sd.getProductType());
             break;
         }
-        model.addAttribute("voResp", voResp);
+        model.addAttribute("code", code);
 
         List<ProductAttrDTO> list = productAttrApi.findProductAttrAll();
 

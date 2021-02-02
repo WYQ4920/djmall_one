@@ -26,7 +26,7 @@ public class QiNiuYun {
     /**
      * 外链域名
      */
-    private static final String URL = "qnue446o0.hn-bkt.clouddn.com";
+    public static final String URL = "qnue446o0.hn-bkt.clouddn.com";
 
     /**
      * 存储空间名称
@@ -46,7 +46,7 @@ public class QiNiuYun {
     /**
      *创建地区
      */
-    private static   Configuration cnf = new Configuration(Region.autoRegion());
+    private static  Configuration cnf = new Configuration(Region.autoRegion());
 
     /**
      * 七牛封装的上传工厂

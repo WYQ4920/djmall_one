@@ -21,7 +21,7 @@ public class SkuDTO implements Serializable {
     /**
      *商品字典名
      */
-    private String DictName;
+    private String dictName;
 
     /**
      *属性名
