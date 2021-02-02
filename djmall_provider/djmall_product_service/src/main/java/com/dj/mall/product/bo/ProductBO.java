@@ -60,4 +60,8 @@ public class ProductBO {
      */
     private Integer isDel;
 
+    /**
+     * 分类集合
+     */
+    private String[] classifyList;
 }

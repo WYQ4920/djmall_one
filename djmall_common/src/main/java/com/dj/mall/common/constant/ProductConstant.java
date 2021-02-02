@@ -31,4 +31,8 @@ public interface ProductConstant {
      */
     String SKU_ISDEFAULT = "DEFAULT";
 
+    /**
+     * 分页数
+     */
+    int PAGE_SIZE = 3;
 }

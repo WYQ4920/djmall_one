@@ -7,6 +7,7 @@ import com.dj.mall.admin.vo.product.ProductVOReq;
 import com.dj.mall.admin.vo.product.ProductVOResp;
 import com.dj.mall.auth.dto.user.UserDTO;
 import com.dj.mall.common.base.QiNiuYun;
+import com.dj.mall.common.base.PageResult;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
@@ -87,9 +88,12 @@ public class ProductController {
      * @return
      */
     @GetMapping("list")
-    public ResultModel list(ProductVOReq productVOReq) throws Exception {
-        List<ProductDTO> productList = productApi.findProductAll(DozerUtil.map(productVOReq, ProductDTO.class));
-        return new ResultModel().success(DozerUtil.mapList(productList, ProductVOResp.class));
+    public ResultModel list(ProductVOReq productVOReq, Integer pageNo) throws Exception {
+        PageResult pageList = productApi.findProductAll(DozerUtil.map(productVOReq, ProductDTO.class), pageNo);
+        return new ResultModel().success(PageResult.pageInfo(
+                pageList.getCurrent(),
+                pageList.getPages(),
+                DozerUtil.mapList(pageList.getRecords(), ProductVOResp.class)));
     }
 
     @GetMapping("delete")

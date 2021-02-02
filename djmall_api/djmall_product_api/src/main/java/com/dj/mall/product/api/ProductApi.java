@@ -1,5 +1,6 @@
 package com.dj.mall.product.api;
 
+import com.dj.mall.common.base.PageResult;
 import com.dj.mall.product.dto.ProductDTO;
 import com.dj.mall.product.dto.ProductSkuDTO;
 
@@ -28,8 +29,9 @@ public interface ProductApi {
     /**
      * 展示商品
      * @param productDTO
+     * @param pageNo
      * @return
      * @throws Exception
      */
-    List<ProductDTO> findProductAll(ProductDTO productDTO) throws Exception;
+    PageResult findProductAll(ProductDTO productDTO, Integer pageNo) throws Exception;
 }

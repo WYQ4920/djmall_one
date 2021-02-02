@@ -1,6 +1,8 @@
 package com.dj.mall.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dj.mall.product.bo.ProductBO;
 import com.dj.mall.product.entity.ProductEntity;
 import org.springframework.dao.DataAccessException;
@@ -19,4 +21,13 @@ public interface ProductMapper extends BaseMapper<ProductEntity> {
      * @throws DataAccessException
      */
     List<ProductBO> findProductAndDict() throws DataAccessException;
+
+    /**
+     * 商品展示
+     * @param productBOPage
+     * @param productBO
+     * @return
+     * @throws DataAccessException
+     */
+    IPage<ProductBO> findProductAll(Page<ProductBO> productBOPage, ProductBO productBO) throws DataAccessException;
 }

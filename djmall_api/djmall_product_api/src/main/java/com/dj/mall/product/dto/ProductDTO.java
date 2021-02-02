@@ -67,4 +67,8 @@ public class ProductDTO implements Serializable {
      */
     private byte[] img;
 
+    /**
+     * 分类集合
+     */
+    private String[] classifyList;
 }

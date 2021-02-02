@@ -2,8 +2,11 @@ package com.dj.mall.product.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.common.base.QiNiuYun;
+import com.dj.mall.common.base.PageResult;
 import com.dj.mall.common.constant.ProductConstant;
 import com.dj.mall.common.util.DozerUtil;
 
@@ -81,8 +84,8 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
      * @throws Exception
      */
     @Override
-    public List<ProductDTO> findProductAll(ProductDTO productDTO) throws Exception {
-        QueryWrapper<ProductEntity> queryWrapper = new QueryWrapper<>();
+    public PageResult findProductAll(ProductDTO productDTO, Integer pageNo) throws Exception {
+        /*QueryWrapper<ProductEntity> queryWrapper = new QueryWrapper<>();
         if (null != productDTO.getProductName()) {
             queryWrapper.like("product_name", productDTO.getProductName());
         }
@@ -92,6 +95,16 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
                 queryWrapper.eq("product_type", productDTO.getProductType()).or();
             }
         }
-        return DozerUtil.mapList(super.list(queryWrapper), ProductDTO.class);
+        return DozerUtil.mapList(super.list(queryWrapper), ProductDTO.class);*/
+
+        if (null != productDTO.getProductName()) {
+            String[] classifyList = productDTO.getProductType().split(",");
+            productDTO.setClassifyList(classifyList);
+        }
+        IPage<ProductBO> pageList = getBaseMapper().findProductAll(new Page<ProductBO>(pageNo, ProductConstant.PAGE_SIZE), DozerUtil.map(productDTO, ProductBO.class));
+        return PageResult.pageInfo(
+                pageList.getCurrent(),
+                pageList.getPages(),
+                DozerUtil.mapList(pageList.getRecords(), ProductDTO.class));
     }
 }

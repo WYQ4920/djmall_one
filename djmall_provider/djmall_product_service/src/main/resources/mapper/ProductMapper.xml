@@ -9,4 +9,33 @@
             djmall_product dp
         LEFT JOIN djmall_dict dd ON dp.product_type = dd.`code`
     </select>
+    <select id="findProductAll" resultType="com.dj.mall.product.bo.ProductBO">
+        SELECT
+            p.id,
+            p.product_name,
+            p.product_postage,
+            p.product_img,
+            p.product_des,
+            p.product_give_like,
+            p.product_num,
+            d.dict_name AS product_type,
+            dd.dict_name AS product_status
+        FROM
+            djmall_product p
+        LEFT JOIN djmall_dict d ON p.product_type =d.`code`
+        LEFT JOIN djmall_dict dd ON p.product_status = dd.`code`
+        LEFT JOIN djmall_freight f ON p.product_postage = f.post_id
+        <where>
+            <if test="null != product.classifyList and '' != product.classifyList">
+                and p.product_type in
+                <foreach collection="product.classifyList" item="l" open="(" close=")" separator=",">
+                    #{l}
+                </foreach>
+            </if>
+
+            <if test="null != product.productName and '' != product.productName">
+                and p.product_name like "%"#{product.productName}"%"
+            </if>
+        </where>
+    </select>
 </mapper>

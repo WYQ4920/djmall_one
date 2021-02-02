@@ -12,18 +12,20 @@
 </head>
 <script type="text/javascript">
 
+    var pageNo = 1;
     $(function (){
-       search();
+       search(pageNo);
    })
 
-    function search(){
+    function search(pageNo){
         $.get(
-            "<%=request.getContextPath() %>/product/list",
+            "<%=request.getContextPath() %>/product/list?pageNo=" + pageNo,
             $("#fm").serialize(),
             function(result){
                 var html = "";
-                for (var i = 0; i < result.data.length; i++) {
-                    var data = result.data[i];
+                var pageHtml = "";
+                for (var i = 0; i < result.data.records.length; i++) {
+                    var data = result.data.records[i];
                     html += "<tr>";
                     html += "<td><input type='checkbox' name='id' value='"+ data.id +"'></td>";
                     html += "<td>"+ data.productName +"</td>";
@@ -37,9 +39,30 @@
                     html += "</tr>";
                 }
                 $("#tb").html(html);
+                pageHtml += "<input type='button' onclick='page(true,null)' value='上一页'>";
+                pageHtml += "<input type='button' onclick='page(false," + result.data.pages + ")' value='下一页'>";
+                $("#pageDiv").html(pageHtml);
             }
         )
     }
+
+    /* 分页 */
+    function page(page, pages){
+       if (page){
+           if (pageNo == 1){
+               layer.msg("首页");
+               return;
+           }
+           pageNo--;
+       }else {
+           if (pageNo >= pages){
+               layer.msg("尾页");
+               return;
+           }
+           pageNo++;
+       }
+       show(pageNo);
+   }
 
     /* 去新增 */
     function toAdd(){
@@ -98,5 +121,6 @@
     </tr>
     <tbody id="tb" align="center"></tbody>
 </table>
+<div id="pageDiv"></div>
 </body>
 </html>
