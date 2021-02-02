@@ -15,6 +15,7 @@ import com.dj.mall.auth.entity.user.UserEntity;
 import com.dj.mall.auth.entity.user.UserRoleEntity;
 import com.dj.mall.auth.mapper.user.UserMapper;
 import com.dj.mall.auth.service.user.UserRoleService;
+
 import com.dj.mall.cmpt.EMailApi;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.constant.UserConstant;

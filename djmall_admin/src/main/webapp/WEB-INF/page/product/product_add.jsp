@@ -176,7 +176,7 @@
         描述
             <textarea name="productDes"></textarea><br>
         图片
-<%--            <input type="file" name="productImg"><br>--%>
+            <input type="file" name="img"><br>
         分类
             <select name="productType" onchange="search()">
                 <option value="">请选择</option>

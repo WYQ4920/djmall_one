@@ -4,9 +4,11 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.common.constant.ProductConstant;
 import com.dj.mall.common.util.DozerUtil;
+
 import com.dj.mall.product.api.ProductApi;
 import com.dj.mall.product.api.ProductSkuApi;
 import com.dj.mall.product.bo.ProductBO;
+
 import com.dj.mall.product.dto.ProductDTO;
 import com.dj.mall.product.dto.ProductSkuDTO;
 import com.dj.mall.product.entity.ProductEntity;

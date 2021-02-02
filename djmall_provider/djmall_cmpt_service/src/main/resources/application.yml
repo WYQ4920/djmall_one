@@ -1,4 +1,10 @@
 spring:
+  aliyun:
+    sms:
+      accessKeyId: LTAI4G6EdgWofSCNHCy4xpvS # TODO CSV文件中AccessKeyId
+      accessKeySecret: 6OstBYgKfsX04z7B9dhPNmEWddaKrQ # TODO CSV文件中AccessKeySecret
+      signName: 一堂课网络  # 国内消息-签名管理-签名名称
+      templateCode: SMS_206745725 # 国内消息-模板管理-模板CODE
   mail:
     host: smtp.163.com #SMTP服务器地址 smtp.qq.com
     username: zjj961021@163.com #登陆账号
@@ -15,6 +21,8 @@ spring:
 system:
   email:
     restpwd: 尊敬的%s，您的密码已被管理员%s，于%s重置为%s。为了您的账户安全，请及时修改。
+
+
 
 # Dubbo
 dubbo:

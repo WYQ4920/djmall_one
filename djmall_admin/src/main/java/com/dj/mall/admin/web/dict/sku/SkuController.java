@@ -6,6 +6,7 @@ import com.dj.mall.admin.vo.dict.DictVOResp;
 import com.dj.mall.admin.vo.dict.sku.SkuVOReq;
 import com.dj.mall.admin.vo.dict.sku.SkuVOResp;
 import com.dj.mall.common.base.ResultModel;
+import com.dj.mall.common.util.CodeTest;
 import com.dj.mall.common.util.DozerUtil;
 import com.dj.mall.dict.api.sku.SkuApi;
 import com.dj.mall.dict.dto.DictDTO;

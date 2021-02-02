@@ -1,5 +1,6 @@
 package com.dj.mall.dict.task;
 
+
 import com.dj.mall.dict.api.DictApi;
 import com.dj.mall.dict.dto.DictDTO;
 import lombok.extern.slf4j.Slf4j;
