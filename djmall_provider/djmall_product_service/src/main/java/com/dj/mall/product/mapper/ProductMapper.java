@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dj.mall.product.bo.ProductBO;
 import com.dj.mall.product.entity.ProductEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -29,5 +30,5 @@ public interface ProductMapper extends BaseMapper<ProductEntity> {
      * @return
      * @throws DataAccessException
      */
-    IPage<ProductBO> findProductAll(Page<ProductBO> productBOPage, ProductBO productBO) throws DataAccessException;
+    IPage<ProductBO> findProductAll(Page<ProductBO> productBOPage, @Param("product") ProductBO productBO) throws DataAccessException;
 }
