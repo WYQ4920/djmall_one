@@ -57,13 +57,13 @@ public class ProductController {
      * 新增商品
      */
     @PostMapping("addProduct")
+    //MultipartFile是SpringMVC提供简化上传操作的工具类
     public ResultModel addProduct(ProductVOReq productVOReq, ProductSkuVOReq productSkuList, HttpSession session, MultipartFile img) throws Exception {
         Assert.notNull(img, "请上传图片");
 
         //生成新的图片名
         String lName = UUID.randomUUID().toString().replace("-", "");
-        String rName = img.getOriginalFilename().substring(img.getOriginalFilename().indexOf("."));
-        //   http://qnue446o0.hn-bkt.clouddn.com/
+        String rName = img.getOriginalFilename().substring(img.getOriginalFilename().lastIndexOf("."));
         productVOReq.setProductImg(lName+rName);
 
         Assert.hasText(productVOReq.getProductName(), "商品名称不能为空");

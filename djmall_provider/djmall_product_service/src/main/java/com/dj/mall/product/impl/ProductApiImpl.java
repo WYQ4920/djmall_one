@@ -97,11 +97,11 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
         }
         return DozerUtil.mapList(super.list(queryWrapper), ProductDTO.class);*/
 
-        if (null != productDTO.getProductName()) {
+        if (null != productDTO.getProductType()) {
             String[] classifyList = productDTO.getProductType().split(",");
             productDTO.setClassifyList(classifyList);
         }
-        IPage<ProductBO> pageList = getBaseMapper().findProductAll(new Page<ProductBO>(pageNo, ProductConstant.PAGE_SIZE), DozerUtil.map(productDTO, ProductBO.class));
+        IPage<ProductBO> pageList = getBaseMapper().findProductAll(new Page<ProductBO>(pageNo,3), DozerUtil.map(productDTO, ProductBO.class));
         return PageResult.pageInfo(
                 pageList.getCurrent(),
                 pageList.getPages(),
