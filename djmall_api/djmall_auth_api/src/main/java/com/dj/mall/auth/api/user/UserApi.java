@@ -146,4 +146,19 @@ public interface UserApi {
      * @param userDTO
      */
     void updatePwd(UserDTO userDTO);
+
+    /**
+     * 买家登录
+     * @param userNPE
+     * @param userPwd
+     * @return
+     */
+    UserDTO findUserByNPEAndPwd(String userNPE, String userPwd)throws Exception;
+
+    /**
+     * 买家登录获得用户盐
+     * @param userNEP
+     * @return
+     */
+    UserDTO getSalt1(String userNPE);
 }

@@ -1,10 +1,12 @@
 package com.dj.mall.product.api;
 
 import com.dj.mall.common.base.PageResult;
+import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.product.dto.ProductDTO;
 import com.dj.mall.product.dto.ProductSkuDTO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author WYQ
@@ -33,5 +35,5 @@ public interface ProductApi {
      * @return
      * @throws Exception
      */
-    PageResult findProductAll(ProductDTO productDTO, Integer pageNo) throws Exception;
+     ProductDTO findProductAll(ProductDTO productDTO, Integer pageNo) throws Exception;
 }

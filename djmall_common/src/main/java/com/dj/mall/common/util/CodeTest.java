@@ -17,4 +17,14 @@ public class CodeTest {
 		}
 		return sb.toString();
 	}
+
+	public static String getRandom(Integer num) {
+		String str = "0123456789";
+		StringBuilder sb = new StringBuilder(num);
+		for (int i = 0; i < num; i++) {
+			char ch = str.charAt(new Random().nextInt(str.length()));
+			sb.append(ch);
+		}
+		return sb.toString();
+	}
 }

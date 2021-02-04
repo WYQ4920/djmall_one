@@ -11,6 +11,7 @@ import com.dj.mall.common.base.PageResult;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
+import com.dj.mall.common.util.QiNiuUtil;
 import com.dj.mall.dict.api.DictApi;
 import com.dj.mall.dict.dto.attr.ProductAttrDTO;
 import com.dj.mall.product.api.ProductApi;
@@ -24,7 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -60,7 +63,6 @@ public class ProductController {
     //MultipartFile是SpringMVC提供简化上传操作的工具类
     public ResultModel addProduct(ProductVOReq productVOReq, ProductSkuVOReq productSkuList, HttpSession session, MultipartFile img) throws Exception {
         Assert.notNull(img, "请上传图片");
-
         //生成新的图片名
         String lName = UUID.randomUUID().toString().replace("-", "");
         String rName = img.getOriginalFilename().substring(img.getOriginalFilename().lastIndexOf("."));
@@ -74,7 +76,6 @@ public class ProductController {
         UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
 
         ProductDTO productDTO = DozerUtil.map(productVOReq, ProductDTO.class);
-        //将图片放入数组
         productDTO.setImg(img.getBytes());
 
         productApi.addProduct(productDTO, DozerUtil.map(productSkuList, ProductSkuDTO.class), user.getRoleId());
@@ -89,16 +90,15 @@ public class ProductController {
      */
     @GetMapping("list")
     public ResultModel list(ProductVOReq productVOReq, Integer pageNo) throws Exception {
-        PageResult pageList = productApi.findProductAll(DozerUtil.map(productVOReq, ProductDTO.class), pageNo);
-        return new ResultModel().success(PageResult.pageInfo(
-                pageList.getCurrent(),
-                pageList.getPages(),
-                DozerUtil.mapList(pageList.getRecords(), ProductVOResp.class)));
+
+        ProductDTO list = productApi.findProductAll(DozerUtil.map(productVOReq, ProductDTO.class), pageNo);
+        return new ResultModel().success(list);
+
     }
 
     @GetMapping("delete")
     public ResultModel<Object> delete(String key){
-        QiNiuYun.deleteFile(key);
+        QiNiuUtil.delFile(key);
         return new ResultModel<>().success();
     }
 

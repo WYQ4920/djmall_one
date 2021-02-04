@@ -3,6 +3,7 @@ package com.dj.mall.product.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author WYQ
@@ -71,4 +72,14 @@ public class ProductDTO implements Serializable {
      * 分类集合
      */
     private String[] classifyList;
+
+    /**
+     * 商品集合
+     */
+    private List<ProductDTO> productDTOList;
+
+    /**
+     * 当前页
+     */
+    private Integer pages;
 }

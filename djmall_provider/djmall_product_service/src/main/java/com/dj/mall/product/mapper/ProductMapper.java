@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author WYQ
@@ -25,10 +26,12 @@ public interface ProductMapper extends BaseMapper<ProductEntity> {
 
     /**
      * 商品展示
-     * @param productBOPage
+     * @param productBO
      * @param productBO
      * @return
      * @throws DataAccessException
      */
-    IPage<ProductBO> findProductAll(Page<ProductBO> productBOPage, @Param("product") ProductBO productBO) throws DataAccessException;
+    List<ProductBO> findProductAll(@Param("product") ProductBO productBO) throws DataAccessException;
+
+
 }

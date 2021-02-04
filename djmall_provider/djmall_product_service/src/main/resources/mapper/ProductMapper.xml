@@ -26,7 +26,7 @@
         LEFT JOIN djmall_dict dd ON p.product_status = dd.`code`
 
         <where>
-            <if test="null != product.classifyList and '' != product.classifyList">
+            <if test="null != product.classifyList">
                p.product_type in
                 <foreach collection="product.classifyList" item="l" open="(" close=")" separator=",">
                     #{l}

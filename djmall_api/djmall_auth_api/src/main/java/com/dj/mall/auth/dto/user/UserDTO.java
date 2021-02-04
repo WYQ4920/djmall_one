@@ -84,4 +84,10 @@ public class UserDTO implements Serializable {
      * 资源信息集合
      */
     private List<ResourceDTO> resourceList;
+
+    /**
+     * 用户名/手机号/邮箱
+     */
+    private String  userNPE;
+
 }

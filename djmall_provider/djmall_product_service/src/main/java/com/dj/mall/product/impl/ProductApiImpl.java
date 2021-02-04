@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.mall.common.base.QiNiuYun;
 import com.dj.mall.common.base.PageResult;
+import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.ProductConstant;
 import com.dj.mall.common.util.DozerUtil;
 
+import com.dj.mall.common.util.QiNiuUtil;
 import com.dj.mall.product.api.ProductApi;
 import com.dj.mall.product.api.ProductSkuApi;
 import com.dj.mall.product.bo.ProductBO;
@@ -18,11 +20,17 @@ import com.dj.mall.product.dto.ProductDTO;
 import com.dj.mall.product.dto.ProductSkuDTO;
 import com.dj.mall.product.entity.ProductEntity;
 import com.dj.mall.product.mapper.ProductMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author WYQ
@@ -55,14 +63,13 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
     @Override
     public void addProduct(ProductDTO productDTO, ProductSkuDTO productSkuList, Integer id) throws Exception {
         //将图片保存到七牛
-        QiNiuYun.uploadFile(productDTO.getImg(), productDTO.getProductImg());
+        QiNiuUtil.uploadFile(productDTO.getImg(), productDTO.getProductImg());
 
         // 新增商品
         productDTO.setProductStatus(ProductConstant.PRODUCT_STATUS);
         productDTO.setIsDel(ProductConstant.PRODUCT_ISDEL);
         ProductEntity productList = DozerUtil.map(productDTO, ProductEntity.class);
         super.save(productList);
-
 
 
         // 新增商品sku
@@ -84,27 +91,21 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
      * @throws Exception
      */
     @Override
-    public PageResult findProductAll(ProductDTO productDTO, Integer pageNo) throws Exception {
-        /*QueryWrapper<ProductEntity> queryWrapper = new QueryWrapper<>();
-        if (null != productDTO.getProductName()) {
-            queryWrapper.like("product_name", productDTO.getProductName());
-        }
-        if (null != productDTO.getProductType()) {
-            String[] ProductTypes = productDTO.getProductType().split(",");
-            for (String pt : ProductTypes) {
-                queryWrapper.eq("product_type", productDTO.getProductType()).or();
-            }
-        }
-        return DozerUtil.mapList(super.list(queryWrapper), ProductDTO.class);*/
+    public ProductDTO findProductAll(ProductDTO productDTO, Integer pageNo) throws Exception {
 
         if (null != productDTO.getProductType()) {
             String[] classifyList = productDTO.getProductType().split(",");
             productDTO.setClassifyList(classifyList);
         }
-        IPage<ProductBO> pageList = getBaseMapper().findProductAll(new Page<ProductBO>(pageNo,3), DozerUtil.map(productDTO, ProductBO.class));
-        return PageResult.pageInfo(
-                pageList.getCurrent(),
-                pageList.getPages(),
-                DozerUtil.mapList(pageList.getRecords(), ProductDTO.class));
+
+        PageHelper.startPage(pageNo, 3);
+        List<ProductBO> pageList = getBaseMapper().findProductAll(DozerUtil.map(productDTO, ProductBO.class));
+        PageInfo<ProductBO> pageInfo = new PageInfo<ProductBO>(pageList);
+
+        ProductDTO productDTO1 = new ProductDTO();
+        productDTO1.setProductDTOList(DozerUtil.mapList(pageInfo.getList(), ProductDTO.class));
+        productDTO1.setPages(pageInfo.getPages());
+        return productDTO1;
+
     }
 }

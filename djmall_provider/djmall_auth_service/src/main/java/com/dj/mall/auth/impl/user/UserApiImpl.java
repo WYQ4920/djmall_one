@@ -74,6 +74,7 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
         queryWrapper1.eq("user_id", userDTO.getId());
         UserRoleEntity userRoleEntity = userRoleService.getOne(queryWrapper1);
+
         if (userRoleEntity == null) {
             throw new BusinessException("用户无角色，请联系管理员！");
         }
@@ -369,6 +370,55 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         super.update(userEntity1, queryWrapper);
 
 
+    }
+
+    /**
+     * 买家登录
+     *
+     * @param userNPE
+     * @param userPwd
+     * @return
+     */
+    @Override
+    public UserDTO findUserByNPEAndPwd(String userNPE, String userPwd) throws Exception {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name", userNPE);
+        queryWrapper.or().eq("user_phone", userNPE);
+        queryWrapper.or().eq("user_email", userNPE);
+        UserEntity userEntity = this.getOne(queryWrapper);
+        UserDTO userDTO = DozerUtil.map(userEntity, UserDTO.class);
+        if (userDTO == null) {
+            throw new BusinessException("用户名不存在");
+        }
+        if (!userDTO.getUserPwd().equals(userPwd)) {
+            throw new BusinessException("密码不正确");
+        }
+
+        // 获取登录用户的角色
+        QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("user_id", userDTO.getId());
+        UserRoleEntity userRoleEntity = userRoleService.getOne(queryWrapper1);
+
+        if (!UserConstant.GENERAL_ROLE_ID.equals(userRoleEntity.getRoleId())) {
+            throw new BusinessException("请选择用户对应的账号密码");
+        }
+        return userDTO;
+    }
+
+    /**
+     * 买家登录获得用户盐
+     *
+     * @param userNPE
+     * @return
+     */
+    @Override
+    public UserDTO getSalt1(String userNPE) {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name", userNPE);
+        queryWrapper.or().eq("user_phone",userNPE);
+        queryWrapper.or().eq("user_email",userNPE);
+        UserEntity userEntity = this.getOne(queryWrapper);
+        return DozerUtil.map(userEntity, UserDTO.class);
     }
 
 }

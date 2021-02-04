@@ -24,8 +24,8 @@
             function(result){
                 var html = "";
                 var pageHtml = "";
-                for (var i = 0; i < result.data.records.length; i++) {
-                    var data = result.data.records[i];
+                for (var i = 0; i < result.data.productDTOList.length; i++) {
+                    var data = result.data.productDTOList[i];
                     html += "<tr>";
                     html += "<td><input type='checkbox' name='id' value='"+ data.id +"'></td>";
                     html += "<td>"+ data.productName +"</td>";
