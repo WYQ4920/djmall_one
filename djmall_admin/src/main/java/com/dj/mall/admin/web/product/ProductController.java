@@ -74,8 +74,9 @@ public class ProductController {
         Assert.hasText(productVOReq.getProductDes(), "商品描述不能为空");
         // 获取商户id
         UserDTO user = (UserDTO) session.getAttribute(UserConstant.USER_SESSION);
-
         ProductDTO productDTO = DozerUtil.map(productVOReq, ProductDTO.class);
+
+        // 将图片放进dto
         productDTO.setImg(img.getBytes());
 
         productApi.addProduct(productDTO, DozerUtil.map(productSkuList, ProductSkuDTO.class), user.getRoleId());
@@ -97,9 +98,11 @@ public class ProductController {
     }
 
     @GetMapping("delete")
-    public ResultModel<Object> delete(String key){
+    public ResultModel delete (String key){
         QiNiuUtil.delFile(key);
-        return new ResultModel<>().success();
+        return new ResultModel().success();
     }
+
+
 
 }

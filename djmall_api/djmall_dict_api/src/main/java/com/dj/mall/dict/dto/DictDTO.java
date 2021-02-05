@@ -26,4 +26,5 @@ public class DictDTO implements Serializable {
      */
     private String dictName;
 
+
 }

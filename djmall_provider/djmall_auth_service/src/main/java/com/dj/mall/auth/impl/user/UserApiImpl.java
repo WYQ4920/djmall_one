@@ -11,6 +11,7 @@ import com.dj.mall.auth.bo.user.UserBO;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.dto.user.UserTokenDTO;
 import com.dj.mall.auth.entity.user.UserEntity;
 import com.dj.mall.auth.entity.user.UserRoleEntity;
 import com.dj.mall.auth.mapper.user.UserMapper;
@@ -18,17 +19,20 @@ import com.dj.mall.auth.service.user.UserRoleService;
 
 import com.dj.mall.cmpt.EMailApi;
 import com.dj.mall.common.base.BusinessException;
+import com.dj.mall.common.constant.CacheConstant;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.DozerUtil;
 import com.dj.mall.common.util.PasswordSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements UserApi {
@@ -44,6 +48,9 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
 
     @Value("${system.email.restPwd}")
     private String resetPwdText;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 用户登录
@@ -380,29 +387,39 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
      * @return
      */
     @Override
-    public UserDTO findUserByNPEAndPwd(String userNPE, String userPwd) throws Exception {
+    public UserTokenDTO findUserByNPEAndPwd(String userNPE, String userPwd) throws Exception {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userNPE);
         queryWrapper.or().eq("user_phone", userNPE);
         queryWrapper.or().eq("user_email", userNPE);
         UserEntity userEntity = this.getOne(queryWrapper);
-        UserDTO userDTO = DozerUtil.map(userEntity, UserDTO.class);
-        if (userDTO == null) {
+        if (userEntity == null) {
             throw new BusinessException("用户名不存在");
         }
-        if (!userDTO.getUserPwd().equals(userPwd)) {
+        if (!userEntity.getUserPwd().equals(userPwd)) {
             throw new BusinessException("密码不正确");
         }
 
         // 获取登录用户的角色
         QueryWrapper<UserRoleEntity> queryWrapper1 = new QueryWrapper<>();
-        queryWrapper1.eq("user_id", userDTO.getId());
+        queryWrapper1.eq("user_id", userEntity.getId());
         UserRoleEntity userRoleEntity = userRoleService.getOne(queryWrapper1);
 
         if (!UserConstant.GENERAL_ROLE_ID.equals(userRoleEntity.getRoleId())) {
             throw new BusinessException("请选择用户对应的账号密码");
         }
-        return userDTO;
+
+        //生成token
+        String token = UUID.randomUUID().toString().replace("-","");
+
+        //token-user 登录用户信息存入redis
+        redisTemplate.opsForValue().set(CacheConstant.USER_TOKEN + token, DozerUtil.map(userEntity,UserTokenDTO.class), 22*24*60*60);
+        UserTokenDTO userTokenDTO = new UserTokenDTO();
+        userTokenDTO.setToken(token);
+        userTokenDTO.setNickName(userEntity.getNickName());
+        userTokenDTO.setUserName(userEntity.getUserName());
+
+        return  userTokenDTO;
     }
 
     /**
@@ -419,6 +436,23 @@ public class UserApiImpl extends ServiceImpl<UserMapper, UserEntity> implements 
         queryWrapper.or().eq("user_email",userNPE);
         UserEntity userEntity = this.getOne(queryWrapper);
         return DozerUtil.map(userEntity, UserDTO.class);
+    }
+
+    /**
+     * 昵称查重
+     *
+     * @param nickName
+     * @return
+     */
+    @Override
+    public boolean checkNickName(String nickName) {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("nick_name", nickName);
+        UserEntity userEntity = this.getOne(queryWrapper);
+        if (userEntity != null) {
+            return false;
+        }
+        return true;
     }
 
 }

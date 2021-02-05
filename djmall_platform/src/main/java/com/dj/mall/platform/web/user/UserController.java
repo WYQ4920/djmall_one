@@ -4,11 +4,13 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.dj.mall.auth.api.user.UserApi;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.dto.user.UserTokenDTO;
 import com.dj.mall.common.base.BusinessException;
 import com.dj.mall.common.base.ResultModel;
 import com.dj.mall.common.constant.UserConstant;
 import com.dj.mall.common.util.CodeTest;
 import com.dj.mall.common.util.DozerUtil;
+import com.dj.mall.platform.vo.user.UserTokenVOResp;
 import com.dj.mall.platform.vo.user.UserVOReq;
 import com.dj.mall.platform.vo.user.UserVOResp;
 import org.springframework.util.Assert;
@@ -37,8 +39,8 @@ public class UserController {
     public ResultModel<Object> login(String userNPE, String userPwd) throws Exception, BusinessException {
         Assert.hasText(userNPE, "用户名/手机号/不能为空");
         Assert.hasText(userPwd, "密码不能为空");
-        UserDTO userDTO = userApi.findUserByNPEAndPwd(userNPE, userPwd);
-        return new ResultModel<>().success();
+        UserTokenDTO userTokenDTO = userApi.findUserByNPEAndPwd(userNPE, userPwd);
+        return new ResultModel<>().success(DozerUtil.map(userTokenDTO, UserTokenVOResp.class));
     }
 
     /**
@@ -69,6 +71,19 @@ public class UserController {
     @RequestMapping("checkUserName")
     public boolean checkUserName(String userName) throws Exception {
         return userApi.checkUserName(userName);
+    }
+
+
+    /**
+     * 昵称查重
+     *
+     * @param nickName
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("checkNickName")
+    public boolean checkNickName(String nickName) throws Exception {
+        return userApi.checkNickName(nickName);
     }
 
     /**

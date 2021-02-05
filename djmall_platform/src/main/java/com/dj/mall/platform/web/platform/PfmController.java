@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PfmController {
 
-    @RequestMapping("toShow")
-    public String toShow() {
-        return "djmall_platform/show";
-    }
+
 
 
 }

@@ -10,6 +10,8 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/MD5/md5-min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/cookie.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/token.js"></script>
 </head>
 <script type="text/javascript">
 	
@@ -51,7 +53,9 @@
 	   						}, function(){
 	   						  //do something
 	   							if(result.code == "200"){
-	   								location.href="<%=request.getContextPath() %>/index/toIndex";
+	   								cookie.set("TOKEN",result.data.token);
+									cookie.set("NICK_NAME",result.data.nickName);
+	   								parent.window.location.reload();
 									layer.close(index);
 	   								return;
 	   							}
@@ -87,14 +91,7 @@
 				}
 		)
 	}
-	
 
-	//Frameset中使得页面加载同步
-	//判断当前窗口路径与加载路径是否一致。
-	if (window.top.document.URL != document.URL) {
-		//将窗口路径与加载路径同步
-		window.top.location = document.URL;
-	}
 </script>
 <style>
 
@@ -108,7 +105,7 @@
 		<label for="userPwd">密 码：</label>
 		<input type="password" name="userPwd" id="userPwd"><br>
 		<input type="submit" value="登录">
-		<input type="button" value="注册" onclick="add()">
+		<%--<input type="button" value="注册" onclick="add()">--%>
 
 		<%--<a href="<%=request.getContextPath() %>/user/toForgetPwd">忘记密码？点我找回</a>--%>
 	</form>

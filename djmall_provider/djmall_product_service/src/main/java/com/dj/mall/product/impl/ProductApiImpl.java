@@ -71,7 +71,6 @@ public class ProductApiImpl extends ServiceImpl<ProductMapper, ProductEntity> im
         ProductEntity productList = DozerUtil.map(productDTO, ProductEntity.class);
         super.save(productList);
 
-
         // 新增商品sku
         for (ProductSkuDTO productSku : productSkuList.getSkuList()) {
             productSku.setProductId(productList.getId());

@@ -8,7 +8,10 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import sun.plugin.viewer.IExplorerPluginObject;
+
+import java.sql.SQLOutput;
 
 /**
  * @Author zhengyk
@@ -19,12 +22,12 @@ public class QiNiuUtil {
     /**
      * AK
      */
-    private static final String AK = "xEDiJV_tAPS4BGS21HhoIptCZt1dghH8ko_tyngG";
+    private static  final String AK = "xEDiJV_tAPS4BGS21HhoIptCZt1dghH8ko_tyngG";
 
     /**
      * SK
      */
-    private static final String SK = "M8z6j1rDSh0hUdzyW97tLN5Ea2MfDZTvW_5jA4ZL";
+    private  static final  String SK = "M8z6j1rDSh0hUdzyW97tLN5Ea2MfDZTvW_5jA4ZL";
 
     /**
      * 外链域名
@@ -34,7 +37,7 @@ public class QiNiuUtil {
     /**
      * 存储空间名称
      */
-    private static final String BUCKET = "paceo3forzyk";
+    private  static  final String BUCKET = "paceo3forzyk";
 
     /**
      * 密钥配置
@@ -45,6 +48,7 @@ public class QiNiuUtil {
     /**
      * 生成token
      * private static String token = auth.uploadToken(BUCKET);
+     *
      */
     private static String token = auth.uploadToken(BUCKET);
 
@@ -61,31 +65,40 @@ public class QiNiuUtil {
     private static UploadManager uploadManager = new UploadManager(cnf);
 
     /**
+     * 牛封装的删除工厂
+     *  private static  BucketManager bucketManager =  new BucketManager(auth, cnf);
+     */
+    private static  BucketManager bucketManager =  new BucketManager(auth, cnf);
+
+
+    /**
      * byte[] 上传图片
      */
-    public static void uploadFile(byte[] img, String key){
+    public static void uploadFile(byte[] img , String key){
         try {
-            uploadManager.put(img, key ,token);
-            System.out.println("upload success");
+            uploadManager.put(img, key, token);
+            System.out.println("success upload");
         } catch (QiniuException e) {
-            System.out.println("upload shibai");
+            System.out.println("shibai upload");
             e.printStackTrace();
         }
     }
+
 
     /**
      * 删除图片
      */
     public static void delFile(String key){
-        BucketManager bucketManager =  new BucketManager(auth, cnf);
         try {
             bucketManager.delete(BUCKET, key);
-            System.out.println("del success");
+            System.out.println("success del");
         } catch (QiniuException e) {
-            System.out.println("del shibai");
+            System.out.println("success shibai");
             e.printStackTrace();
         }
     }
+
+
 
 
 

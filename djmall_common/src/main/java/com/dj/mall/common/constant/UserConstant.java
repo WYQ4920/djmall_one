@@ -43,4 +43,9 @@ public interface UserConstant {
      */
     String SESSION_VERIFY_CODE = "SESSION_VERIFY_CODE";
 
+    /**
+     * 用户性别
+     */
+    String USER_SEX_PARENT_CODE = "USER_SEX";
+
 }

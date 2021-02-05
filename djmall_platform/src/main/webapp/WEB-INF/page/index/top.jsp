@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 align="center">欢迎${user.userName}登陆</h1>
-	<a href="<%=request.getContextPath() %>/user/exit">退出</a>
+<a href="<%=request.getContextPath()%>/djmall_platform/toShow" >商城首页</a><br/><br>
 	<div id="time" align="right"></div>
 </body>
 <script type="text/javascript">

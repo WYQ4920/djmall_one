@@ -23,7 +23,7 @@ public class IndexPageController {
     }
 
     @RequestMapping("toRight")
-    public String toRight() throws Exception {
+    public String toRight() {
         return "index/right";
     }
 }
