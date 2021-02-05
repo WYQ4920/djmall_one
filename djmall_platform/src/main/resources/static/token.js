@@ -5,7 +5,7 @@ var token_get = function (url, callback) {
             type: "GET",
             url: url,
             beforeSend: function (request) {
-                request.setRequestHeader("TOKEN", cookie.get("TOKEN"));
+                request.setRequestHeader("TOKEN", Cookies.get("TOKEN"));
             },
             success: callback
         });
@@ -20,7 +20,7 @@ var token_post = function (url, param, callback) {
             url: url,
             data: param,
             beforeSend: function (request) {
-                request.setRequestHeader("TOKEN", cookie.get("TOKEN"));
+                request.setRequestHeader("TOKEN", Cookies.get("TOKEN"));
             },
             success: callback
         });
@@ -31,24 +31,23 @@ var token_post = function (url, param, callback) {
 
 // 设置登录的cookie信息
 var set_login = function (TOKEN, NICK_NAME) {
-    cookie.set("TOKEN", TOKEN, 1);
-    cookie.set("NICK_NAME", NICK_NAME, 1);
+    Cookies.set("TOKEN", TOKEN, {expires: 1, path: "/"});
+    Cookies.set("NICK_NAME", NICK_NAME, {expires: 1, path: "/"});
 }
 
 // 验证是否登陆
 var check_login = function () {
-    return (cookie.get("TOKEN") != undefined && cookie.get("NICK_NAME") != undefined);
+    return (Cookies.get("TOKEN") != undefined && Cookies.get("NICK_NAME") != undefined);
 };
 // 退出登录
 var logout = function () {
-    // cookie.delete("TOKEN");
-    // cookie.delete("NICK_NAME");
-    cookie.clear();
+    Cookies.remove("TOKEN");
+    Cookies.remove("NICK_NAME");
     toLogin();
 }
 
 function getToken() {
-    return cookie.get("TOKEN");
+    return Cookies.get("TOKEN");
 }
 
 // 去登录
@@ -112,3 +111,14 @@ $.ajaxSetup({
         }
     }
 });
+// 清空全部cookie
+function clear(){
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+    console.log("需要删除的cookie名字：" + keys);
+    if (keys) {
+        for (var i = keys.length; i--;){
+            //     document.cookie = keys[i] + "=; expire=" + date.toGMTString() + "; path=/";
+            Cookies.remove(keys[i]);
+        }
+    }
+}

@@ -169,4 +169,5 @@ public interface UserApi {
      * @return
      */
     boolean checkNickName(String nickName);
+
 }

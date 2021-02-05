@@ -10,7 +10,7 @@
     <title>djmall商城</title>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/static/cookie.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js.cookie.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/token.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/dist/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/bootstrap/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
     $(function (){
         //是否登录
         if(check_login()){
-            $("#login").html(cookie.get("NICK_NAME"));
+            $("#login").html(Cookies.get("NICK_NAME"));
             $("#login").attr("href", "<%=request.getContextPath()%>/index/toIndex?TOKEN=" + getToken());
         }
     })

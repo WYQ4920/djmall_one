@@ -10,7 +10,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/MD5/md5-min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/static/cookie.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/js.cookie.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/static/token.js"></script>
 </head>
 <script type="text/javascript">
@@ -53,8 +53,8 @@
 	   						}, function(){
 	   						  //do something
 	   							if(result.code == "200"){
-	   								cookie.set("TOKEN",result.data.token);
-									cookie.set("NICK_NAME",result.data.nickName);
+									Cookies.set("TOKEN",result.data.token);
+									Cookies.set("NICK_NAME",result.data.nickName);
 	   								parent.window.location.reload();
 									layer.close(index);
 	   								return;

@@ -22,39 +22,20 @@
             rules: {
                 nickName: {
                     required: true,
-                    remote: {
-                        type: "post",
-                        url: "<%=request.getContextPath()%>/user/checkNickName",
-                        data: {
-                            nickName: function () {
-                                return $("#nickName").val();
-                            }
-                        }
-                    }
                 },
                 userEmail: {
                     required: true,
                     email: true,
-                    remote: {
-                        type: "post",
-                        url: "<%=request.getContextPath()%>/user/checkUserEmail",
-                        data: {
-                            userEmail: function () {
-                                return $("#userEmail").val();
-                            }
-                        }
-                    }
                 },
             },
             messages: {
                 nickName: {
                     required: "请输入用户名",
-                    remote: "用户名重复"
-                },
+				},
                 userEmail: {
                     required: "不能为空",
                     email: "请输入正确的邮箱规则",
-                    remote: "用户邮箱重复"
+
                 }
             },
             submitHandler: function (fm) {
@@ -69,7 +50,7 @@
                         }, function () {
                             //do something
                             if (result.code == "200") {
-                                parent.location.href = "<%=request.getContextPath()%>/user/toLogin";
+                                parent.location.href = "<%=request.getContextPath()%>/index/toIndex";
                                 layer.close(index);
                                 return;
                             }
@@ -78,13 +59,6 @@
                     });
             }
         });
-        //自定义手机号验证
-        jQuery.validator.addMethod("isphoneNum", function (value, element) {
-            var length = value.length;
-            var mobile = /^1[3|5|7|8]{1}[0-9]{9}$/;
-            return this.optional(element) || (length == 11 && mobile.test(value));
-        }, "请正确填写您的手机号码");
-
     })
 </script>
 <style>
@@ -109,7 +83,7 @@
 		<label for="userEmail">邮箱：</label>
 		<input type="email" name="userEmail" id="userEmail" value="${user.userEmail}"><br>
 		<br>
-		<input type="submit" value="提交注册">
+		<input type="submit" value="提交">
 	</form>
 
 </body>

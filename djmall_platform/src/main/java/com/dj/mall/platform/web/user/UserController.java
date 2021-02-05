@@ -124,7 +124,16 @@ public class UserController {
         return new ResultModel().success(DozerUtil.map(userDTO, UserVOResp.class).getSalt());
     }
 
-
+    /**
+     * 修改个人信息
+     */
+    @PostMapping("update")
+    public ResultModel update( UserVOReq userVOReq) throws Exception {
+        Assert.hasText(userVOReq.getNickName(), "昵称不能为空");
+        Assert.hasText(userVOReq.getUserEmail(), "邮箱不能为空");
+        userApi.updateUser(DozerUtil.map(userVOReq, UserDTO.class));
+        return new ResultModel().success();
+    }
 
 
 }
