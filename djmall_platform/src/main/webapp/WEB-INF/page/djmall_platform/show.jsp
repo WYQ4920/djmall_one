@@ -24,7 +24,7 @@
             <div class="layui-nav">
                 <li class="layui-nav-item"><a  href="">首页</a></li>
                 <li class="layui-nav-item"><a id="login" href="javascript:toLogin()">登录</a></li>
-                <li class="layui-nav-item"><a  href="javascript:toAdd()">注册</a></li>
+                <li class="layui-nav-item"><a   href="javascript:toAdd()">注册</a></li>
                 <li class="layui-nav-item"><a i href="">购物车</a></li>
             </div>
         </div>
