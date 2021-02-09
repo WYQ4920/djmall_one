@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>djmall商城</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/static/layui/css/layui.css" media="all">
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/static/js.cookie.min.js"></script>
@@ -29,8 +30,33 @@
             </div>
         </div>
     </div>
-</div>
+</div><br><br><br><br><br>
 
+<form id="fm">
+    &nbsp&nbsp&nbsp&nbsp名称查询：
+    <input type="text" name="productName"/><br>
+    &nbsp&nbsp&nbsp&nbsp分类：
+    <c:forEach items="${productList}" var="p">
+        &nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="productType" value="${p.code}">${p.dictName}
+    </c:forEach>
+    <button type="button" onclick="check()" class="btn btn-default btn-sm" style="margin:5px 20px">搜索</button><br><br>
+
+
+<table cellspacing="0" cellpadding="10" border="1px solid" class="layui-table" style="margin: 20px;width: auto;child-align: auto" >
+    <tr align="center">
+        <td>商品名</td>
+        <td>类型</td>
+        <td>邮费</td>
+        <td>商品图片</td>
+        <td>描述</td>
+        <td>点赞量</td>
+        <td>订单量</td>
+        <td>了解更多</td>
+    </tr>
+    <tbody id="tb" align="center"></tbody>
+</table>
+<div id="pageDiv"></div>
+</form>
 
 
 
@@ -71,25 +97,68 @@
         });
     }
 
-    function getSalt(){
-        /*alert(userNPE);*/
-        $.post(
-            "<%=request.getContextPath() %>/user/getSalt",
-            {userNPE:userNPE},
-            function (result){
-                if (result.code == 200){
-                    $("#salt").val(result.data);
-                    return;
-                }
-                layer.msg(result.msg);
-            }
-        )
-    }
 
     //判断当前窗口路径与加载路径是否一致。
     if(window.top.document.URL != document.URL){
         //将窗口路径与加载路径同步
         window.top.location = document.URL;
+    }
+
+    //商品展示
+    var pageNo = 1;
+    $(function (){
+        search(pageNo);
+    })
+
+    function search(pageNo){
+        $.get(
+            "<%=request.getContextPath() %>/djmall_platform/list?pageNo=" + pageNo,
+            $("#fm").serialize(),
+            function(result){
+                var html = "";
+                var pageHtml = "";
+                for (var i = 0; i < result.data.productDTOList.length; i++) {
+                    var data = result.data.productDTOList[i];
+                    html += "<tr>";
+                    html += "<td>"+ data.productName +"</td>";
+                    html += "<td>"+ data.productType +"</td>";
+                    html += "<td>"+ data.productPostage +"</td>";
+                    html += "<td><img src='http://qnue446o0.hn-bkt.clouddn.com/"+ data.productImg +"'height='100px' width='100px'></td>";
+                    html += "<td>"+ data.productDes +"</td>";
+                    html += "<td>"+ data.productGiveLike +"</td>";
+                    html += "<td>"+ data.productOrderCount +"</td>";
+                    html += "<td><input type='button' name='id' value='查看详情' onclick='toBuy("+ data.id +")'></td>";
+                    html += "</tr>";
+                }
+                $("#tb").html(html);
+                pageHtml += "<input type='button' onclick='page(true,null)' value='上一页'>";
+                pageHtml += "<input type='button' onclick='page(false," + result.data.pages + ")' value='下一页'>";
+                $("#pageDiv").html(pageHtml);
+            }
+        )
+    }
+
+    /* 分页 */
+    function page(page, pages){
+        if (page){
+            if (pageNo == 1){
+                layer.msg("首页");
+                return;
+            }
+            pageNo--;
+        }else {
+            if (pageNo >= pages){
+                layer.msg("尾页");
+                return;
+            }
+            pageNo++;
+        }
+        show(pageNo);
+    }
+
+    //模糊查
+    function check(){
+        search(1);
     }
 
 </script>
