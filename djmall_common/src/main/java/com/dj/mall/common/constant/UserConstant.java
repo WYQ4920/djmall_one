@@ -21,6 +21,13 @@ public interface UserConstant {
      */
     Integer MERCHANT_ROLE_ID = 3;
 
+
+    /**
+     * general
+     * 普通用户的角色id
+     */
+    Integer GENERAL_ROLE_ID = 2;
+
     /**
      * 用户正常状态
      */
@@ -35,5 +42,10 @@ public interface UserConstant {
      *
      */
     String SESSION_VERIFY_CODE = "SESSION_VERIFY_CODE";
+
+    /**
+     * 用户性别
+     */
+    String USER_SEX_PARENT_CODE = "USER_SEX";
 
 }

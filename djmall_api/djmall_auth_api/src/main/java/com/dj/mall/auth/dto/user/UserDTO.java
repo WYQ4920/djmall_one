@@ -84,4 +84,7 @@ public class UserDTO implements Serializable {
      * 资源信息集合
      */
     private List<ResourceDTO> resourceList;
+
+
+
 }

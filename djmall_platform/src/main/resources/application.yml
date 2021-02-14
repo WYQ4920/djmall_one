@@ -1,0 +1,34 @@
+server:
+  port: 8082
+  servlet:
+    jsp:
+      init-parameters:
+        development: true   #可修改jsp不重启服务
+    context-path: /platform    #上下文路径
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/page/
+      suffix: .jsp
+    static-path-pattern: /static/**
+    hiddenmethod:
+      filter:
+        enabled: true
+  # redis 配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  servlet:
+    multipart: # 上传文件限制大小
+      max-file-size: 10MB
+dubbo:
+  application:
+    name: platform # 应用名
+    qos-enable: false # 关闭在线调试
+  registry:
+    address: zookeeper://localhost:2181 # 注册中心地址
+  consumer:
+    check: false
+    timeout: 60000

@@ -3,6 +3,7 @@ package com.dj.mall.auth.api.user;
 import com.dj.mall.auth.dto.res.ResourceDTO;
 import com.dj.mall.auth.dto.role.RoleDTO;
 import com.dj.mall.auth.dto.user.UserDTO;
+import com.dj.mall.auth.dto.user.UserTokenDTO;
 import com.dj.mall.common.base.BusinessException;
 
 import java.util.List;
@@ -146,4 +147,27 @@ public interface UserApi {
      * @param userDTO
      */
     void updatePwd(UserDTO userDTO);
+
+    /**
+     * 买家登录
+     * @param userNPE
+     * @param userPwd
+     * @return
+     */
+    UserTokenDTO findUserByNPEAndPwd(String userNPE, String userPwd)throws Exception;
+
+    /**
+     * 买家登录获得用户盐
+     * @param userNPE
+     * @return
+     */
+    UserDTO getSalt1(String userNPE);
+
+    /**
+     * 昵称查重
+     * @param nickName
+     * @return
+     */
+    boolean checkNickName(String nickName);
+
 }

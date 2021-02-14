@@ -24,8 +24,8 @@
             function(result){
                 var html = "";
                 var pageHtml = "";
-                for (var i = 0; i < result.data.records.length; i++) {
-                    var data = result.data.records[i];
+                for (var i = 0; i < result.data.productDTOList.length; i++) {
+                    var data = result.data.productDTOList[i];
                     html += "<tr>";
                     html += "<td><input type='checkbox' name='id' value='"+ data.id +"'></td>";
                     html += "<td>"+ data.productName +"</td>";
@@ -89,6 +89,11 @@
         });
     }
 
+    //模糊查
+    function check(){
+        search(1);
+    }
+
 </script>
 <body>
 <br>
@@ -99,7 +104,7 @@
         <c:forEach items="${productList}" var="p">
             &nbsp&nbsp&nbsp&nbsp<input type="checkbox" name="productType" value="${p.code}">${p.dictName}
         </c:forEach>
-    <button type="button" onclick="search()" class="btn btn-default btn-sm" style="margin:5px 20px">搜索</button><br><br>
+    <button type="button" onclick="check()" class="btn btn-default btn-sm" style="margin:5px 20px">搜索</button><br><br>
     <button type="button" onclick="toAdd()" class="btn btn-default" style="margin:5px 20px">新增</button>
     <button type="button" onclick="toUpdate()" class="btn btn-default" style="margin:5px">修改</button>
     <button type="button" onclick="upOrDown()" class="btn btn-default" style="margin:5px">上架/下架</button>
