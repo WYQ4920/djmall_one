@@ -1,19 +1,18 @@
-package com.dj.mall.order.dto.order;
+package com.dj.mall.order.bo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- * 订单表-主
+ * 订单表-子
  * @Author zhengyk
- * @Date 2021/2/5 16:29
+ * @Date 2021/2/5 17:56
  */
 @Data
-public class OrderDTO implements Serializable {
+public class OrderInfoBO {
 
     /**
      * 订单号
@@ -21,9 +20,24 @@ public class OrderDTO implements Serializable {
     private String orderNo;
 
     /**
+     * 父订单号
+     */
+    private String parentOrderNo;
+
+    /**
      * 买家ID
      */
-    private String buyerId;
+    private Integer buyerId;
+
+    /**
+     * 商户ID
+     */
+    private Integer businessId;
+
+    /**
+     * 商品ID
+     */
+    private Integer productId;
 
     /**
      * 订单总金额
@@ -31,7 +45,7 @@ public class OrderDTO implements Serializable {
     private BigDecimal totalMoney;
 
     /**
-     * 实付总金额
+     * 实际付款总金额
      */
     private BigDecimal totalPayMoney;
 
@@ -41,7 +55,7 @@ public class OrderDTO implements Serializable {
     private BigDecimal totalFreight;
 
     /**
-     *总购买数量
+     * 总购买数量
      */
     private Integer totalBuyCount;
 
@@ -101,23 +115,34 @@ public class OrderDTO implements Serializable {
     private LocalDateTime updateTime;
 
     /**
-     * 集合
+     * 商品名
      */
-    private List<OrderDTO> orderDTOList;
+    private String productName;
 
     /**
-     * 订单状态展示
+     * 邮费
      */
-    private String orderStatusShow;
+    private String productPostage;
 
     /**
-     * 支付方式展示
+     * 商品属性属性
+     */
+    private String skuInfo;
+
+    /**
+     * 支付方式
      */
     private String payTypeShow;
 
     /**
-     * 商品名
+     * 订单状态
      */
-    private String productName;
+    private String orderStatusShow;
+
+    /**
+     * 折扣
+     */
+    private String skuRate;
+
 
 }

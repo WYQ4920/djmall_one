@@ -29,7 +29,7 @@ dubbo:
     address: zookeeper://localhost:2181 # 注册中心地址
   protocol:
     name: dubbo # 协议名
-    port: 20881 # 服务端口
+    port: 20885 # 服务端口
 # 日志
 logging:
   level:

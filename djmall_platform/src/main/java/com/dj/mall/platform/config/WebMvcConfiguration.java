@@ -21,13 +21,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
         InterceptorRegistration interceptorRegistration = registry.addInterceptor(tokenInterceptor);
         //  拦截请求
-        interceptorRegistration.addPathPatterns("/user/**");
+        interceptorRegistration.addPathPatterns("/**");
         //  放过请求
         interceptorRegistration.excludePathPatterns("/user/toLogin");
         interceptorRegistration.excludePathPatterns("/user/login");
         interceptorRegistration.excludePathPatterns("/user/toAdd");
         interceptorRegistration.excludePathPatterns("/user/add");
-        interceptorRegistration.excludePathPatterns("/user/getSalt");
         interceptorRegistration.excludePathPatterns("/user/getSalt");
         interceptorRegistration.excludePathPatterns("/djmall_platform/toShow");
 
