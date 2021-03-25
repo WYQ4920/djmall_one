@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dj.mall.order.mapper.order.OrderMapper">
+
+
+    <select id="findOrderByStatus" resultType="com.dj.mall.order.bo.OrderBO">
+
+        SELECT
+            dor.*,
+            doi.*,
+            GROUP_CONCAT(dp.product_name) as productName,
+            dd.dict_name as payTypeShow ,
+            ddi.dict_name as orderStatusShow
+        FROM
+            djmall_order dor
+                left JOIN djmall_order_info doi ON doi.parent_order_no = dor.order_no
+                left JOIN djmall_product dp ON doi.product_id = dp.id
+                left JOIN djmall_dict dd ON dd. CODE = dor.pay_type
+                left JOIN djmall_dict ddi ON ddi. CODE = dor.order_status
+        WHERE
+            dor.order_status = #{orderStatus} and dor.buyer_id=#{buyerId}
+    </select>
+</mapper>

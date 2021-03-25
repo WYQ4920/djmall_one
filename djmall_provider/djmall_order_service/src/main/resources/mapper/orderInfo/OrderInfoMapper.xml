@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.mall.order.mapper.orderInfo.OrderInfoMapper">
+
+
+    <select id="findOrderByStatus" resultType="com.dj.mall.order.bo.OrderInfoBO">
+        SELECT
+            doi.*,
+            dp.product_name,
+            dp.product_postage,
+            dod.sku_info,
+            dod.sku_rate,
+            dd.dict_name as payTypeShow ,
+            ddi.dict_name as orderStatusShow
+        FROM
+            djmall_order_info doi
+                left JOIN djmall_order_detail dod ON doi.order_no = dod.child_order_no
+                left JOIN djmall_product dp ON doi.product_id = dp.id
+                left JOIN djmall_dict dd ON dd. CODE = doi.pay_type
+                left JOIN djmall_dict ddi ON ddi. CODE = doi.order_status
+        WHERE
+            doi.order_status in
+              <foreach collection="orderStatusArr" open="(" close=")" item="o" separator=",">
+                 #{o}
+              </foreach>
+
+             and doi.buyer_id=#{buyerId}
+    </select>
+</mapper>

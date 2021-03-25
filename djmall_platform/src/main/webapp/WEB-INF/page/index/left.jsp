@@ -18,8 +18,9 @@
 <body>
 
 <a href="<%=request.getContextPath()%>/user/toShow" target="right">个人信息</a><br/><br/>
-<a href="<%=request.getContextPath()%>/goods/toPaymentList" target="right">收货地址</a><br/><br/>
-<a href="<%=request.getContextPath()%>/goods/toPaymentList" target="right">我的订单</a><br/><br/>
+<a href="<%=request.getContextPath()%>/site/toSite" target="right">收货地址</a><br/><br/>
+<a href="<%=request.getContextPath()%>/order/toOrder" target="right">我的订单</a><br/><br/>
+<a href="<%=request.getContextPath()%>/order/toDetermine" target="right">确认订单</a><br/><br/>
 
 </body>
 

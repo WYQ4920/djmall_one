@@ -98,6 +98,23 @@ public class OrderVOResp {
      */
     private LocalDateTime updateTime;
 
+    /**
+     * 订单状态展示
+     */
+    private String orderStatusShow;
+
+    /**
+     * 支付方式展示
+     */
+    private String payTypeShow;
+
+
+    /**
+     * 商品名
+     */
+    private String productName;
+
+
 
 
 }

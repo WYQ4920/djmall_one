@@ -1,8 +1,8 @@
-package com.dj.mall.order.dto.order;
+package com.dj.mall.order.bo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @Date 2021/2/5 16:29
  */
 @Data
-public class OrderDTO implements Serializable {
+public class OrderBO {
 
     /**
      * 订单号
@@ -101,11 +101,6 @@ public class OrderDTO implements Serializable {
     private LocalDateTime updateTime;
 
     /**
-     * 集合
-     */
-    private List<OrderDTO> orderDTOList;
-
-    /**
      * 订单状态展示
      */
     private String orderStatusShow;
@@ -119,5 +114,4 @@ public class OrderDTO implements Serializable {
      * 商品名
      */
     private String productName;
-
 }

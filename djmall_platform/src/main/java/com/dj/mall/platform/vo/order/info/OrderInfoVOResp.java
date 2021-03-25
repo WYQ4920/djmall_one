@@ -44,6 +44,11 @@ public class OrderInfoVOResp {
     private BigDecimal totalMoney;
 
     /**
+     * 实际付款总金额
+     */
+    private BigDecimal totalPayMoney;
+
+    /**
      * 总运费
      */
     private BigDecimal totalFreight;
@@ -108,6 +113,35 @@ public class OrderInfoVOResp {
      */
     private LocalDateTime updateTime;
 
+    /**
+     * 商品名
+     */
+    private String productName;
+
+    /**
+     * 邮费
+     */
+    private String productPostage;
+
+    /**
+     * 商品属性属性
+     */
+    private String skuInfo;
+
+    /**
+     * 支付方式
+     */
+    private String payTypeShow;
+
+    /**
+     * 订单状态
+     */
+    private String orderStatusShow;
+
+    /**
+     * 折扣
+     */
+    private String skuRate;
 
 
 
