@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/djmall?characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/djmall_one?characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&useSSL=false
 
 #redis
   redis:
