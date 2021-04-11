@@ -33,5 +33,4 @@ public interface ProductMapper extends BaseMapper<ProductEntity> {
      */
     List<ProductBO> findProductAll(@Param("product") ProductBO productBO) throws DataAccessException;
 
-
 }
